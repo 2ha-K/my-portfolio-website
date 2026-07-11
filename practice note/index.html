@@ -3,14 +3,22 @@
 <head>
     <title>我的學習筆記</title>
     <!-- css是在html中用來美化網頁的語言，之中的style是用來寫css的標籤，在head中使用style標籤可以讓整個網頁都套用css的樣式，若是想要只套用在某個標籤上，可以在該標籤中使用style屬性，並在裡面寫css的語法 -->
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
+    <meta name="description" content="這是我的學習筆記，裡面有我上課的筆記以及一些練習的程式碼，歡迎大家來參觀。">
+    <meta name="keywords" content="學習筆記,程式碼,練習,HTML,CSS,JavaScript">
+    <meta property="og:title" content="我的學習筆記">
+    <meta property="og:description" content="這是我的學習筆記，裡面有我上課的筆記以及一些練習的程式碼，歡迎大家來參觀。">
+    <meta property="og:image" content="https://res.cloudinary.com/dp7kmvksa/image/upload/v1779016353/b503f6f6eb0b43d3aa1d641f39dd463d_1696507173_tplv-dy-360p_jy9tkq.jpg">
+    <meta property="og:url" content="https://kevin24419686.github.io/practice%20note/index.html">
+
 </head>
 <body>
     <h1>上課筆記</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <ul>
+        <li><a href="#section1">7/8</a></li>
+        <li><a href="#section2">7/10</a></li>
+        <li><a href="#section3">7/11</a></li>
+    </ul>
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
     <p>!DOCTYPE html的<ins>驚嘆號</ins>是最新版的意思。</p>
@@ -60,11 +68,13 @@
     <br>
     <a href="mailto:kevin24419686@gmail.com">寄信給凱文</a>
     <br><br><br><br><br><br><br><br><br><br><br>
-    <h2>7/10</h2>
+    <h2 id="section2">7/10</h2>
     <h3>建立頁面跳轉錨點</h3>
     <p>建立錨點的方式是使用a標籤，並在href屬性中使用#符號加上錨點的名稱，然後在頁面中使用id屬性來指定錨點的位置。</p>
     <ul>
         <li><a href="#section1">第一節</a></li>
+        <li><a href="#section2">第二節</a></li>
+        <li><a href="#section3">第三節</a></li>
     </ul>
     <h3>圖片</h3>
     <p>我們通常只會指定高或寬其中一個，讓其自動抓比例。圖片沒有讀取到會跑出alt的資訊。</p>
@@ -114,7 +124,7 @@ email=abc@gmail.com&password=123456
     </form>
     <h3>什麼是radio button? (單選按鈕（Radio Button），一組選項中只能選一個。)</h3>
     <p>radio button是單選按鈕的意思，通常會搭配label使用，讓使用者可以點擊文字來選擇。</p>
-    <label for="male>">
+    <label for="male">
         <input type="radio" name="gender" id="male" value="male">
         男
     </label>
@@ -162,4 +172,78 @@ email=abc@gmail.com&password=123456
         </select>
         <input type="submit" value="送出">
     </form>"
+
+    <h2 id="section3">7/11</h2>
+    <h3>什麼是Meta? (meta 的核心概念就是：「描述某個東西本身的資訊，而不是那個東西本身。」)</h3>
+    <p>Meta是指網頁的元資料，通常會放在head標籤中，包含網頁的描述、關鍵字、作者、版權等資訊。</p>
+    <h4>Description</h4>
+    <p>Description是指網頁的描述，通常會放在meta標籤中，讓搜尋引擎可以了解網頁的內容。</p>
+    <p>是由開發者（或程式）提供給搜尋引擎和社群平台的頁面摘要，不是 HTML 自動從內文擷取，且 Google 可能視情況改用內文作為搜尋結果描述。</p>
+    <h4>Keywords</h4>
+    <p>Keywords是指網頁的關鍵字，通常會放在meta標籤中，讓搜尋引擎可以了解網頁的內容。</p>
+    <h4>OG</h4>
+    <p>OG是指Open Graph的縮寫，用於定義網頁的社交媒體分享資訊。</p>
+    <p>OG標籤通常會放在head標籤中，包含網頁的標題、描述、圖片、網址等資訊，讓社交媒體可以正確地顯示網頁的內容。</p>
+    <ul>
+        <li>og:title：網頁的標題。</li>
+        <li>og:description：網頁的描述。</li>
+        <li>og:image：網頁的圖片。</li>
+        <li>og:url：網頁的網址。(og:url 用來指定網頁的正式網址，避免同一內容因不同網址被社群平台誤認為不同頁面。)</li>
+    </ul>
+    <h3>什麼是跳脫字元?</h3>
+    <p>跳脫字元是指在HTML中使用特殊字元的方式，通常會使用&amp;符號加上字元的名稱或編碼，讓瀏覽器可以正確地顯示特殊字元。</p>
+    <a href="https://www.w3schools.com/html/html_entities.asp" target="_blank">HTML Entities</a>
+    <ul>
+        <li>&amp;nbsp;：空格</li>
+        <li>&amp;lt;：小於號</li>
+        <li>&amp;gt;：大於號</li>
+        <li>&amp;amp;：&amp;</li>
+        <li>&amp;quot;：雙引號</li>
+        <li>&amp;apos;：單引號</li>
+        <li>&trade;：商標</li>
+    </ul>
+    <h3>粗體元素</h3>
+    <p>粗體元素是指使用strong標籤或<b>b標籤</b>來將文字加粗，通常會用於強調文字的重要性。</p>
+    <h3>強調元素</h3>
+    <p>強調元素是指使用<strong>strong標籤</strong>來將文字強調。</p>
+    <p>strong 表示「內容很重要」並通常顯示為粗體，可以為文字添加語意；b 只是讓文字變粗，不代表具有特殊語意。</p>
+    <h3>斜體元素</h3>
+    <p>斜體元素是指使用<i>i標籤</i>來將文字設為斜體，通常會用於強調文字的語氣或翻譯。</p>
+    <h3>em元素</h3>
+    <p>em元素是指使用<em>em標籤</em>來將文字設為斜體，通常會用於強調文字的語氣或翻譯。</p>
+    <p>em 表示「內容很重要」並通常顯示為斜體，可以為文字添加語意；i 只是讓文字變斜，不代表具有特殊語意。</p>
+    <h3>什麼是iframe?</h3>
+    <p>iframe是指內嵌框架，可以用來在一個網頁中嵌入另一個網頁。</p>
+    <iframe src="../index.html" frameborder="0">
+
+    </iframe>
+    <p>frameborder="0" 表示不顯示iframe的邊框，但在 HTML5 已不建議使用，現在通常改用 border: none; 來設定。</p>
+
+    <h3>在網頁中播放音樂</h3>
+    <audio controls>
+        <source src="./song.mp3" type="audio/mpeg">
+        出現這個表示您的瀏覽器不支持音樂播放。
+    </audio>
+    <p>audio 標籤用來在網頁中播放音樂，source 標籤用來指定音樂檔案的來源，type 屬性用來指定音樂檔案的格式。</p>
+    <p>這是一個 MPEG 音訊格式的檔案（通常就是 MP3）。</p>
+
+    <h3>什麼是div?</h3>
+    <p>div是指division的縮寫，用來將網頁分成不同的區塊，方便進行樣式設定和版面設計。</p>    
+    <div style="background-color: lightblue; padding: 20px;">
+        <h4>這是一個div區塊</h4>
+        <p>div區塊可以用來包住其他元素，方便進行樣式設定和版面設計。</p>
+    </div>
+    <h3>什麼是span?</h3>
+    <p>span是指span的縮寫，用來將網頁中的文字分成不同的區塊，方便進行樣式設定和版面設計。</p>
+    <span style="color: red;">這是一個span區塊</span>
+    <p>span區塊可以用來包住其他元素，方便進行樣式設定和版面設計。</p>
+
+    <h3>button</h3>
+    <p>button是指按鈕，用來觸發某個動作，通常會搭配JavaScript使用。</p>
+    <button style="color: white; background-color: blue; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; border-radius: 5px;" onclick="alert('你按了按鈕!')">按我</button>
+    <p>button標籤用來建立按鈕，onclick屬性</p>
+    <a href="https://google.com">
+        <button>Go google!</button>
+    </a>
+</body>
 </html>
