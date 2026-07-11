@@ -8,11 +8,20 @@
 <body style="background-color: lightgray;">
     <h1 style="font-family: 'Noto Serif TC', serif;">2HA的秘密基地</h1>
     <p>這裡是2HA的秘密基地，展示他辛勞的成果以及研究，歡迎欣賞或者留言喔!(如果有做出留言功能的話)</p>
-    <h2 style="color: rgb(166, 34, 124);">2HA是誰</h2>
+    <h2>目錄:</h2>
+    <ul>
+        <li><a href="#who-is-2ha">2HA是誰</a></li>
+        <li><a href="#skills">技能樹</a></li>
+        <li><a href="#showcase">2HA的展示廳</a></li>
+        <li><a href="#other">其他</a></li>
+    </ul>
+    <h2 style="color: rgb(166, 34, 124);" id="who-is-2ha">2HA是誰</h2>
     <p>2HA是一個就讀<mark>Arizona State University</mark>  CS 的學士學生</p>
-    <img src="https://res.cloudinary.com/dp7kmvksa/image/upload/v1779016353/b503f6f6eb0b43d3aa1d641f39dd463d_1696507173_tplv-dy-360p_jy9tkq.jpg" alt="2HA頭像" height="640" width="360">
-    <h3 style="color: green;">技能樹</h3>
-    <h2 style=" text-align: center;">2HA的展示廳</h2>
+    <a href="https://today.line.me/tw/v3/article/318Z9B" target="_blank">
+        <img src="https://res.cloudinary.com/dp7kmvksa/image/upload/v1779016353/b503f6f6eb0b43d3aa1d641f39dd463d_1696507173_tplv-dy-360p_jy9tkq.jpg" alt="2HA頭像" height="640" width="360">
+    </a>
+    <h2 style="color: green;" id="skills">技能樹</h2>
+    <h2 style=" text-align: center;" id="showcase">2HA的展示廳</h2>
 
     <h3>功能展示牆</h3>
     <h3>作品集</h3>
@@ -24,10 +33,41 @@
         <h4>資安</h4>
         <h4>硬體</h4>
     </ul>
-    <h2>其他</h2>
+    <h2 id="other">其他</h2>
 
     <h3><i>留言</i>板</h3>
-
+    <form action="">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="message">留言內容:</label>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+        <br>
+        <label for="date">日期:</label>
+        <input type="date" id="date" name="date" required>
+        <br>
+        <select id="rating" name="rating" required>
+            <option value="">請選擇評分</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        <label for="like">喜歡:</label>
+        <input type="radio" id="like" name="like" value="like">
+        <label for="dislike">不喜歡:</label>
+        <input type="radio" id="dislike" name="like" value="dislike">
+        <br>
+        <label for="subscribe">訂閱最新消息:</label>
+        <input type="checkbox" id="subscribe" name="subscribe" value="subscribe">
+        <br>
+        <input type="submit" value="送出">
+    </form>
     <h3>相關連結</h3>
     <a href="https://github.com/2ha-K?tab=repositories" title="超連結" target="_blank">2HA的Github</a>
     <br>

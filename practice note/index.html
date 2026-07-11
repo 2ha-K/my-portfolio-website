@@ -11,26 +11,31 @@
 </head>
 <body>
     <h1>上課筆記</h1>
-    <h2>!DOCTYPE html</h2>
-    <p>!DOCTYPE html的驚嘆號是最新版的意思</p>
+    <h2 id="section1">7/8</h2>
+    <h3>什麼是!DOCTYPE html?</h3>
+    <p>!DOCTYPE html的<ins>驚嘆號</ins>是最新版的意思。</p>
+    <h3>什麼是br?</h3>
     <!-- 這是一個空格 -->
+    <p>br是換行的意思，br是break的縮寫。</p>
     <br>
-    <h2>lorem</h2>
+    <h3>甚麼是lorem?</h3>
     <p>lorem是生成假文的意思</p>
-    <h2>->&nbsp;這是可以多個的空格<-</h2>
-    <h2>有序列表</h2>
+    <h3>什麼是nbsp?</h3>
+    <p>nbsp是空格的意思，nbsp是non-breaking space的縮寫。</p>
+    <p>->&nbsp;這是可以多個的空格<-<p>
+    <h3>有序列表 ol => order list</h3>
     <ol>
         <li>第一個</li>
         <li>第二個</li>
         <li>第三個</li>
     </ol>
-    <h2>無序列表</h2>
+    <h3>無序列表ul => unordered list</h3>
     <ul>
         <li>第一個</li>
         <li>第二個</li>
         <li>第三個</li>
     </ul>
-    <h2>表格</h2>
+    <h3>表格</h3>
     <table>
         <tr>
             <th>姓名</th>
@@ -48,11 +53,113 @@
             <td>女</td>
         </tr>
     </table>
-    <h2>超連結</h2>
+    <h3>超連結</h3>
     <a href="https://www.google.com/" target="_blank">Google</a>
     <br>
     <a href="page1.html">Page1</a>
     <br>
     <a href="mailto:kevin24419686@gmail.com">寄信給凱文</a>
-</body>
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <h2>7/10</h2>
+    <h3>建立頁面跳轉錨點</h3>
+    <p>建立錨點的方式是使用a標籤，並在href屬性中使用#符號加上錨點的名稱，然後在頁面中使用id屬性來指定錨點的位置。</p>
+    <ul>
+        <li><a href="#section1">第一節</a></li>
+    </ul>
+    <h3>圖片</h3>
+    <p>我們通常只會指定高或寬其中一個，讓其自動抓比例。圖片沒有讀取到會跑出alt的資訊。</p>
+    <img src="./640.jpeg" alt="線條小狗貼貼" height="360">
+    <h3>超連結圖片</h3>
+    <a href="https://www.google.com/" target="_blank">
+        <img src="./640.jpeg" alt="Google Logo" height="360">
+    </a>
+    <h3>文字輸入框</h3>
+    <h4>文字輸入框1-電子郵件</h4>
+    <form action="xxx.com/index.php" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <p>這裡的action是指表單送出的網址，method是指表單送出的方式，post是指將表單資料放在請求的body中，get是指將表單資料放在網址中。</p>
+    <p>
+        for + id 的作用是把文字標籤和輸入框連結起來，點擊標籤時游標會自動進入對應的輸入框，也有助於螢幕閱讀器等無障礙功能
+    </p>
+    <pre>
+POST /index.php HTTP/1.1
+Host: xxx.com/n
+Content-Type: application/x-www-form-urlencoded
+email=abc@gmail.com&password=123456
+    </pre>
+    <h4>文字輸入框2-日期</h4>
+    <form action="">
+        <label for="date">出發的日期</label>
+        <input type="date" name="date" id="date">
+        <br>
+        <label for="days">停留天數</label>
+        <input type="number" name="days" id="days">
+        <br>
+        <input type="submit" value="送出">
+    </form>
+    <h4>文字輸入框3-多行輸入</h4>
+    <form action="">
+        <label for="message">留言</label>
+        <br>
+        <textarea name="message" id="message" cols="30" rows="10" placeholder="請輸入訊息"></textarea>
+        <br>
+        <input type="submit" value="送出">
+    </form>
+    <h3>什麼是radio button? (單選按鈕（Radio Button），一組選項中只能選一個。)</h3>
+    <p>radio button是單選按鈕的意思，通常會搭配label使用，讓使用者可以點擊文字來選擇。</p>
+    <label for="male>">
+        <input type="radio" name="gender" id="male" value="male">
+        男
+    </label>
+    <label for="female">
+        <input type="radio" name="gender" id="female" value="female">
+        女  
+    </label>
+    <h3>什麼是checkbox? (複選按鈕（Checkbox），一組選項中可以選多個。)</h3>
+    <p>checkbox是複選按鈕的意思，通常會搭配label使用，讓使用者可以點擊文字來選擇。</p>
+    <p>只有當你要「提交資料到後端」時，才需要。</p>
+    <form action="">
+        <label for="option1">
+            <input type="checkbox" name="option1" id="option1" value="option1">
+            選項1
+        </label>
+        <label for="option2">
+            <input type="checkbox" name="option2" id="option2" value="option2">
+            選項2
+        </label>
+        <label for="option3">
+            <input type="checkbox" name="option3" id="option3" value="option3">
+            選項3
+        </label>
+        <input type="submit" value="送出">
+    </form>
+    <ul>
+        <li>
+            包在 label 裡：不用 for、id，點文字也能勾選。
+        </li>
+        <li>
+            不包在 label 裡：需要 for 對應 id，才能讓文字也能點。
+        </li>
+        <li>
+            沒有包也沒有 for：文字和 checkbox 沒有關聯，只能點 checkbox 本身。
+        </li>
+    </ul>
+    <h3>下拉式選單</h3>
+    <p>下拉式選單是指使用select標籤來建立的選單，通常會搭配option標籤使用，讓使用者可以從下拉式選單中選擇一個選項。</p>
+    <h4>選擇一個城市</h4>
+    <form action="">
+        <select name="city" id="city">
+            <option value="taipei">台北</option>
+            <option value="taichung">台中</option>
+            <option value="kaohsiung">高雄</option>
+        </select>
+        <input type="submit" value="送出">
+    </form>"
 </html>
