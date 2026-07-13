@@ -9,10 +9,14 @@
     <meta property="og:description" content="這是我的學習筆記，裡面有我上課的筆記以及一些練習的程式碼，歡迎大家來參觀。">
     <meta property="og:image" content="https://res.cloudinary.com/dp7kmvksa/image/upload/v1779016353/b503f6f6eb0b43d3aa1d641f39dd463d_1696507173_tplv-dy-360p_jy9tkq.jpg">
     <meta property="og:url" content="https://kevin24419686.github.io/practice%20note/index.html">
-
+    <style>
+        #method1-1 {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>上課筆記</h1>
+    <h1>HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <ul>
         <li><a href="#section1">7/8</a></li>
@@ -245,5 +249,115 @@ email=abc@gmail.com&password=123456
     <a href="https://google.com">
         <button>Go google!</button>
     </a>
+
+    <h2>7/13</h2>
+    <h3>什麼是header, main, footer?</h3>
+    <p>
+    &lt;div&gt; 是沒有意思的容器；
+    &lt;header&gt;、&lt;nav&gt;、&lt;article&gt;、&lt;footer&gt;
+    是有意思的容器。它們讓人和電腦都更容易理解網頁的結構，
+    而不是改變網頁的功能或外觀。
+    </p>
+    <h4>什麼是header (標頭)?</h4>
+    <p>header是指網頁的標頭，用來放置網站的標題、導覽列、Logo等元素，通常會放在網頁的最上方。</p>
+    <p>header本質上可以看成是一個有特殊語意（semantic）的 div。</p>
+    <div style="border: 1px solid;">
+        <p>
+        &lt;body&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;網站頁首&lt;/header&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;導覽列&lt;/nav&gt;<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;main&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;article&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;header&gt;文章標題&lt;/header&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;文章內容...&lt;/p&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;footer&gt;作者、日期&lt;/footer&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/main&gt;<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;footer&gt;網站頁尾&lt;/footer&gt;<br>
+        &lt;/body&gt;
+    </p>
+    </div>
+    <header style="background-color: lightgray; padding: 20px;">
+        <h1>這是header</h1>
+        <nav>
+            <ul>
+                <li><a href="#section1">7/8</a></li>
+                <li><a href="#section2">7/10</a></li>
+                <li><a href="#section3">7/11</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h4>什麼是main (主要內容)?</h4>
+    <p>main是指網頁的主要內容，用來放置網站的核心資訊，通常會放在header和footer之間。</p>
+    <main style="background-color: lightyellow; padding: 20px;">
+        <h2>這是main</h2>
+        <p>main標籤用來包住網頁的主要內容，通常會放在header和footer之間。</p>
+    </main>
+    <h4>什麼是footer (頁尾)?</h4>
+    <p>footer是指網頁的頁尾，用來放置網站的版權、聯絡資訊、社群連結等元素，通常會放在網頁的最下方。</p>
+    <footer style="background-color: lightgray; padding: 20px;">
+        <h2>這是footer</h2>
+        <p>footer標籤用來包住網頁的頁尾，通常會放在網頁的最下方作者名稱和版權資訊。</p>
+    </footer>
+
+    <h1>CSS上課筆記</h1>
+    <h2>7/13</h2>
+    <img src="./image.png" height="360" alt="CSS筆記">
+    <h3>CSS基本三種方法</h3>
+    <h4>方法一: 內嵌樣式-在head中使用style標籤</h4>
+    <p>可以在HTML文件的&lt;head&gt;部分使用&lt;style&gt;標籤來定義CSS樣式。</p>
+    <ol id="method1">
+        <li id="method1-1">對元素(標籤)直接修飾: 改變元素的外觀</li>
+        <li id="method1-2">對元素(標籤)加上class或id: 方便重複使用</li>
+        <li id="method1-3">加上id，選擇該id旗下的元素</li>
+        <li id="method1-4">選擇 id（要 #）</li>
+    </ol>
+    <ul>
+        <li>優點: 可以讓整個網頁都套用CSS的樣式，方便統一管理</li>
+        <li>缺點: 需要在HTML文件中加入style標籤，增加HTML文件的大小，且無法一次調整所有不同的page</li>
+    </ul>
+    <h4 style="color: green;">方法二: 行內樣式</h4>
+    <p>可以在HTML元素中使用style屬性來定義CSS樣式。</p>
+    <ul>
+        <li>優點: 簡單直接，適用於單一元素的樣式定義</li>
+        <li>缺點: 不易維護，無法重複使用，會增加HTML文件的大小</li>
+    </ul>
+    <h4>方法三: 外部CSS檔案</h4>
+    <p>可以將CSS樣式寫在一個單獨的.css檔案中，然後在HTML文件中使用&lt;link&gt;標籤來引入該CSS檔案。</p>
+    <p>引入方式: 在head中加入&lt;link rel="stylesheet" type="text/css" href="styles.css"&gt;</p>
+    <ul>
+        <li>優點: 可以將CSS樣式與HTML結構分離，方便維護和重複使用，且可以一次調整所有不同的page</li>
+        <li>缺點: 需要額外建立CSS檔案，增加HTTP請求次數，且需要注意CSS檔案的路徑</li>
+    </ul>
+
+    <h3>CSS顏色</h3>
+    <p>CSS中可以使用多種方式來定義顏色，包括顏色名稱、十六進位值、RGB值和RGBA值等。</p>
+    <p>&lt;p&gt;CSS 覆蓋順序：!important &gt; Inline (style=&quot;&quot;) &gt; #id &gt; .class &gt; tag &gt; *；若權重相同，後面寫的覆蓋前面。&lt;/p&gt;</p>
+    <ul>
+        <li>內建顏色: red, blue, green, etc.</li>
+        <li>十六進位值: #FFFFFF, #000000</li>
+        <li>RGB值: rgb(255, 0, 0), rgba(255, 0, 0, 0.5) (最後面的 0.5 是 Alpha（透明度）。)</li>
+        <li>HSL: 色調, 飽和度, 明度. 例如: hsl(0, 100%, 50%) 是紅色</li>
+    </ul>
+    <ul>
+        <li>color: 顏色</li>
+        <li>background-color: 背景顏色</li>
+        <li>border-color: 邊框顏色</li>
+    </ul>
+
+    <h3>CSS 字體</h3>
+    <p>CSS中可以使用font-family屬性來定義字體，通常會指定多個字體名稱，瀏覽器會依序選擇可用的字體。</p>
+    <p>可以分隔多個字體在font-family屬性中，用逗號分隔。當前面不能使用去調用</p>
+    <p style="font-family: cursive, sans-serif;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique odit laborum maiores rerum perferendis quis numquam magni ad, quas commodi sit totam placeat enim quasi. In odit libero omnis quod?</p>
+    <h4>CSS 字體大小</h4>
+    <p>CSS中可以使用font-size屬性來定義字體大小，通常會使用像素(px)、百分比(%)、em(1em是基準字體大小的100%)、rem等單位。</p>
+    <h4>CSS 字體粗細</h4>
+    <p>CSS中可以使用font-weight屬性來定義字體粗細，通常會使用normal、bold、bolder、lighter等關鍵字，或是使用數值(100~900)來定義。</p>
+    <h4>CSS 字體風格</h4>
+    <p>CSS中可以使用font-style屬性來定義字體風格，通常會使用normal、italic、oblique等關鍵字。</p>
 </body>
 </html>
