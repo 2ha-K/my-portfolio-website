@@ -9,9 +9,19 @@
     <meta property="og:description" content="這是我的學習筆記，裡面有我上課的筆記以及一些練習的程式碼，歡迎大家來參觀。">
     <meta property="og:image" content="https://res.cloudinary.com/dp7kmvksa/image/upload/v1779016353/b503f6f6eb0b43d3aa1d641f39dd463d_1696507173_tplv-dy-360p_jy9tkq.jpg">
     <meta property="og:url" content="https://kevin24419686.github.io/practice%20note/index.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+    @font-face {
+        font-family: 'LXGW WenKai Mono TC download';
+        src: url("./fonts/LXGW WenKai Mono TC Regular.ttf");
+    }
     <style>
         #method1-1 {
             color: red;
+        }
+        body {
+            font-family: 'LXGW WenKai Mono TC download', 'LXGW WenKai Mono TC', monospace;
         }
     </style>
 </head>
@@ -22,6 +32,7 @@
         <li><a href="#section1">7/8</a></li>
         <li><a href="#section2">7/10</a></li>
         <li><a href="#section3">7/11</a></li>
+        <li><a href="#section4">7/30</a></li>
     </ul>
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
@@ -359,5 +370,39 @@ email=abc@gmail.com&password=123456
     <p>CSS中可以使用font-weight屬性來定義字體粗細，通常會使用normal、bold、bolder、lighter等關鍵字，或是使用數值(100~900)來定義。</p>
     <h4>CSS 字體風格</h4>
     <p>CSS中可以使用font-style屬性來定義字體風格，通常會使用normal、italic、oblique等關鍵字。</p>
+    
+    <h2 id="section4">7/30</h2>
+    <h3>如何使用google font</h3>
+    <p>google font是Google提供的免費字體服務，可以讓你在網頁中使用多種精美的字體。</p>
+    <a href="https://fonts.google.com/" target="_blank">访问Google Fonts</a>
+    <h3>Embed版本</h3>
+    <ol>
+        <li>選擇好字體後按下get font</li>
+        <li>選擇embed</li>
+        <li>複製link標籤到head中</li>
+        <li>在CSS中使用font-family屬性來指定字體名稱</li>
+    </ol>
+    <h3>下載版本</h3>
+    <ol>
+        <li>選擇好字體後按下download family</li>
+        <li>解壓縮下載的檔案</li>
+        <li>將字體檔案放到專案中</li>
+        <li>在CSS中使用@font-face規則來指定字體檔案</li>
+    </ol>
+    <h3>Border的使用</h3>
+    <p>border是指邊框，可以用來設定元素的邊框樣式、寬度和顏色。</p>
+    <p>border-style: solid, dashed, dotted, double, groove, ridge, inset, outset, none, hidden;</p>
+    <p>border-width: thin, medium, thick, px, em, rem;</p>
+    <p>border-color: color name, hex, rgb, rgba, hsl;</p>
+    <p>border-radius: rounded corners</p>
+    <p style="border-style: dotted; border-width: 5px; border-color: green; border-radius: 15px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sunt reiciendis sint amet, deserunt quia reprehenderit, excepturi, rerum sequi repudiandae numquam exercitationem? Enim eligendi esse earum quasi soluta autem voluptatem.</p>
+    <h3>border: 設定整個border</h3>
+    <p style="border: solid 3px green;">border: solid 3px green = 簡寫版本</p>
+    <h3>border-top, border-right, border-bottom, border-left: 設定單邊border</h3>
+    <p style="border-top: solid 3px green;">border-top: solid 3px green</p>
+    <p style="border-right: solid 3px green;">border-right: solid 3px green</p>
+    <p style="border-bottom: solid 3px green;">border-bottom: solid 3px green</p>
+    <p style="border-left: solid 3px green;">border-left: solid 3px green</p>
+    
 </body>
 </html>
