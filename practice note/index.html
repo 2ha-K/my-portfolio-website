@@ -12,16 +12,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
-    @font-face {
-        font-family: 'LXGW WenKai Mono TC download';
-        src: url("./fonts/LXGW WenKai Mono TC Regular.ttf");
-    }
+    
     <style>
+        @font-face {
+            font-family: 'LXGW WenKai Mono TC download';
+            src: url("./fonts/LXGW WenKai Mono TC Regular.ttf");
+        }
         #method1-1 {
             color: red;
         }
         body {
             font-family: 'LXGW WenKai Mono TC download', 'LXGW WenKai Mono TC', monospace;
+        }
+        .box {
+            min-width: 25%;
+            max-width: 50%;
+            height: 100px;
+            border: 1px solid black;
+            float: left;
+            background-color: orange;
+            padding-top: 10px;
+            padding-left: 10px;
+            margin-bottom: 30px;
+        }
+        * {
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -35,6 +50,7 @@
         <li><a href="#method1">CSS上課筆記</a></li>
         <li><a href="#section4">7/13</a></li>
         <li><a href="#section5">7/30</a></li>
+        <li><a href="#section6">7/31</a></li>
     </ul>
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
@@ -452,37 +468,267 @@ email=abc@gmail.com&password=123456
     <h3>CSS中的Overflow?</h3>
     <p>overflow 是 CSS 用來控制內容超出元素大小時該如何顯示 的屬性。當內容超過元素設定的寬度或高度時，可以決定是顯示、隱藏、捲動或自動出現捲軸。</p>
     <h4>visible (預設)</h4>
-<p>超出的內容直接顯示，不會被裁切。</p>
+    <p>超出的內容直接顯示，不會被裁切。</p>
 
-<h4>hidden</h4>
-<p>超出的內容會被隱藏，使用者看不到。</p>
+    <h4>hidden</h4>
+    <p>超出的內容會被隱藏，使用者看不到。</p>
 
-<h4>scroll</h4>
-<p>永遠顯示捲軸（水平或垂直），即使內容沒有超出，也會保留捲軸空間。</p>
+    <h4>scroll</h4>
+    <p>永遠顯示捲軸（水平或垂直），即使內容沒有超出，也會保留捲軸空間。</p>
 
-<h4>auto</h4>
-<p>只有內容超出時才會顯示捲軸，沒有超出則不顯示。</p>
+    <h4>auto</h4>
+    <p>只有內容超出時才會顯示捲軸，沒有超出則不顯示。</p>
 
-<h4>clip</h4>
-<p>超出的內容會直接裁切（剪掉），且不能透過捲動查看。與 hidden 類似，但更偏向單純裁切內容。</p>
-<ol>
-    <li><strong>visible (預設)</strong>：超出的內容直接顯示，不會被裁切。</li>
-    <li><strong>hidden</strong>：超出的內容會被隱藏，使用者看不到。</li>
-    <div style="width: 300px; height: 200px; border: 1px solid; overflow: hidden; ">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+    <h4>clip</h4>
+    <p>超出的內容會直接裁切（剪掉），且不能透過捲動查看。與 hidden 類似，但更偏向單純裁切內容。</p>
+    <ol>
+        <li><strong>visible (預設)</strong>：超出的內容直接顯示，不會被裁切。</li>
+        <li><strong>hidden</strong>：超出的內容會被隱藏，使用者看不到。</li>
+        <div style="width: 300px; height: 200px; border: 1px solid; overflow: hidden; ">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+        </div>
+        <li><strong>scroll</strong>：永遠顯示捲軸，即使內容沒有超出也會保留捲軸空間。</li>
+        <div style="width: 300px; height: 200px; border: 1px solid; overflow: scroll; ">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+        </div>
+        <li><strong>auto</strong>：只有內容超出時才會顯示捲軸。</li>
+        <div style="width: 300px; height: 200px; border: 1px solid; overflow: auto; ">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+        </div>
+        <li><strong>clip</strong>：超出的內容直接裁切，不能透過捲動查看。</li>
+        <div style="width: 300px; height: 200px; border: 1px solid; overflow: clip; ">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+        </div>
+    </ol>
+
+    <h2 id="section6">7/31</h2>
+    <h3>CSS的display?</h3>
+    <p>
+    CSS 的 <code>display</code> 用來決定元素在網頁上的顯示方式。常見的值有
+    <code>inline</code>、<code>block</code>、<code>inline-block</code> 和
+    <code>none</code>。
+    <code>inline</code> 會與其他元素排在同一行，不能設定寬度、高度，適合文字或小型內容；
+    <code>block</code> 會獨自佔據一整行，可以自由設定寬度、高度、邊距等；
+    <code>inline-block</code> 結合了兩者的優點，既能與其他元素排在同一行，又可以設定寬度與高度；
+    <code>none</code> 則會讓元素完全隱藏，不會顯示，也不會佔據任何版面空間。
+    </p>
+    <div style="display: inline; border: 1px solid;">
+        我是盒子
+    </div >
+    <p style="display: inline;">我是行</p>
+
+    <h3>CSS的高度和寬度</h3>
+    <h4>什麼是 vh？</h4>
+    <p>
+    <code>vh</code>（Viewport Height）是 CSS 的長度單位，代表瀏覽器視窗高度的百分比。
+    <code>100vh</code> 表示整個視窗高度，<code>50vh</code> 表示視窗高度的一半，常用來讓元素填滿整個畫面。
+    </p>
+
+    <h4>id 和 class 的差別？</h4>
+    <p>
+    <code>id</code> 用來唯一識別一個元素，一個頁面中通常只能出現一次，CSS 使用 <code>#</code> 選取；
+    <code>class</code> 用來分類多個元素，可以重複使用，CSS 使用 <code>.</code> 選取。
+    </p>
+
+    <h4>min-width 和 max-width</h4>
+    <p>
+    <code>min-width</code> 用來設定元素的最小寬度，元素不會縮小到低於此值；
+    <code>max-width</code> 用來設定元素的最大寬度，元素不會放大超過此值，常用於響應式網頁設計。
+    </p>
+
+    <h4>* {} 是什麼？</h4>
+    <p>
+    <code>*</code> 稱為萬用選擇器（Universal Selector），代表選取網頁中的所有元素，常用來統一設定
+    <code>margin</code>、<code>padding</code> 或 <code>box-sizing</code> 等初始樣式。
+    </p>
+
+    <h4>box-sizing: border-box 是什麼？</h4>
+    <p>
+    預設情況下，元素的 <code>width</code> 和 <code>height</code> 不包含 <code>padding</code> 和 <code>border</code>。
+    設定 <code>box-sizing: border-box;</code> 後，元素的寬度與高度會包含 <code>padding</code> 和 <code>border</code>，讓版面配置更容易控制。
+    </p>
+    <div class="box">
+        我是一個box
     </div>
-    <li><strong>scroll</strong>：永遠顯示捲軸，即使內容沒有超出也會保留捲軸空間。</li>
-    <div style="width: 300px; height: 200px; border: 1px solid; overflow: scroll; ">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+    <div class="box">
+        我是一個box
     </div>
-    <li><strong>auto</strong>：只有內容超出時才會顯示捲軸。</li>
-    <div style="width: 300px; height: 200px; border: 1px solid; overflow: auto; ">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+    <div class="box">
+        我是一個box
     </div>
-    <li><strong>clip</strong>：超出的內容直接裁切，不能透過捲動查看。</li>
-    <div style="width: 300px; height: 200px; border: 1px solid; overflow: clip; ">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iusto aspernatur dolores omnis quis harum mollitia voluptatibus consectetur necessitatibus dolor at tenetur quidem amet, cum est architecto nobis libero quisquam?</p>
+    <div class="box">
+        我是一個box
     </div>
-</ol>
+    <div class="box">
+        我是一個box
+    </div>
+    <div class="box">
+        我是一個box
+    </div>
+    <div style="clear: both;"></div>
+    <h3>CSS中的定位: Position</h3>
+    <img src="./images/線條小狗狗.gif" style="position: fixed; bottom: 0;right: 0;">
+    <h4>絕對位置:</h4>
+    <p>不指定 position 時，元素會依照正常排列，margin 只是調整元素之間的距離；只有 absolute、fixed 等定位方式，才會真正脫離正常排列。</p>
+    <p>
+    <code>position: absolute;</code> 會讓元素脫離正常排列，不再影響其他元素的位置。通常會搭配
+    <code>top</code>、<code>right</code>、<code>bottom</code>、<code>left</code>
+    來指定元素的位置。如果父元素有設定 <code>position: relative;</code>，則會以父元素為基準定位；否則會以整個瀏覽器視窗為基準定位。
+    </p>
+    <p>
+    當子元素使用 <code>position: absolute;</code> 時，如果父元素設定了
+    <code>position: relative;</code>，子元素會以父元素為定位基準，搭配
+    <code>top</code>、<code>right</code>、<code>bottom</code>、<code>left</code>
+    決定位置；如果父元素沒有設定 <code>position: relative;</code>，則子元素會往外尋找最近有設定定位（如 <code>relative</code>、<code>absolute</code>、<code>fixed</code>）的祖先元素，若都找不到，就會以整個瀏覽器視窗（Viewport）作為定位基準。
+    </p>
+    <h4>固定位置:</h4>
+    <p>
+    <code>position: fixed;</code> 會讓元素脫離正常排列，並固定在瀏覽器視窗（Viewport）的指定位置，通常搭配
+    <code>top</code>、<code>right</code>、<code>bottom</code>、<code>left</code>
+    設定位置。即使網頁上下捲動，元素仍會固定在原來的位置，不會跟著內容一起移動，常用於返回頂端按鈕、導覽列或懸浮選單。
+    </p>
+    <h4>position: relative（相對位置）</h4>
+    <p>
+    <code>position: relative;</code> 會讓元素以自己原本的位置作為基準，搭配
+    <code>top</code>、<code>right</code>、<code>bottom</code>、<code>left</code>
+    進行偏移。元素雖然看起來移動了，但仍保留原本所佔的空間，不會脫離正常排列，也常作為 <code>position: absolute;</code> 子元素的定位基準。
+    </p>
+    <h4>position: sticky（黏性定位）</h4>
+    <p>
+    <code>position: sticky;</code> 結合了 <code>relative</code> 和 <code>fixed</code> 的特性。元素一開始會依照正常排列顯示，當網頁捲動到指定位置（通常搭配 <code>top</code>、<code>left</code> 等）時，元素會固定在該位置；離開父元素的範圍後，則會停止固定並跟著父元素一起結束。常用於表格標題、側邊欄或導覽列。
+    </p>
+    <h4>class="A B"?</h4>
+    <p>同時擁有 A 和 B 兩個 class，兩個樣式都會套用。</p>
+
+    <h3>CSS的盒模型: Box Model</h3>
+    <p>
+    CSS Box Model（盒模型）是 CSS 中描述元素版面配置的核心概念。瀏覽器會把每個 HTML 元素都看成一個「盒子（Box）」，並依照 <code>Content（內容）</code>、<code>Padding（內距）</code>、<code>Border（邊框）</code>、<code>Margin（外距）</code> 四個部分來決定元素實際佔用的大小與和其他元素之間的距離。理解 Box Model 是學習 CSS 排版最重要的基礎之一。
+    </p>
+    <div class="box">
+        這是第一個 div。
+    </div>
+
+    <div class="box">
+        這是第二個 div。
+    </div>
+    <div style="clear: both;"></div>
+    <ol>
+    <li>設定盒子的內容大小（Content）：
+        <pre><code>width: 200px;
+height: 200px;</code></pre>
+            </li>
+
+            <li>設定背景顏色：
+                <pre><code>background-color: orange;</code></pre>
+            </li>
+
+            <li>設定外距（Margin），讓兩個 div 之間相隔 30px：
+                <pre><code>margin-bottom: 30px;</code></pre>
+            </li>
+
+            <li>設定邊框（Border）：
+                <pre><code>border: 1px solid black;</code></pre>
+            </li>
+
+            <li>設定上方內距（Padding），讓內容離上邊框 10px：
+                <pre><code>padding-top: 10px;</code></pre>
+            </li>
+
+            <li>設定左方內距（Padding），讓內容離左邊框 10px：
+                <pre><code>padding-left: 10px;</code></pre>
+            </li>
+        </ol>
+    <h4>background-color</h4>
+    <p>背景顏色</p>
+    <h4>Padding 和 Margin 的差別</h4>
+    <p>
+    <code>padding</code>（內距）是元素<strong>內容與邊框之間</strong>的空間，增加 padding 會讓元素內部變大；<code>margin</code>（外距）是<strong>元素邊框與其他元素之間</strong>的空間，用來拉開元素彼此的距離，不會增加元素本身的內容空間。
+    </p>
+    <h4>box-sizing: border-box 和 padding 的關係</h4>
+    <p>
+    預設情況下（<code>content-box</code>），<code>width</code> 和 <code>height</code> 只代表內容（Content）的大小，<code>padding</code> 和 <code>border</code> 會另外加上去，因此元素會變得比設定的尺寸更大。設定 <code>box-sizing: border-box;</code> 後，<code>padding</code> 和 <code>border</code> 會包含在 <code>width</code>、<code>height</code> 裡，不會因為增加 padding 而讓元素變大。
+    </p>
+
+    <h3>CSS Padding: (內邊距)</h3>
+    <div style="padding: 50px; border: 1px solid; background-color: aqua;">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor dignissimos, expedita rerum natus odit quisquam magni asperiores maiores accusantium iure deleniti, at, commodi aperiam veniam mollitia aliquid quas facere harum!
+    </div>
+    <p>
+    <code>padding</code> 用來設定元素<strong>內容（Content）與邊框（Border）之間</strong>的距離，也稱為內邊距。增加 <code>padding</code> 會讓內容離邊框更遠，使元素內部看起來更有留白；在預設的 <code>box-sizing: content-box;</code> 下，增加 <code>padding</code> 還會讓元素實際大小變大。
+    </p>
+
+    <h4>分別設定四個方向</h4>
+
+    <ul>
+        <li><code>padding-top</code>：上方內邊距</li>
+        <li><code>padding-right</code>：右方內邊距</li>
+        <li><code>padding-bottom</code>：下方內邊距</li>
+        <li><code>padding-left</code>：左方內邊距</li>
+    </ul>
+
+    <h4>Padding 簡寫</h4>
+
+    <ul>
+        <li><code>padding: 20px;</code>：四個方向都是 20px。</li>
+        <li><code>padding: 10px 20px;</code>：上下 10px，左右 20px。</li>
+        <li><code>padding: 10px 20px 30px;</code>：上 10px，左右 20px，下 30px。</li>
+        <li><code>padding: 10px 20px 30px 40px;</code>：依序為上（Top）、右（Right）、下（Bottom）、左（Left），順時針方向。</li>
+    </ul>
+
+    <h3>CSS 元素選擇器（Element Selector）</h3>
+    <p>
+    CSS 元素選擇器（Element Selector）是使用 HTML 標籤名稱來選取元素，例如
+    <code>p</code>、<code>h1</code>、<code>div</code> 等。選取後，所有相同標籤的元素都會套用相同的 CSS 樣式，因此適合用來設定整個網頁中某一類元素的共同外觀。
+    </p>
+
+    <pre><code>p {
+        color: red;
+    }
+
+    h1 {
+        text-align: center;
+    }</code></pre>
+    <h4>text-decoration</h4>
+    <p>控制是否有底線_______________: none/underline</p>
+
+    <h3>CSS 元素選擇器（Element Selector）- ID Vs Class</h3>
+    <h4>ID 選擇器（#）</h4>
+    <p>
+    ID 選擇器用來選取具有特定 <code>id</code> 屬性的元素，CSS 使用 <code>#</code> 開頭。一個 <code>id</code> 在同一個網頁中通常只會使用一次，因此適合套用在唯一的元素，例如頁首、頁尾或特定區塊。
+    </p>
+
+    <pre><code>#title {
+        color: red;
+    }</code></pre>
+    <h4>Class 選擇器（.）</h4>
+    <p>
+    Class 選擇器用來選取具有特定 <code>class</code> 屬性的元素，CSS 使用 <code>.</code> 開頭。相同的 <code>class</code> 可以套用在多個元素上，因此適合重複使用相同的樣式，例如按鈕、卡片或警告文字等。
+    </p>
+
+    <pre><code>.box {
+        border: 1px solid black;
+    }</code></pre>
+
+    <h3>一次修改多個元素的 CSS 樣式（群組選擇器）</h3>
+
+    <p>
+    CSS 可以使用<strong>逗號（,）</strong>將多個選擇器分隔，讓它們共用同一組樣式，稱為<strong>群組選擇器（Grouping Selector）</strong>。當多個元素需要套用相同的 CSS 時，可以使用群組選擇器，避免重複撰寫相同的樣式，讓程式碼更簡潔且容易維護。
+    </p>
+
+    <h4>語法</h4>
+
+    <pre><code>選擇器1, 選擇器2, 選擇器3 {
+        屬性: 值;
+    }</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>h1, h2, p {
+        color: blue;
+    }</code></pre>
+
+    <p>
+    上面的程式碼會讓所有 <code>h1</code>、<code>h2</code> 和 <code>p</code> 元素的文字都變成藍色。
+    </p>
 </body>
 </html>
