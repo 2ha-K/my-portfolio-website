@@ -30,13 +30,16 @@
             height: 100px;
             border: 1px solid black;
             float: left;
-            background-color: orange;
+            background-color: rgb(0, 98, 255);
             padding-top: 10px;
             padding-left: 10px;
             margin-bottom: 30px;
         }
         * {
             box-sizing: border-box;
+        }
+        body {
+            background-color: rgb(220, 235, 245);
         }
     </style>
 </head>
@@ -51,6 +54,7 @@
         <li><a href="#section4">7/13</a></li>
         <li><a href="#section5">7/30</a></li>
         <li><a href="#section6">7/31</a></li>
+        <li><a href="#section7">8/1</a></li>
     </ul>
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
@@ -730,5 +734,423 @@ height: 200px;</code></pre>
     <p>
     上面的程式碼會讓所有 <code>h1</code>、<code>h2</code> 和 <code>p</code> 元素的文字都變成藍色。
     </p>
-</body>
+
+    <h2 id="section7">8/1</h2>
+
+    <h3>CSS 後代選擇器（Descendant Selector）</h3>
+
+    <p>
+    CSS 後代選擇器（Descendant Selector）用來選取某個元素內的所有後代元素，無論相隔幾層都會被選取。使用空格（space）表示後代關係，前面的選擇器代表祖先元素，後面的選擇器代表要選取的後代元素。
+    </p>
+
+    <h4>語法</h4>
+
+    <pre><code>父元素 子元素 {
+        屬性: 值;
+    }</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>div p {
+        color: red;
+    }</code></pre>
+
+    <p>
+    上述程式碼會選取所有位於 <code>&lt;div&gt;</code> 內的 <code>&lt;p&gt;</code> 元素，即使中間隔了多層其他元素，也都會套用相同的樣式。
+    </p>
+
+    <h3>CSS 子選擇器（Child Selector）</h3>
+
+    <p>
+    CSS 子選擇器（Child Selector）用來選取某個元素的<strong>直接子元素</strong>，不會選取更深層的後代元素。使用 <code>&gt;</code> 符號表示父子關係，前面的選擇器代表父元素，後面的選擇器代表直接子元素。
+    </p>
+
+    <h4>語法</h4>
+
+    <pre><code>父元素 > 子元素 {
+        屬性: 值;
+    }</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>div > p {
+        color: blue;
+    }</code></pre>
+
+    <p>
+    上述程式碼只會選取 <code>&lt;div&gt;</code> 的直接 <code>&lt;p&gt;</code> 子元素；如果 <code>&lt;p&gt;</code> 位於其他元素（如 <code>&lt;section&gt;</code>）內，就不會被選取。
+    </p>
+
+    <h4>後代選擇器（空格）與子選擇器（>）的差別</h4>
+
+    <p>
+    後代選擇器（<code>父元素 子元素</code>）會選取父元素內<strong>所有符合條件的後代元素</strong>，無論相隔幾層；子選擇器（<code>父元素 &gt; 子元素</code>）則只會選取<strong>父元素的直接子元素</strong>，不會選取孫元素或更深層的後代。
+    </p>
+
+    <pre><code>後代選擇器（空格）
+
+    div
+    ├── p      ✔
+    └── section
+        └── p  ✔
+
+
+    子選擇器（>）
+
+    div
+    ├── p      ✔
+    └── section
+        └── p  ✘
+    </code></pre>
+
+    <h3>CSS 鄰居選擇器（Adjacent Sibling Selector）</h3>
+
+    <p>
+    CSS 鄰居選擇器（Adjacent Sibling Selector）用來選取某個元素的<strong>下一個緊鄰的兄弟元素</strong>，也就是與該元素同層級且緊接在後面的元素。使用 <code>+</code> 符號表示鄰居關係，前面的選擇器代表前一個元素，後面的選擇器代表要選取的下一個兄弟元素。
+    </p>
+
+    <h4>語法</h4>
+
+    <pre><code>元素1 + 元素2 {
+        屬性: 值;
+    }</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>h1 + p {
+        color: red;
+    }</code></pre>
+
+    <p>
+    上述程式碼只會選取緊接在 <code>&lt;h1&gt;</code> 後面的第一個 <code>&lt;p&gt;</code> 元素。
+    </p>
+
+    <pre><code>
+        h1
+    ├── p   ✔
+    ├── p   ✘
+    └── p   ✘
+    </code></pre>
+    <p>
+    鄰居選擇器在實務開發中相對較少使用，因為它只能選取<strong>緊鄰的下一個兄弟元素</strong>，限制較多。若需要選取多個兄弟元素，通常會使用一般兄弟選擇器（<code>~</code>），或直接為元素加入 <code>class</code> 來套用樣式，因此在一般網頁開發中較不常見。
+    </p>
+
+    <h3>CSS 屬性選擇器（Attribute Selector）</h3>
+
+    <p>
+    CSS 屬性選擇器（Attribute Selector）用來根據 HTML 元素的屬性（Attribute）或屬性值來選取元素，而不需要使用 <code>id</code> 或 <code>class</code>。常用於選取具有特定屬性的元素，或依據屬性值進一步篩選元素。
+    </p>
+
+    <h4>1. 只輸入屬性</h4>
+
+    <p>
+    只要元素具有指定的屬性，就會被選取。
+    </p>
+
+    <pre><code>[href] {
+        color: blue;
+    }</code></pre>
+
+    <pre><code>&lt;a href="https://google.com"&gt;Google&lt;/a&gt;
+    &lt;a&gt;沒有 href&lt;/a&gt;
+    </code></pre>
+
+    <h4>2. 屬性 = 值</h4>
+
+    <p>
+    選取屬性值完全相同的元素。
+    </p>
+
+    <pre><code>input[type="text"] {
+        border: 1px solid blue;
+    }</code></pre>
+
+    <pre><code>&lt;input type="text"&gt;
+    &lt;input type="password"&gt;
+    </code></pre>
+
+    <h4>3. 屬性 ^= 值（開頭）</h4>
+
+    <p>
+    <code>^=</code> 表示屬性值必須以指定文字開頭。
+    </p>
+
+    <pre><code>a[href^="https"] {
+        color: green;
+    }</code></pre>
+
+    <pre><code>&lt;a href="https://google.com"&gt;Google&lt;/a&gt;
+    &lt;a href="http://example.com"&gt;Example&lt;/a&gt;
+    </code></pre>
+
+    <h4>4. 屬性 $= 值（結尾）</h4>
+
+    <p>
+    <code>$=</code> 表示屬性值必須以指定文字結尾。
+    </p>
+
+    <pre><code>img[src$=".png"] {
+        border: 2px solid red;
+    }</code></pre>
+
+    <pre><code>&lt;img src="cat.png"&gt;
+    &lt;img src="dog.jpg"&gt;
+    </code></pre>
+
+    <h4>整理</h4>
+
+    <ul>
+        <li><code>[屬性]</code>：只要具有指定屬性即可選取。</li>
+        <li><code>[屬性="值"]</code>：屬性值必須完全相同。</li>
+        <li><code>[屬性^="值"]</code>：屬性值必須以指定文字開頭。</li>
+        <li><code>[屬性$="值"]</code>：屬性值必須以指定文字結尾。</li>
+    </ul>
+    
+    <h3>第一子元素和最後子元素選擇器</h3>
+    <p>
+    CSS 提供了 <code>:first-child</code> 和 <code>:last-child</code> 選擇器，可以用來選取元素的 第一子元素 和 最後子元素。
+    </p>
+
+    <h4>語法</h4>
+
+    <pre><code>
+    元素:first-child {
+        屬性: 值;
+    }
+
+    元素:last-child {
+        屬性: 值;
+    }</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>
+    li:first-child {
+        color: red;
+    }
+
+    li:last-child {
+        color: blue;
+    }</code></pre>
+
+    <p>
+    上述程式碼會讓第一個和最後一個 <code>&lt;li&gt;</code> 元素的文字分別變成紅色和藍色。
+    </p>
+
+    <h3>CSS 權重（Specificity）</h3>
+
+    <p>
+    當多個 CSS 規則同時套用到同一個元素時，瀏覽器會根據<strong>權重（Specificity）</strong>決定哪一個樣式生效。權重越高，優先權越高；若權重相同，則以<strong>後面撰寫</strong>的 CSS 覆蓋前面的樣式。
+    </p>
+
+    <h4>權重順序（由高到低）</h4>
+
+    <ol>
+        <li><code>!important</code></li>
+        <li>Inline Style（HTML 的 <code>style=""</code>）</li>
+        <li>ID 選擇器（<code>#id</code>）</li>
+        <li>Class、屬性選擇器、偽類（<code>.class</code>、<code>[type]</code>、<code>:hover</code>）</li>
+        <li>元素選擇器（<code>div</code>、<code>p</code>、<code>h1</code>）</li>
+    </ol>
+
+    <h4>權重比較</h4>
+
+    <ul>
+        <li><code>p</code> → (0,0,1)</li>
+        <li><code>.box</code> → (0,1,0)</li>
+        <li><code>#title</code> → (1,0,0)</li>
+        <li><code>div p</code> → (0,0,2)</li>
+        <li><code>div .box</code> → (0,1,1)</li>
+        <li><code>#title .box</code> → (1,1,0)</li>
+    </ul>
+
+    <h4>同權重時</h4>
+
+    <p>
+    如果兩個選擇器的權重完全相同，則以<strong>後面撰寫</strong>的 CSS 覆蓋前面的樣式。
+    </p>
+
+    <pre><code>p {
+        color: green;
+    }
+
+    p {
+        color: red;
+    }</code></pre>
+
+    <p>
+    最終文字會顯示為紅色。
+    </p>
+
+    <h4>補充</h4>
+
+    <ul>
+        <li>Visual Studio Code 滑鼠移到選擇器上時，可以查看 <strong>Selector Specificity（權重）</strong>，方便判斷哪個 CSS 規則優先。</li>
+        <li><code>!important</code> 雖然能提高優先權，但會增加樣式維護難度，因此<strong>除非必要，否則盡量不要使用</strong>。</li>
+    </ul>
+
+    <h3>Background（背景）</h3>
+
+    <p>
+    CSS 的 <code>background</code> 相關屬性用來設定元素的背景，例如背景顏色、背景圖片、圖片大小、位置及是否重複顯示等。
+    </p>
+
+    <h4>背景圖片</h4>
+
+    <pre><code>body {
+        background-image: url("./small.jpg");
+    }</code></pre>
+
+    <p>
+    <code>background-image</code> 用來設定背景圖片，圖片路徑需使用 <code>url()</code> 包住。
+    </p>
+
+    <h4>為什麼本地圖片也要使用 url()？</h4>
+
+    <p>
+    <code>url()</code> 並不代表只能放網站網址，它表示<strong>資源的位置（Uniform Resource Locator）</strong>。因此可以放本地圖片的相對路徑（例如 <code>./image.jpg</code>）、絕對路徑，或是網路上的網址（例如 <code>https://example.com/image.jpg</code>）。
+    </p>
+
+    <h4>圖片太小會重複</h4>
+
+    <p>
+    背景圖片預設會重複平鋪（Repeat），如果圖片尺寸小於元素大小，就會一直重複顯示。可以使用 <code>background-repeat: no-repeat;</code> 讓背景圖片只顯示一次。
+    </p>
+
+    <pre><code>body {
+        background-image: url("./small.jpg");
+        background-repeat: no-repeat;
+    }</code></pre>
+
+    <h4>背景位置</h4>
+
+    <p>
+    <code>background-position</code> 用來設定背景圖片的位置，例如 <code>center</code>、<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code>。
+    </p>
+
+    <pre><code>background-position: center;</code></pre>
+
+    <h4>背景大小</h4>
+
+    <p>
+    <code>background-size</code> 用來調整背景圖片的大小，常見的值有 <code>cover</code> 和 <code>contain</code>。
+    </p>
+
+    <ul>
+        <li><code>cover</code>：填滿整個元素，圖片可能被裁切。</li>
+        <li><code>contain</code>：完整顯示整張圖片，不會裁切，但可能留下空白。</li>
+    </ul>
+
+    <pre><code>background-size: cover;</code></pre>
+
+    <h3>CSS 偽類別（Pseudo-class）</h3>
+
+    <p>
+    CSS 偽類別（Pseudo-class）用來選取元素的<strong>特定狀態</strong>，例如滑鼠移入、按下按鈕、取得焦點或第一個子元素等。它不是 HTML 中真正的 <code>class</code>，而是由瀏覽器根據元素目前的狀態暫時套用，因此稱為「偽（Pseudo）類別」。
+    </p>
+
+    <h4>常見偽類別</h4>
+
+    <ul>
+        <li><code>:hover</code>：滑鼠移到元素上。</li>
+        <li><code>:active</code>：滑鼠按下元素時。</li>
+        <li><code>:visited</code>：已拜訪過的連結。</li>
+        <li><code>:focus</code>：元素取得焦點，例如正在輸入的文字框。</li>
+        <li><code>:first-child</code>：父元素中的第一個子元素。</li>
+        <li><code>:last-child</code>：父元素中的最後一個子元素。</li>
+        <li><code>:nth-child(n)</code>：父元素中的第 n 個子元素。</li>
+        <li><code>:not()</code>：排除符合指定條件的元素。</li>
+    </ul>
+
+    <h4>範例</h4>
+
+    <pre><code>
+    a:hover {
+        color: red;
+    }
+
+    input:focus {
+        border: 2px solid blue;
+    }
+
+    li:first-child {
+        font-weight: bold;
+    }
+
+    li:not(:hover) {
+        color: gray;
+    }</code></pre>
+
+    <h4>為什麼叫偽類別？</h4>
+
+    <p>
+    偽類別看起來像一般的 <code>class</code>，但它不是寫在 HTML 中的 <code>class</code> 屬性，而是由瀏覽器根據元素目前的狀態自動判斷並套用，因此稱為「偽（Pseudo）類別」。
+    </p>
+    <p>
+        class 是你自己寫在 HTML 的分類；Pseudo-class 則是瀏覽器根據元素目前的狀態（如 :hover、:focus、:active）暫時選取元素，因此稱為偽類別。
+    </p>
+
+
+    <h3>CSS 偽元素（Pseudo-element）</h3>
+
+    <p>
+    CSS 偽元素（Pseudo-element）用來選取或建立元素中的<strong>特定部分</strong>，例如第一個字、第一行文字，或在元素內容前後加入新的內容。與偽類別不同，偽元素操作的是元素的部分內容，而不是元素的狀態。
+    </p>
+
+    <h4>常見偽元素</h4>
+
+    <ul>
+        <li><code>::first-letter</code>：選取第一個文字。</li>
+        <li><code>::first-line</code>：選取第一行文字。</li>
+        <li><code>::selection</code>：選取使用者反白的文字。</li>
+        <li><code>::before</code>：在元素內容前加入內容（需搭配 <code>content</code>）。</li>
+        <li><code>::after</code>：在元素內容後加入內容（需搭配 <code>content</code>）。</li>
+        <li><code>::marker</code>：修改列表項目的項目符號（Marker）。</li>
+    </ul>
+
+    <h4>範例</h4>
+
+    <pre><code>
+    h1::first-letter {
+        color: blue;
+    }
+
+    p::first-line {
+        color: red;
+    }
+
+    p::selection {
+        background: gray;
+        color: white;
+    }
+
+    li::before {
+        content: "★ ";
+    }
+
+    li::after {
+        content: " 🍎";
+    }
+
+    li::marker {
+        color: red;
+    }</code></pre>
+
+    <h4>為什麼叫偽元素？</h4>
+
+    <p>
+    偽元素不是 HTML 中真正存在的元素，而是由瀏覽器暫時建立或選取元素的一部分，例如第一個字、第一行或前後新增的內容，因此稱為「偽（Pseudo）元素」。
+    </p>
+
+    <h4>為什麼有時候使用 <code>:</code>，有時候使用 <code>::</code>？</h4>
+
+    <p>
+    CSS2 時期，偽類別與偽元素都使用一個冒號（<code>:</code>）。從 CSS3 開始，為了區分兩者，規定<strong>偽類別使用 <code>:</code>，偽元素使用 <code>::</code></strong>。不過為了相容舊版瀏覽器，像 <code>:before</code>、<code>:after</code> 等舊寫法現在仍然可以使用，但建議採用新的雙冒號寫法。
+    </p>
+
+    <ul>
+        <li><code>:hover</code>、<code>:active</code>、<code>:focus</code> → 偽類別（Pseudo-class）</li>
+        <li><code>::before</code>、<code>::after</code>、<code>::first-letter</code> → 偽元素（Pseudo-element）</li>
+    </ul>
+    </body>
 </html>
