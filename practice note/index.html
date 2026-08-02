@@ -55,6 +55,7 @@
         <li><a href="#section5">7/30</a></li>
         <li><a href="#section6">7/31</a></li>
         <li><a href="#section7">8/1</a></li>
+        <li><a href="#section8">8/2</a></li>
     </ul>
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
@@ -1152,5 +1153,55 @@ height: 200px;</code></pre>
         <li><code>:hover</code>、<code>:active</code>、<code>:focus</code> → 偽類別（Pseudo-class）</li>
         <li><code>::before</code>、<code>::after</code>、<code>::first-letter</code> → 偽元素（Pseudo-element）</li>
     </ul>
+
+    <h2 id="section8">8/2</h2>
+    <h3>CSS Flexbox（彈性盒模型）</h3>
+    <p>
+    CSS Flexbox（Flexible Box Layout）是一種用來建立<strong>一維（單行或單列）</strong>版面的 CSS 排版模型。只要將父元素設定為 <code>display: flex;</code>，其子元素就會變成 Flex Item，可以依照主軸（Main Axis）和交叉軸（Cross Axis）進行排列、自動調整大小及控制間距，因此非常適合製作導覽列、卡片、按鈕排列及響應式版面。
+    </p>
+
+    <img src="./images/flexBox.png" alt="Flexbox示意圖" style="width:100%; max-width:600px;">
+
+    <h4>基本概念</h4>
+
+    <ul>
+        <li><strong>Flex Container</strong>：設定 <code>display: flex;</code> 的父元素。</li>
+        <li><strong>Flex Item</strong>：Container 內的直接子元素。</li>
+        <li><strong>Main Axis（主軸）</strong>：Flex Item 排列的主要方向，預設為水平（左→右）。</li>
+        <li><strong>Cross Axis（交叉軸）</strong>：與主軸垂直的方向，預設為垂直（上→下）。</li>
+    </ul>
+
+    <h4>一句話記憶</h4>
+
+    <p>
+    <strong>Flexbox 就是先決定主軸（Main Axis）怎麼排列，再決定交叉軸（Cross Axis）怎麼對齊。</strong>
+    </p>
+    <h4>flex-direction（主軸方向）</h4>
+
+    <p>
+    <code>flex-direction</code> 用來設定 Flexbox <strong>主軸（Main Axis）</strong> 的排列方向，也就是決定 Flex Item 要從哪個方向開始排列。預設值為 <code>row</code>（由左到右）。
+    </p>
+
+    <ul>
+        <li><code>row</code>：水平排列，由左到右（預設）。</li>
+        <li><code>row-reverse</code>：水平排列，由右到左。</li>
+        <li><code>column</code>：垂直排列，由上到下。</li>
+        <li><code>column-reverse</code>：垂直排列，由下到上。</li>
+    </ul>
+
+    <h4>範例</h4>
+
+    <pre><code>.container {
+        display: flex;
+        flex-direction: row;
+    }</code></pre>
+
+    <h4>一句話記憶</h4>
+
+    <p>
+    <strong>flex-direction 決定主軸（Main Axis）的方向，而 <code>justify-content</code> 與 <code>align-items</code> 都會依照這個主軸方向進行排列與對齊。</strong>
+    </p>
+    
+
     </body>
 </html>
