@@ -12,8 +12,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/709a472a1e.js" crossorigin="anonymous"></script>
     
     <style>
+        .icons svg {
+            font-size: 100px;   /* 調整圖示大小 */
+            color: black;      /* 調整圖示顏色 */
+        }
+
+        .icons svg:hover {
+            color: purple;     /* 滑鼠移上去時改變顏色 */
+            transform: scale(1.2); /* 放大為 1.2 倍 */
+        }
         @font-face {
             font-family: 'LXGW WenKai Mono TC download';
             src: url("./fonts/LXGW WenKai Mono TC Regular.ttf");
@@ -41,6 +51,7 @@
         body {
             background-color: rgb(220, 235, 245);
         }
+
     </style>
 </head>
 <body>
@@ -782,7 +793,7 @@ height: 200px;</code></pre>
     上述程式碼只會選取 <code>&lt;div&gt;</code> 的直接 <code>&lt;p&gt;</code> 子元素；如果 <code>&lt;p&gt;</code> 位於其他元素（如 <code>&lt;section&gt;</code>）內，就不會被選取。
     </p>
 
-    <h4>後代選擇器（空格）與子選擇器（>）的差別</h4>
+    <h4>後代選擇器（空格）與子選擇器（&gt;）的差別</h4>
 
     <p>
     後代選擇器（<code>父元素 子元素</code>）會選取父元素內<strong>所有符合條件的後代元素</strong>，無論相隔幾層；子選擇器（<code>父元素 &gt; 子元素</code>）則只會選取<strong>父元素的直接子元素</strong>，不會選取孫元素或更深層的後代。
@@ -1343,99 +1354,410 @@ height: 200px;</code></pre>
 
         <h4>練習flexbox遊戲</h4>
         <a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy</a>
-        </body>
+        
 
         <hr>
 
-    <h4>Flex Item 尺寸控制</h4>
+        <h4>Flex Item 尺寸控制</h4>
 
-    <p>
-    除了控制排列方式之外，Flexbox 也可以控制每個 Flex Item 的大小，
-    主要使用 <code>flex-grow</code>、<code>flex-shrink</code>、
-    <code>flex-basis</code> 及其縮寫 <code>flex</code>。
-    </p>
+        <p>
+        除了控制排列方式之外，Flexbox 也可以控制每個 Flex Item 的大小，
+        主要使用 <code>flex-grow</code>、<code>flex-shrink</code>、
+        <code>flex-basis</code> 及其縮寫 <code>flex</code>。
+        </p>
 
-    <hr>
+        <hr>
 
-    <h4>flex-grow（放大比例）</h4>
+        <h4>flex-grow（放大比例）</h4>
 
-    <p>
-    <code>flex-grow</code> 用來決定當容器還有剩餘空間時，每個 Flex Item 可以分配多少空間。
-    數值越大，分配到的剩餘空間越多。
-    </p>
+        <p>
+        <code>flex-grow</code> 用來決定當容器還有剩餘空間時，每個 Flex Item 可以分配多少空間。
+        數值越大，分配到的剩餘空間越多。
+        </p>
 
-    <h4>範例</h4>
+        <h4>範例</h4>
 
-    <pre><code>.item1{
-        flex-grow: 1;
-    }
+        <pre><code>.item1{
+            flex-grow: 1;
+        }
 
-    .item2{
-        flex-grow: 2;
-    }</code></pre>
+        .item2{
+            flex-grow: 2;
+        }</code></pre>
 
-    <hr>
+        <hr>
 
-    <h4>flex-shrink（縮小比例）</h4>
+        <h4>flex-shrink（縮小比例）</h4>
 
-    <p>
-    <code>flex-shrink</code> 用來決定當容器空間不足時，每個 Flex Item 要縮小多少。
-    數值越大，縮小的比例越多。
-    </p>
+        <p>
+        <code>flex-shrink</code> 用來決定當容器空間不足時，每個 Flex Item 要縮小多少。
+        數值越大，縮小的比例越多。
+        </p>
 
-    <h4>範例</h4>
+        <h4>範例</h4>
 
-    <pre><code>.item1{
-        flex-shrink: 1;
-    }
+        <pre><code>.item1{
+            flex-shrink: 1;
+        }
 
-    .item2{
-        flex-shrink: 2;
-    }</code></pre>
+        .item2{
+            flex-shrink: 2;
+        }</code></pre>
 
-    <hr>
+        <hr>
 
-    <h4>flex-basis（初始大小）</h4>
+        <h4>flex-basis（初始大小）</h4>
 
-    <p>
-    <code>flex-basis</code> 用來設定 Flex Item 的初始大小，Flexbox 會先以這個大小進行排列，再依照
-    <code>flex-grow</code> 或 <code>flex-shrink</code> 調整。
-    </p>
+        <p>
+        <code>flex-basis</code> 用來設定 Flex Item 的初始大小，Flexbox 會先以這個大小進行排列，再依照
+        <code>flex-grow</code> 或 <code>flex-shrink</code> 調整。
+        </p>
 
-    <h4>範例</h4>
+        <h4>範例</h4>
 
-    <pre><code>.item{
-        flex-basis: 200px;
-    }</code></pre>
+        <pre><code>.item{
+            flex-basis: 200px;
+        }</code></pre>
 
-    <hr>
+        <hr>
 
-    <h4>flex（縮寫）</h4>
+        <h4>flex（縮寫）</h4>
 
-    <p>
-    <code>flex</code> 是 <code>flex-grow</code>、<code>flex-shrink</code> 與
-    <code>flex-basis</code> 的縮寫。
-    </p>
+        <p>
+        <code>flex</code> 是 <code>flex-grow</code>、<code>flex-shrink</code> 與
+        <code>flex-basis</code> 的縮寫。
+        </p>
 
-    <p>
-    語法：
-    </p>
+        <p>
+        語法：
+        </p>
 
-    <pre><code>flex: grow shrink basis;</code></pre>
+        <pre><code>flex: grow shrink basis;</code></pre>
 
-    <h4>範例</h4>
+        <h4>範例</h4>
 
-    <pre><code>.item{
-        flex: 1 1 100px;
-    }</code></pre>
+        <pre><code>.item{
+            flex: 1 1 100px;
+        }</code></pre>
 
-    <p>
-    等同於：
-    </p>
+        <p>
+        等同於：
+        </p>
 
-    <pre><code>.item{
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: 100px;
-    }</code></pre>
+        <pre><code>.item{
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 100px;
+        }</code></pre>
+
+        <h3>Transform（轉換）</h3>
+
+        <p>
+            CSS 的 <code>transform</code> 屬性可以改變元素的外觀與位置，
+            常見功能包括<strong>位移、旋轉、放大或縮小</strong>。
+        </p>
+
+        <ol>
+            <li>
+                <h4>位移：translate()</h4>
+                <p>
+                    使用 <code>translate()</code> 可以移動元素的位置，
+                    第一個數值代表左右位移，第二個數值代表上下位移。
+                </p>
+
+                <pre><code>transform: translate(50px, 20px);</code></pre>
+
+                <p>
+                    表示元素向右移動 <code>50px</code>，
+                    並向下移動 <code>20px</code>。
+                </p>
+            </li>
+
+            <li>
+                <h4>旋轉：rotate()</h4>
+                <p>
+                    使用 <code>rotate()</code> 可以旋轉元素，
+                    單位通常使用 <code>deg</code>，代表角度。
+                </p>
+
+                <pre><code>transform: rotate(45deg);</code></pre>
+
+                <p>
+                    表示元素順時針旋轉 <code>45</code> 度。
+                    使用負數則會逆時針旋轉。
+                </p>
+            </li>
+
+            <li>
+                <h4>放大或縮小：scale()</h4>
+                <p>
+                    使用 <code>scale()</code> 可以改變元素的大小。
+                </p>
+
+                <pre><code>transform: scale(1.5);</code></pre>
+
+                <p>
+                    <code>1.5</code> 代表放大為原本的 1.5 倍，
+                    小於 <code>1</code> 則代表縮小。
+                </p>
+            </li>
+
+            <li>
+                <h4>合併多個轉換效果</h4>
+                <p>
+                    多個轉換效果可以寫在同一個 <code>transform</code> 中，
+                    每個效果之間使用<strong>空格</strong>分隔，不需要使用逗號。
+                </p>
+
+                <pre><code>transform: translate(50px, 20px) rotate(45deg) scale(1.5);</code></pre>
+
+                <p>
+                    這段程式會讓元素先位移、再旋轉，最後放大。
+                    轉換效果的書寫順序不同，結果也可能不同。
+                </p>
+            </li>
+        </ol>
+
+        <h3>CSS 動畫（animation）</h3>
+
+        <p>
+            CSS 的 <code>animation</code> 可以讓元素自動產生動畫效果，
+            常見流程為：先使用 <code>@keyframes</code> 定義動畫內容，
+            再透過 <code>animation</code> 套用到元素。
+        </p>
+
+        <ol>
+            <li>
+                <h4>@keyframes（關鍵影格）</h4>
+
+                <p>
+                    <code>@keyframes</code> 用來定義動畫的每個階段，
+                    最常使用 <code>from</code>（開始）與 <code>to</code>（結束）。
+                </p>
+
+        <pre><code>@keyframes move {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(200px);
+            }
+        }</code></pre>
+            </li>
+
+            <li>
+                <h4>animation-name（動畫名稱）</h4>
+
+                <p>
+                    <code>animation-name</code> 用來指定要使用哪個
+                    <code>@keyframes</code> 動畫。
+                </p>
+
+        <pre><code>animation-name: move;</code></pre>
+            </li>
+
+            <li>
+                <h4>animation-duration（動畫時間）</h4>
+
+                <p>
+                    <code>animation-duration</code> 用來設定動畫播放多久，
+                    常用單位有 <code>s</code>（秒）與 <code>ms</code>（毫秒）。
+                </p>
+
+        <pre><code>animation-duration: 2s;</code></pre>
+
+                <p>
+                    表示動畫會播放 2 秒。
+                </p>
+            </li>
+
+            <li>
+                <h4>animation 縮寫</h4>
+
+                <p>
+                    可以將多個 <code>animation</code> 屬性合併成一行，
+                    最基本的格式如下：
+                </p>
+
+        <pre><code>animation: 動畫名稱 播放時間;</code></pre>
+
+        <pre><code>animation: move 2s;</code></pre>
+
+                <p>
+                    上面的程式等同於：
+                </p>
+
+        <pre><code>animation-name: move;
+        animation-duration: 2s;</code></pre>
+            </li>
+        </ol>
+
+        <h3>Font Awesome 是什麼？</h3>
+
+        <p>
+            <a href="https://fontawesome.com/" target="_blank">
+                Font Awesome
+            </a>
+            是一個流行的圖示庫，提供大量免費圖示，
+            可以輕鬆地將圖示加入網頁中。
+        </p>
+
+        <p>
+            使用 Font Awesome 前，需要先在 HTML 中載入它的 JavaScript：
+        </p>
+
+        <pre><code>&lt;script
+            src="https://kit.fontawesome.com/709a472a1e.js"
+            crossorigin="anonymous"&gt;
+        &lt;/script&gt;</code></pre>
+
+        <h4>加入 Instagram 圖示</h4>
+
+        <div class="icons">
+            <a href="https://www.instagram.com/" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+        <p>CSS 永遠是套在瀏覽器「最後看到的 HTML」上，而不是你原始寫的 HTML。(這裡其實變成svg了!)</p>
+
+        <p>
+            Font Awesome 圖示可以透過 CSS 調整大小、顏色和其他樣式。
+        </p>
+
+        <pre><code>.icons i {
+            font-size: 40px;
+            color: black;
+        }</code></pre>
+
+        <h3>什麼是 RWD（Responsive Web Design）？</h3>
+
+        <p>
+            RWD（Responsive Web Design，響應式網頁設計）是一種網頁設計方式，
+            可以讓網頁根據不同裝置（電腦、平板、手機）的螢幕大小，
+            自動調整版面配置，讓使用者都有良好的瀏覽體驗。
+        </p>
+
+        <ol>
+            <li>
+                <h4>@media（媒體查詢）</h4>
+
+                <p>
+                    <code>@media</code> 用來根據不同螢幕尺寸，
+                    套用不同的 CSS 樣式。
+                </p>
+
+        <pre><code>@media screen and (max-width: 768px) {
+
+        }</code></pre>
+
+            </li>
+
+            <li>
+                <h4>min-width（最小寬度）</h4>
+
+                <p>
+                    <code>min-width</code> 表示：
+                    <strong>當螢幕寬度大於或等於指定寬度時，套用裡面的 CSS。</strong>
+                </p>
+
+        <pre><code>@media screen and (min-width: 768px) {
+            body {
+                background-color: lightblue;
+            }
+        }</code></pre>
+
+            </li>
+
+            <li>
+                <h4>max-width（最大寬度）</h4>
+
+                <p>
+                    <code>max-width</code> 表示：
+                    <strong>當螢幕寬度小於或等於指定寬度時，套用裡面的 CSS。</strong>
+                </p>
+
+        <pre><code>@media screen and (max-width: 768px) {
+            body {
+                background-color: lightgreen;
+            }
+        }</code></pre>
+
+            </li>
+
+            <li>
+                <h4>min-width 與 max-width 一起使用</h4>
+
+                <p>
+                    可以同時設定最小與最大寬度，
+                    只在指定範圍內套用 CSS。
+                </p>
+
+        <pre><code>@media screen and (min-width: 768px) and (max-width: 1024px) {
+            body {
+                background-color: lightyellow;
+            }
+        }</code></pre>
+
+            </li>
+        </ol>
+
+        <h4>一句話記憶</h4>
+
+        <p>
+            <strong>
+                min-width：螢幕寬度 ≥ 指定值。<br>
+                max-width：螢幕寬度 ≤ 指定值。
+            </strong>
+        </p>
+        <h3>CSS Flexbox（彈性盒模型）</h3>
+
+        <p>
+            CSS Flexbox（Flexible Box Layout）是一種用來建立<strong>一維（單行或單列）</strong>
+            版面的 CSS 排版模型。只要將父元素設定為
+            <code>display: flex;</code>，其子元素就會變成
+            <strong>Flex Item（彈性項目）</strong>，可以輕鬆控制排列方向、
+            對齊方式、元素間距及版面配置，因此是目前最常用的網頁切版方式之一。
+        </p>
+
+        <p>
+            Flexbox 常用於建立導覽列（Navbar）、卡片（Card）、
+            Header、Footer、側邊欄（Sidebar）、內容區（Content）、
+            表單排列及 RWD（Responsive Web Design）響應式網頁設計。
+            透過 <code>display: flex;</code> 搭配
+            <code>flex</code>、<code>justify-content</code>、
+            <code>align-items</code>、<code>flex-wrap</code>、
+            <code>gap</code> 等屬性，就能快速完成大部分常見的網頁版面。
+        </p>
+
+        <h4>基本概念</h4>
+
+        <ul>
+            <li><strong>Flex Container（彈性容器）</strong>：設定 <code>display: flex;</code> 的父元素。</li>
+            <li><strong>Flex Item（彈性項目）</strong>：Flex Container 裡面的所有子元素。</li>
+        </ul>
+
+        <h4>常用屬性</h4>
+
+        <ul>
+            <li><code>display: flex;</code>：建立 Flex 容器。</li>
+            <li><code>flex-direction</code>：設定排列方向。</li>
+            <li><code>justify-content</code>：控制主軸（Main Axis）對齊方式。</li>
+            <li><code>align-items</code>：控制交叉軸（Cross Axis）對齊方式。</li>
+            <li><code>flex-wrap</code>：控制元素是否換行。</li>
+            <li><code>gap</code>：設定元素之間的間距。</li>
+            <li><code>flex</code>：控制元素所佔比例。</li>
+            <li><code>order</code>：改變元素顯示順序。</li>
+        </ul>
+
+        <h4>一句話記憶</h4>
+
+        <p>
+            <strong>
+                Flexbox 是 CSS 最常用的切版工具，只要設定
+                <code>display: flex;</code>，
+                就能方便控制元素的排列、對齊、比例與間距。
+            </strong>
+        </p>
+    </body>
 </html>
