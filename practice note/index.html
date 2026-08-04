@@ -1156,8 +1156,9 @@ height: 200px;</code></pre>
 
     <h2 id="section8">8/2</h2>
     <h3>CSS Flexbox（彈性盒模型）</h3>
+
     <p>
-    CSS Flexbox（Flexible Box Layout）是一種用來建立<strong>一維（單行或單列）</strong>版面的 CSS 排版模型。只要將父元素設定為 <code>display: flex;</code>，其子元素就會變成 Flex Item，可以依照主軸（Main Axis）和交叉軸（Cross Axis）進行排列、自動調整大小及控制間距，因此非常適合製作導覽列、卡片、按鈕排列及響應式版面。
+    CSS Flexbox（Flexible Box Layout）是一種用來建立<strong>一維（單行或單列）</strong>版面的 CSS 排版模型。只要將父元素設定為 <code>display: flex;</code>，其子元素就會變成 Flex Item，可以輕鬆控制排列方向、對齊方式及元素間距，因此非常適合製作導覽列、卡片、按鈕排列及響應式版面。
     </p>
 
     <img src="./images/flexBox.png" alt="Flexbox示意圖" style="width:100%; max-width:600px;">
@@ -1167,19 +1168,23 @@ height: 200px;</code></pre>
     <ul>
         <li><strong>Flex Container</strong>：設定 <code>display: flex;</code> 的父元素。</li>
         <li><strong>Flex Item</strong>：Container 內的直接子元素。</li>
-        <li><strong>Main Axis（主軸）</strong>：Flex Item 排列的主要方向，預設為水平（左→右）。</li>
-        <li><strong>Cross Axis（交叉軸）</strong>：與主軸垂直的方向，預設為垂直（上→下）。</li>
+        <li><strong>Main Axis（主軸）</strong>：Flex Item 排列的方向，預設為水平（左 → 右）。</li>
+        <li><strong>Cross Axis（交叉軸）</strong>：與主軸垂直的方向，預設為垂直（上 → 下）。</li>
     </ul>
 
     <h4>一句話記憶</h4>
 
     <p>
-    <strong>Flexbox 就是先決定主軸（Main Axis）怎麼排列，再決定交叉軸（Cross Axis）怎麼對齊。</strong>
+    <strong>Flexbox 就是先決定主軸方向，再決定主軸與交叉軸如何對齊。</strong>
     </p>
+
+    <hr>
+
     <h4>flex-direction（主軸方向）</h4>
 
     <p>
-    <code>flex-direction</code> 用來設定 Flexbox <strong>主軸（Main Axis）</strong> 的排列方向，也就是決定 Flex Item 要從哪個方向開始排列。預設值為 <code>row</code>（由左到右）。
+    <code>flex-direction</code> 用來決定 <strong>Main Axis（主軸）</strong> 的方向，因此也會影響後續
+    <code>justify-content</code> 的排列方向。
     </p>
 
     <ul>
@@ -1196,12 +1201,241 @@ height: 200px;</code></pre>
         flex-direction: row;
     }</code></pre>
 
-    <h4>一句話記憶</h4>
+    <p>
+    <strong>一句話記憶：</strong>
+    <code>flex-direction</code> 決定 Item 要往哪個方向排列。
+    </p>
+
+    <hr>
+
+    <h4>justify-content（主軸對齊）</h4>
 
     <p>
-    <strong>flex-direction 決定主軸（Main Axis）的方向，而 <code>justify-content</code> 與 <code>align-items</code> 都會依照這個主軸方向進行排列與對齊。</strong>
+    控制 <strong>Main Axis（主軸）</strong> 上所有 Flex Item 的排列方式。
     </p>
-    
 
-    </body>
+    <ul>
+        <li><code>flex-start</code>：靠主軸起點（預設）。</li>
+        <li><code>flex-end</code>：靠主軸終點。</li>
+        <li><code>center</code>：主軸置中。</li>
+        <li><code>space-between</code>：第一個與最後一個貼齊兩側，其餘平均分布。</li>
+        <li><code>space-around</code>：每個 Item 左右間距相同，因此兩端只有半個間距。</li>
+        <li><code>space-evenly</code>：所有間距完全相同，包含左右邊界。</li>
+    </ul>
+
+    <p>
+    <strong>一句話記憶：</strong>
+    <code>justify-content</code> 控制主軸上的排列位置。
+    </p>
+
+    <hr>
+
+    <h4>align-items（交叉軸對齊）</h4>
+
+    <p>
+    控制所有 Flex Item 在 <strong>Cross Axis（交叉軸）</strong> 上的對齊方式。
+    </p>
+
+    <ul>
+        <li><code>flex-start</code>：靠交叉軸起點。</li>
+        <li><code>flex-end</code>：靠交叉軸終點。</li>
+        <li><code>center</code>：交叉軸置中。</li>
+        <li><code>stretch</code>：拉伸填滿交叉軸（預設）。</li>
+        <li><code>baseline</code>：依文字基線對齊。</li>
+    </ul>
+
+    <p>
+    <strong>一句話記憶：</strong>
+    <code>align-items</code> 控制所有 Item 在交叉軸上的位置。
+    </p>
+
+    <hr>
+
+    <h4>align-self(單排)（單一 Item 對齊）</h4>
+
+    <p>
+    <code>align-self</code> 是設定在 <strong>Flex Item</strong> 上，用來覆蓋父元素的
+    <code>align-items</code>，只影響自己，不影響其他 Item。
+    </p>
+
+    <ul>
+        <li><code>auto</code>：繼承父元素設定（預設）。</li>
+        <li><code>flex-start</code>：靠交叉軸起點。</li>
+        <li><code>flex-end</code>：靠交叉軸終點。</li>
+        <li><code>center</code>：交叉軸置中。</li>
+        <li><code>stretch</code>：拉伸填滿交叉軸。</li>
+        <li><code>baseline</code>：依文字基線對齊。</li>
+    </ul>
+
+    <p>
+    <strong>一句話記憶：</strong>
+    <code>align-self</code> 只改自己，不影響其他 Item。
+    </p>
+
+    <hr>
+
+    <h4>align-content（多行排列）</h4>
+
+    <p>
+    控制<strong>多行 Flex Item</strong> 在交叉軸上的排列和對齊方式，只有在
+    <code>flex-wrap: wrap;</code> 且產生多行時才會生效。
+    </p>
+
+    <ul>
+        <li><code>flex-start</code>：所有列靠交叉軸起點。</li>
+        <li><code>flex-end</code>：所有列靠交叉軸終點。</li>
+        <li><code>center</code>：所有列置中。</li>
+        <li><code>space-between</code>：各列平均分布，第一列與最後一列貼齊兩端。</li>
+        <li><code>space-around</code>：各列兩側保留相同空間。</li>
+        <li><code>space-evenly</code>：各列與邊界間距完全相同。</li>
+        <li><code>stretch</code>：各列平均拉伸填滿交叉軸（預設）。</li>
+    </ul>
+
+    <p>
+    <strong>一句話記憶：</strong>
+    <code>align-items</code> 控制<strong>單排每個 Item</strong>，<code>align-content</code> 控制<strong>整排（多行）</strong>。
+    </p>
+
+    <hr>
+
+    <h3>order（排列順序）</h3>
+
+    <p>
+    <code>order</code> 用來改變 Flex Item 的排列順序，而不需要修改 HTML。預設值為 <code>0</code>，數字越小越前面，數字越大越後面。
+    </p>
+
+    <h4>範例</h4>
+
+    <pre><code>
+    .item1{
+        order: 2;
+    }
+
+    .item2{
+        order: 1;
+    }
+
+    .item3{
+        order: 0;
+    }</code></pre>
+
+    <hr>
+
+    <h3>flex-wrap（是否換行）</h3>
+
+    <p>
+    <code>flex-wrap</code> 用來決定 Flex Item 在空間不足時是否換到下一排。
+    </p>
+
+    <ul>
+        <li><code>nowrap</code>：不換行（預設）。</li>
+        <li><code>wrap</code>：空間不足時換到下一排。</li>
+        <li><code>wrap-reverse</code>：空間不足時換到下一排，但排列方向相反。</li>
+    </ul>
+
+        <h4>範例</h4>
+
+        <pre><code>
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+        }</code></pre>
+
+        <h4>練習flexbox遊戲</h4>
+        <a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy</a>
+        </body>
+
+        <hr>
+
+    <h4>Flex Item 尺寸控制</h4>
+
+    <p>
+    除了控制排列方式之外，Flexbox 也可以控制每個 Flex Item 的大小，
+    主要使用 <code>flex-grow</code>、<code>flex-shrink</code>、
+    <code>flex-basis</code> 及其縮寫 <code>flex</code>。
+    </p>
+
+    <hr>
+
+    <h4>flex-grow（放大比例）</h4>
+
+    <p>
+    <code>flex-grow</code> 用來決定當容器還有剩餘空間時，每個 Flex Item 可以分配多少空間。
+    數值越大，分配到的剩餘空間越多。
+    </p>
+
+    <h4>範例</h4>
+
+    <pre><code>.item1{
+        flex-grow: 1;
+    }
+
+    .item2{
+        flex-grow: 2;
+    }</code></pre>
+
+    <hr>
+
+    <h4>flex-shrink（縮小比例）</h4>
+
+    <p>
+    <code>flex-shrink</code> 用來決定當容器空間不足時，每個 Flex Item 要縮小多少。
+    數值越大，縮小的比例越多。
+    </p>
+
+    <h4>範例</h4>
+
+    <pre><code>.item1{
+        flex-shrink: 1;
+    }
+
+    .item2{
+        flex-shrink: 2;
+    }</code></pre>
+
+    <hr>
+
+    <h4>flex-basis（初始大小）</h4>
+
+    <p>
+    <code>flex-basis</code> 用來設定 Flex Item 的初始大小，Flexbox 會先以這個大小進行排列，再依照
+    <code>flex-grow</code> 或 <code>flex-shrink</code> 調整。
+    </p>
+
+    <h4>範例</h4>
+
+    <pre><code>.item{
+        flex-basis: 200px;
+    }</code></pre>
+
+    <hr>
+
+    <h4>flex（縮寫）</h4>
+
+    <p>
+    <code>flex</code> 是 <code>flex-grow</code>、<code>flex-shrink</code> 與
+    <code>flex-basis</code> 的縮寫。
+    </p>
+
+    <p>
+    語法：
+    </p>
+
+    <pre><code>flex: grow shrink basis;</code></pre>
+
+    <h4>範例</h4>
+
+    <pre><code>.item{
+        flex: 1 1 100px;
+    }</code></pre>
+
+    <p>
+    等同於：
+    </p>
+
+    <pre><code>.item{
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 100px;
+    }</code></pre>
 </html>
