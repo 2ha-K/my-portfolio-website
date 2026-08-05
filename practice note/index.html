@@ -26,7 +26,7 @@
         }
         @font-face {
             font-family: 'LXGW WenKai Mono TC download';
-            src: url("./fonts/LXGW WenKai Mono TC Regular.ttf");
+            src: url("./fonts/LXGWWenKaiMonoTC-Regular.ttf");
         }
         #method1-1 {
             color: red;
@@ -51,23 +51,28 @@
         body {
             background-color: rgb(220, 235, 245);
         }
-
     </style>
 </head>
 <body>
-    <h1>HTML上課筆記</h1>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h1>黃金三件套學習筆記</h1>
+    <h2>目錄:</h2>
     <ul>
+        <li><a href="#chapter1">HTML上課筆記</a></li>
         <li><a href="#section1">7/8</a></li>
         <li><a href="#section2">7/10</a></li>
         <li><a href="#section3">7/11</a></li>
-        <li><a href="#method1">CSS上課筆記</a></li>
+        <li><a href="#chapter2">CSS上課筆記</a></li>
         <li><a href="#section4">7/13</a></li>
         <li><a href="#section5">7/30</a></li>
         <li><a href="#section6">7/31</a></li>
         <li><a href="#section7">8/1</a></li>
         <li><a href="#section8">8/2</a></li>
+        <li><a href="#chapter3">JavaScript上課筆記</a></li>
+        <li><a href="#section9">8/5</a></li>
     </ul>
+    <h1 id="chapter1">HTML上課筆記</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
     <h2 id="section1">7/8</h2>
     <h3>什麼是!DOCTYPE html?</h3>
     <p>!DOCTYPE html的<ins>驚嘆號</ins>是最新版的意思。</p>
@@ -116,7 +121,7 @@
     <a href="page1.html">Page1</a>
     <br>
     <a href="mailto:kevin24419686@gmail.com">寄信給凱文</a>
-    <br><br><br><br><br><br><br><br><br><br><br>
+    <br>
     <h2 id="section2">7/10</h2>
     <h3>建立頁面跳轉錨點</h3>
     <p>建立錨點的方式是使用a標籤，並在href屬性中使用#符號加上錨點的名稱，然後在頁面中使用id屬性來指定錨點的位置。</p>
@@ -127,10 +132,10 @@
     </ul>
     <h3>圖片</h3>
     <p>我們通常只會指定高或寬其中一個，讓其自動抓比例。圖片沒有讀取到會跑出alt的資訊。</p>
-    <img src="./640.jpeg" alt="線條小狗貼貼" height="360">
+    <img src="./images/640.jpeg" alt="線條小狗貼貼" height="360">
     <h3>超連結圖片</h3>
     <a href="https://www.google.com/" target="_blank">
-        <img src="./640.jpeg" alt="Google Logo" height="360">
+        <img src="./images/640.jpeg" alt="Google Logo" height="360">
     </a>
     <h3>文字輸入框</h3>
     <h4>文字輸入框1-電子郵件</h4>
@@ -349,9 +354,9 @@ email=abc@gmail.com&password=123456
         <p>footer標籤用來包住網頁的頁尾，通常會放在網頁的最下方作者名稱和版權資訊。</p>
     </footer>
 
-    <h1>CSS上課筆記</h1>
+    <h1 id="chapter2">CSS上課筆記</h1>
     <h2>7/13</h2>
-    <img src="./image.png" height="360" alt="CSS筆記">
+    <img src="./images/image.png" height="360" alt="CSS筆記">
     <h3>CSS基本三種方法</h3>
     <h4>方法一: 內嵌樣式-在head中使用style標籤</h4>
     <p>可以在HTML文件的&lt;head&gt;部分使用&lt;style&gt;標籤來定義CSS樣式。</p>
@@ -1759,5 +1764,13 @@ height: 200px;</code></pre>
                 就能方便控制元素的排列、對齊、比例與間距。
             </strong>
         </p>
+
+        <h1 id="chapter3">JavaScript上課筆記</h1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/LEwi44cWBu8?si=WtS_flNsJTwVUpyW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h2 id="section9">8/5</h2>
+        <p>
+            JavaScript 的 <code>&lt;script&gt;</code> 標籤可以放在 <code>&lt;head&gt;</code> 或 <code>&lt;body&gt;</code> 中。一般建議將它放在 <code>&lt;/body&gt;</code> 前，或放在 <code>&lt;head&gt;</code> 並加上 <code>defer</code> 屬性，讓 JavaScript 在 HTML 載入完成後再執行，避免找不到網頁元素而發生錯誤。
+        </p>
+        <script src="./script.js"></script>
     </body>
 </html>
