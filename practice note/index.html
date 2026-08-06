@@ -2353,6 +2353,146 @@ height: 200px;</code></pre>
         <p><strong>💡 PS：</strong> 上述運算子與 Python 的 <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code>、<code>**=</code> 用法幾乎相同。</p>
         
         <h3>Chapter 3 控制流程</h3>
+        <h4>條件判斷（if、else if、else、switch）</h4>
+
+        <p>
+        JavaScript 可使用 <code>if</code>、<code>else if</code>、<code>else</code> 或
+        <code>switch</code> 進行條件判斷。
+        當需要判斷同一個變數的多種情況時，通常使用 <code>switch</code> 會更清楚。
+        </p>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <ul>
+            <li>Python 使用 <code>if</code>、<code>elif</code>、<code>else</code>。</li>
+            <li>Python 沒有傳統的 <code>switch</code>（Python 3.10 起提供 <code>match-case</code>）。</li>
+        </ul>
+
+        <p><strong>💡 PS：</strong> Python 的 <code>break</code> 只能跳出 <code>for</code>、<code>while</code>；Java 和 JavaScript 的 <code>break</code> 還可以跳出 <code>switch</code>，避免程式繼續執行下一個 <code>case</code>。</p>
+
+        <h4>for 迴圈（for Loop）</h4>
+
+        <p>
+        <code>for</code> 用來重複執行程式碼，通常知道要執行幾次時使用。
+        </p>
+
+        <pre><code>
+        for (let i = 0; i < 5; i++) {
+            console.log(i);
+        }
+        </code></pre>
+
+        <p><strong>語法：</strong></p>
+
+        <pre><code>
+        for (初始值; 條件; 更新) {
+            // 要重複執行的程式
+        }
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <pre><code>
+        for i in range(5):
+            print(i)
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> JavaScript 的 <code>for</code> 比 Python 更自由，可以自行控制初始值、條件與更新方式。</p>
+
+        <p><strong>📖 MDN 中文：</strong> <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/for">for - MDN Web Docs</a></p>
+        <h4>i++ 與 ++i</h4>
+
+        <ul>
+            <li><strong>i++（後置遞增）</strong>：先使用目前的值，再加 1。</li>
+            <li><strong>++i（前置遞增）</strong>：先加 1，再使用新的值。</li>
+        </ul>
+
+        <pre><code>
+        let i = 5;
+
+        console.log(i++);   // 5
+        console.log(i);     // 6
+
+        let j = 5;
+
+        console.log(++j);   // 6
+        console.log(j);     // 6
+        </code></pre>
+
+        <p style="background-color: yellow; padding: 2px;"><strong>💡 PS：</strong> 如果只是單獨寫 <code>i++;</code> 或 <code>++i;</code>，效果完全相同，只有放在運算式中才有差別。</p>
         
+        <h4>字串與數字相加</h4>
+
+        <p>
+        JavaScript 可以直接將字串與數字使用 <code>+</code> 相加，結果會變成<strong>字串（String）</strong>。
+        </p>
+
+        <pre><code>
+        "Age: " + 18      // "Age: 18"
+
+        "5" + 3           // "53"
+
+        5 + "3"           // "53"
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <pre><code>
+        # Python 會報錯
+        "Age: " + 18
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> 只要其中一個是字串，<code>+</code> 就會進行<strong>字串串接（Concatenation）</strong>，最後結果為 <code>String</code>。</p>
+        <h4>do...while 迴圈</h4>
+
+        <p>
+        <code>do...while</code> 會<strong>先執行一次程式碼</strong>，再判斷條件是否繼續執行。
+        </p>
+
+        <pre><code>
+        let i = 1;
+
+        do {
+            console.log(i);
+            i++;
+        } while (i <= 5);
+        </code></pre>
+
+        <p><strong>與 while 的差別：</strong></p>
+
+        <ul>
+            <li><strong>while</strong>：先判斷條件，再決定是否執行。</li>
+            <li><strong>do...while</strong>：先執行一次，再判斷條件。</li>
+        </ul>
+
+        <pre><code>
+        let i = 10;
+
+        while (i < 5) {
+            console.log(i);
+        }
+        // 一次都不會執行
+
+        do {
+            console.log(i);
+        } while (i < 5);
+        // 會執行一次
+        </code></pre>
+
+        <p><strong>Python / Java 對照：</strong></p>
+
+        <ul>
+            <li>Python：沒有 <code>do...while</code>，通常使用 <code>while True</code> + <code>break</code> 模擬。</li>
+            <li>Java：有 <code>do...while</code>，語法與 JavaScript 幾乎相同。</li>
+        </ul>
+
+        <p><strong>什麼時候使用？</strong></p>
+
+        <ul>
+            <li>至少要執行一次的情況，例如選單、使用者輸入、遊戲主迴圈等。</li>
+        </ul>
+
+        <p><strong>💡 PS：</strong> 由於 JavaScript 和 Python 大多可用 <code>while</code> 搭配其他寫法完成，因此 <code>do...while</code> 在實務上較少使用。</p>
+
     </body>
 </html>
