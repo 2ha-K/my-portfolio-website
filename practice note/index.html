@@ -2303,8 +2303,56 @@ height: 200px;</code></pre>
         console.log(n);   // 20
         </code></pre>
 
+        <p>n ||= 10，它跟你前面的 n = n || 10 是同一件事，只是 ES2021 新增的簡寫</p>
+
+        
         <p><strong>💡 PS：</strong> ES2021 之後更常使用 <code>??</code>（Nullish Coalescing）來設定預設值，避免 <code>0</code>、<code>""</code>、<code>false</code> 等合法值被誤判為 Falsy。</p>
         <p>||：只要左邊是 Falsy 就用右邊；??：只有左邊是 null 或 undefined 才用右邊。</p>
         <p>Python 和 JavaScript 的 or / || 主要用於條件判斷；設定預設值時也可以使用，但如果 0、False、"" 等是合法值，就不要使用，Python 建議用 if x is None，JavaScript 建議用 ??（Nullish Coalescing）。</p>
+        <div style="border: 1px solid; display: inline-block; padding: 2px;"><p>score ??= 100;</p></div>
+        <h4>三元運算子（Ternary Operator）</h4>
+
+        <p>
+        三元運算子是 <code>if...else</code> 的簡寫，用來根據條件回傳不同的值。
+        </p>
+
+        <pre><code>
+        條件 ? 成立時的值 : 不成立時的值
+        </code></pre>
+
+        <pre><code>
+        let age = 20;
+
+        let result = age >= 18 ? "成年" : "未成年";
+
+        console.log(result);   // 成年
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <pre><code>
+        result = "成年" if age >= 18 else "未成年"
+        </code></pre>
+
+        <h4>補充</h4>
+
+        <ul>
+            <li><code>console.log("x:", 2)</code> ≈ Python 的 <code>print("x:", 2)</code>。</li>
+            <li>JavaScript 也支援複合指定運算子（Compound Assignment Operators）。</li>
+        </ul>
+
+        <pre><code>
+        x += 1;   // x = x + 1
+        x -= 1;   // x = x - 1
+        x *= 2;   // x = x * 2
+        x /= 2;   // x = x / 2
+        x %= 2;   // x = x % 2
+        x **= 2;  // x = x ** 2
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> 上述運算子與 Python 的 <code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code>、<code>**=</code> 用法幾乎相同。</p>
+        
+        <h3>Chapter 3 控制流程</h3>
+        
     </body>
 </html>
