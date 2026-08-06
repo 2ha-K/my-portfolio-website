@@ -2494,6 +2494,64 @@ height: 200px;</code></pre>
 
         <p><strong>💡 PS：</strong> 由於 JavaScript 和 Python 大多可用 <code>while</code> 搭配其他寫法完成，因此 <code>do...while</code> 在實務上較少使用。</p>
 
-        
+        <h3>Chapter 4 函式 Function</h3>
+        <h4>DRY（Don't Repeat Yourself）</h4>
+
+        <p>
+        DRY（Don't Repeat Yourself）是一種程式設計原則，
+        表示<strong>不要重複寫相同的程式碼</strong>，可以使用函式（Function）重複利用程式。
+        </p>
+
+        <p><strong>💡 PS：</strong> 當相同程式碼重複出現時，通常可以考慮將它整理成一個函式。</p>
+        <h4>函式（Function）</h4>
+
+        <p>
+        函式是一段可以重複呼叫執行的程式碼。
+        </p>
+
+        <pre><code>
+        function sayHello() {
+            console.log("Hello");
+        }
+
+        sayHello();
+        </code></pre>
+
+        <p><strong>Python / Java 對照：</strong></p>
+
+        <ul>
+            <li>JavaScript：<code>function hello() { }</code></li>
+            <li>Python：<code>def hello():</code></li>
+            <li>Java：<code>public static void hello() { }</code></li>
+        </ul>
+
+        <p><strong>💡 PS：</strong> 呼叫函式時，記得加上 <code>()</code>，例如 <code>sayHello()</code>。</p>
+        <h4>Expression（運算式）與 Statement（敘述）</h4>
+
+        <ul>
+            <li><strong>Expression（運算式）</strong>：會產生一個值（Value）。</li>
+            <li><strong>Statement（敘述）</strong>：執行一個動作，不一定會產生值。</li>
+        </ul>
+
+        <pre><code>
+        // Expression
+        2 + 3
+        x * 10
+
+        // Statement
+        let x = 5;
+        if (x > 0) {
+            console.log(x);
+        }
+        </code></pre>
+
+        <p><strong>Python / Java 對照：</strong></p>
+
+        <ul>
+            <li>Expression：<code>2 + 3</code>、<code>a * b</code></li>
+            <li>Statement：<code>if</code>、<code>for</code>、<code>while</code>、變數宣告等。</li>
+        </ul>
+
+        <p><strong>💡 PS：</strong> 一般來說，<strong>Expression 有回傳值；Statement 是執行動作</strong>。</p>
     </body>
 </html>
