@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
     <script src="https://kit.fontawesome.com/709a472a1e.js" crossorigin="anonymous"></script>
     
     <style>
@@ -1772,5 +1773,538 @@ height: 200px;</code></pre>
             JavaScript 的 <code>&lt;script&gt;</code> 標籤可以放在 <code>&lt;head&gt;</code> 或 <code>&lt;body&gt;</code> 中。一般建議將它放在 <code>&lt;/body&gt;</code> 前，或放在 <code>&lt;head&gt;</code> 並加上 <code>defer</code> 屬性，讓 JavaScript 在 HTML 載入完成後再執行，避免找不到網頁元素而發生錯誤。
         </p>
         <script src="./script.js"></script>
+        <h3>瀏覽器是怎麼運作的？</h3>
+
+        <p>
+        瀏覽器（Browser）是一種用來瀏覽網頁的軟體，例如 Chrome、Edge、Firefox 和 Safari。
+        當我們輸入網址（URL）後，瀏覽器會向網站伺服器（Server）發送請求（Request），
+        伺服器再回傳 HTML、CSS、JavaScript、圖片等資源給瀏覽器。
+        瀏覽器接收到這些資料後，會先解析 HTML 建立網頁結構（DOM），
+        再解析 CSS 決定外觀，接著執行 JavaScript 讓網頁具有互動功能，
+        最後將所有內容繪製（Render）到螢幕上，形成我們看到的完整網頁。
+        </p>
+
+        <h4>運作流程</h4>
+
+        <p>
+        使用者輸入網址（URL）
+        <br>
+        ↓
+        <br>
+        瀏覽器發送 HTTP / HTTPS Request
+        <br>
+        ↓
+        <br>
+        網站伺服器（Server）收到請求
+        <br>
+        ↓
+        <br>
+        伺服器回傳 HTML、CSS、JavaScript、圖片等檔案
+        <br>
+        ↓
+        <br>
+        瀏覽器解析 HTML（建立 DOM）
+        <br>
+        ↓
+        <br>
+        瀏覽器解析 CSS（套用樣式）
+        <br>
+        ↓
+        <br>
+        瀏覽器執行 JavaScript（增加互動功能）
+        <br>
+        ↓
+        <br>
+        Render（繪製畫面）
+        <br>
+        ↓
+        <br>
+        使用者看到完整網頁
+        </p>
+
+        <h3>HTTP 請求方法（HTTP Request Methods / HTTP Verbs）</h3>
+
+        <p>
+        HTTP Request Method（又稱 HTTP Verb）表示瀏覽器或程式希望對伺服器執行什麼操作。
+        不同的方法代表不同的用途，例如取得資料、新增資料、修改資料或刪除資料。
+        </p>
+
+        <ul>
+            <li><strong>GET</strong>：取得（讀取）資料。</li>
+            <li><strong>POST</strong>：新增資料，並將資料放在 Request Body 中傳送。</li>
+            <li><strong>PUT</strong>：完整更新一筆資料。</li>
+            <li><strong>PATCH</strong>：部分更新資料。</li>
+            <li><strong>DELETE</strong>：刪除資料。</li>
+        </ul>
+
+        <h4>常見範例</h4>
+
+        <ul>
+            <li>GET /users → 取得所有使用者</li>
+            <li>GET /users/1 → 取得編號 1 的使用者</li>
+            <li>POST /users → 新增使用者</li>
+            <li>PUT /users/1 → 完整修改編號 1 的使用者</li>
+            <li>PATCH /users/1 → 修改部分資料</li>
+            <li>DELETE /users/1 → 刪除編號 1 的使用者</li>
+        </ul>
+
+        <h3>JavaScript 與 jQuery</h3>
+
+        <p>
+        JavaScript 是一種網頁程式語言，主要用來讓網頁具有互動功能，例如按鈕點擊、動畫效果、表單驗證、與伺服器交換資料（API）等。現代網頁幾乎都會使用 JavaScript。
+        </p>
+
+        <p>
+        jQuery 是一個以 JavaScript 為基礎的函式庫（Library），提供許多已經寫好的功能，讓開發者能用更少的程式碼完成常見操作，例如操作 HTML 元素、修改 CSS、處理事件及製作動畫。
+        </p>
+
+        <h4>JavaScript 與 jQuery 比較</h4>
+
+        <ul>
+            <li><strong>JavaScript：</strong>原生程式語言，可直接操作網頁。</li>
+            <li><strong>jQuery：</strong>建立在 JavaScript 上的函式庫，讓程式碼更簡潔。</li>
+        </ul>
+
+        <h4>簡單範例</h4>
+
+        <p><strong>JavaScript：</strong></p>
+
+        <pre><code>
+        document.getElementById("title").style.color = "red";
+        </code></pre>
+
+        <p><strong>jQuery：</strong></p>
+
+        <pre><code>
+        $("#title").css("color", "red");
+        </code></pre>
+
+        <p>
+        可以看到，兩者都能完成相同功能，但 jQuery 的寫法通常較簡潔。
+        </p>
+        <p>jQuery 是建立在 JavaScript 上的函式庫，主要目的是簡化 JavaScript 的撰寫，並解決早期不同瀏覽器之間語法與行為不一致的問題。</p>
+    
+        <h3>Chapter 1 變數、值、資料型別（JavaScript）</h3>
+
+        <p>
+        JavaScript 和 Python 一樣都是直譯式（Interpreted）程式語言，
+        程式通常是一行一行執行，不需要像 C/C++ 一樣先編譯成執行檔。
+        不過現代 JavaScript 引擎（例如 Chrome 的 V8）會在執行時使用
+        JIT（Just-In-Time Compilation）技術，先將部分程式編譯成機器碼，
+        因此執行速度比傳統直譯更快。
+        </p>
+
+        <h4>宣告變數</h4>
+
+        <p>
+        JavaScript 使用 <code>let</code>、<code>const</code> 或舊版的
+        <code>var</code> 宣告變數。
+        </p>
+
+        <pre><code>
+        let name = "Kevin";
+        const pi = 3.14;
+        </code></pre>
+
+        <p>
+        如果宣告了變數但沒有給值，變數的值會是
+        <code>undefined</code>。
+        </p>
+
+        <pre><code>
+        let x;
+        console.log(x);   // undefined
+        </code></pre>
+
+        <p>
+        如果直接使用一個從來沒有宣告過的變數，則會發生
+        <code>ReferenceError</code>。
+        </p>
+
+        <pre><code>
+        console.log(y);   // ReferenceError
+        </code></pre>
+
+        <h4>== 與 ===</h4>
+
+        <ul>
+            <li><strong>==</strong>：只比較值，必要時會自動轉換資料型別（Type Coercion）。</li>
+            <li><strong>===</strong>：同時比較值和資料型別，不會自動轉換型別。</li>
+        </ul>
+
+        <pre><code>
+        5 == "5"      // true
+        5 === "5"     // false
+        </code></pre>
+
+        <p>
+        實務上建議優先使用 <code>===</code>，避免因自動型別轉換造成錯誤。
+        </p>
+
+        <h4>typeof</h4>
+
+        <p>
+        <code>typeof</code> 用來查看資料的型別，類似 Python 的
+        <code>type()</code>。
+        </p>
+
+        <pre><code>
+        typeof 123         // "number"
+        typeof "Hello"     // "string"
+        typeof true        // "boolean"
+        typeof undefined   // "undefined"
+        typeof null        // "object"（JavaScript 的歷史設計問題）
+        </code></pre>
+
+        <h4>JavaScript 與 Python 對照</h4>
+
+        <table border="1">
+            <tr>
+                <th>Python</th>
+                <th>JavaScript</th>
+            </tr>
+            <tr>
+                <td>type(x)</td>
+                <td>typeof x</td>
+            </tr>
+            <tr>
+                <td>==（值）</td>
+                <td>==（值，可自動轉型）</td>
+            </tr>
+            <tr>
+                <td>is（是否同一個物件）</td>
+                <td>===（值+型別相同）</td>
+            </tr>
+            <tr>
+                <td>None</td>
+                <td>null</td>
+            </tr>
+        </table>
+
+        <h4>浮點數陷阱</h4>
+
+        <p>
+        JavaScript 使用 IEEE 754 雙精度浮點數（64-bit）來儲存數字，
+        因此部分小數無法被精確表示，計算時可能會產生誤差。
+        Python 也有相同的問題。
+        </p>
+
+        <pre><code>
+        0.1 + 0.2
+        // 0.30000000000000004
+        </code></pre>
+
+        <p>
+            浮點數誤差不是 JavaScript 的問題，而是大部分程式語言使用 IEEE 754 浮點數格式所造成的共同限制。
+        </p>
+
+        <h3>let vs var</h3>
+
+        <p>
+        兩者都可以宣告變數，但 <code>let</code> 是現代 JavaScript 的寫法，
+        <code>var</code> 是舊寫法，因為作用域（Scope）不同，容易造成錯誤，
+        因此現在幾乎都使用 <code>let</code>。
+        </p>
+
+        <table border="1">
+            <tr>
+                <th>JavaScript</th>
+                <th>Java</th>
+                <th>Python</th>
+            </tr>
+            <tr>
+                <td><code>let</code></td>
+                <td>一般區域變數</td>
+                <td>一般變數</td>
+            </tr>
+            <tr>
+                <td><code>var</code></td>
+                <td>（沒有對應，較像舊版寫法）</td>
+                <td>（沒有對應）</td>
+            </tr>
+        </table>
+
+        <ul>
+            <li><strong>let</strong>：推薦使用。</li>
+            <li><strong>var</strong>：舊寫法，不建議使用。</li>
+        </ul>
+
+        <h4>字串（String）</h4>
+
+        <p>
+        JavaScript 的字串可以使用單引號（<code>' '</code>）、雙引號（<code>" "</code>）
+        或 ES6 新增的反引號（<code>` `</code>，Template Literal）建立。
+        </p>
+
+        <pre><code>
+        let name = "Kevin";
+        let city = 'Taipei';
+        let text = `Hello`;
+        </code></pre>
+
+        <p>
+        字串可以使用 <code>+</code> 進行串接，也可以使用 ES6 的
+        <strong>Template Literal</strong> 將變數直接嵌入字串中。
+        </p>
+
+        <pre><code>
+        let name = "Kevin";
+
+        console.log("Hello " + name);
+        // Hello Kevin
+
+        console.log(`Hello ${name}`);
+        // Hello Kevin
+        </code></pre>
+
+        <p>
+        <strong>Python 對照：</strong>
+        Template Literal 很像 Python 的 <code>f-string</code>。
+        </p>
+
+        <table border="1">
+            <tr>
+                <th>JavaScript</th>
+                <th>Python</th>
+            </tr>
+            <tr>
+                <td><code>`Hello ${name}`</code></td>
+                <td><code>f"Hello {name}"</code></td>
+            </tr>
+        </table>
+        
+        <p><strong>💡 PS：</strong> <code>clear()</code> 不是 JavaScript，而是瀏覽器 Developer Tools（Console）提供的快捷指令；真正的 JavaScript 寫法是 <code>console.clear()</code>。</p>
+
+        <h4>null 和 undefined</h4>
+
+        <p>
+        <code>undefined</code> 表示<strong>有這個變數，但尚未被賦值</strong>，它本身也是一個值。
+        </p>
+
+        <pre><code>
+        let x;
+        console.log(x);   // undefined
+        </code></pre>
+
+        <p>
+        <code>null</code> 表示<strong>開發者主動指定一個空值</strong>，代表目前沒有任何物件或資料。
+        </p>
+
+        <pre><code>
+        let user = null;
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <ul>
+            <li><strong>undefined</strong>：Python 沒有對應概念。</li>
+            <li><strong>null</strong>：≈ Python 的 <code>None</code>。</li>
+        </ul>
+
+        <h4>分號（;）</h4>
+
+        <p>
+        JavaScript 每一行程式通常代表一個敘述（Statement），
+        敘述結束可以加上 <code>;</code>。
+        雖然 JavaScript 有自動補分號（ASI, Automatic Semicolon Insertion）機制，
+        許多情況可以省略，但建議養成加分號的習慣。
+        </p>
+
+        <pre><code>
+        let x = 10;
+        let y = 20;
+
+        console.log(x + y);
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <ul>
+            <li>Python：不用 <code>;</code>（通常一行就是一個敘述）。</li>
+            <li>Java：通常每個敘述都要加 <code>;</code>。</li>
+            <li>JavaScript：可以省略，但建議加上。</li>
+        </ul>
+        <h3>Chapter 2  運算元與運算子</h3>
+        <h4>=== 和 == 差別</h4>
+
+        <p>
+        JavaScript 有兩種相等比較方式：
+        <code>==</code> 和 <code>===</code>。
+        </p>
+
+        <ul>
+            <li><strong>==</strong>：只比較值，必要時會自動轉換資料型別（Type Coercion）。</li>
+            <li><strong>===</strong>：同時比較值和資料型別，不會自動轉換型別，因此較嚴謹，也是實務上較常使用。</li>
+        </ul>
+
+        <pre><code>
+        5 == "5"      // true
+        5 === "5"     // false
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <ul>
+            <li>Python 沒有 <code>===</code>。</li>
+            <li>Python 的 <code>==</code> 不會像 JavaScript 一樣自動轉換型別。</li>
+            <li>若要比較是否為同一個物件，Python 使用 <code>is</code>。</li>
+        </ul>
+        <p><strong>💡 PS：</strong> <code>===</code> 對基本型別（Number、String、Boolean）會比較<strong>值與型別</strong>；對物件（Object、Array）則比較<strong>是否為同一個物件（同一個記憶體位置）</strong>。</p>
+
+        <h4>parse（字串轉數字）</h4>
+
+        <p>
+        JavaScript 的 <code>parseInt()</code> 和 <code>parseFloat()</code>
+        可以把字串解析成數字。
+        </p>
+
+        <ul>
+            <li><code>parseInt()</code>：轉成整數。</li>
+            <li><code>parseFloat()</code>：轉成小數。</li>
+        </ul>
+
+        <pre><code>
+        parseInt("123");       // 123
+        parseFloat("3.14");    // 3.14
+        parseInt("12px");      // 12
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <pre><code>
+        int("123")       # 123
+        float("3.14")    # 3.14
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> JavaScript 的 <code>parseInt("12px")</code> 可以讀到前面的數字並回傳 <code>12</code>；但 Python 的 <code>int("12px")</code> 會直接報錯。</p>
+        <h4>直譯式（Interpreted） vs 編譯式（Compiled）</h4>
+
+        <table border="1">
+            <tr>
+                <th>直譯式</th>
+                <th>編譯式</th>
+            </tr>
+            <tr>
+                <td>✅ 開發方便、修改後可直接執行</td>
+                <td>✅ 執行速度快、效能較佳</td>
+            </tr>
+            <tr>
+                <td>❌ 執行速度通常較慢</td>
+                <td>❌ 修改程式後需要重新編譯</td>
+            </tr>
+        </table>
+
+        <h4>Number（JavaScript 沒有 int 和 float）</h4>
+
+        <p>
+        JavaScript 的所有數字都屬於 <code>Number</code> 型別，
+        不像 Python 或 Java 會區分 <code>int</code> 和 <code>float</code>。
+        </p>
+
+        <pre><code>
+        let a = 5;
+        let b = 5.0;
+
+        typeof a;   // "number"
+        typeof b;   // "number"
+        </code></pre>
+
+        <p>
+        <code>parseInt()</code> 和 <code>parseFloat()</code> 的差別只是解析方式不同，
+        最後回傳的型別都還是 <code>Number</code>。
+        </p>
+
+        <pre><code>
+        parseInt("3.14");      // 3
+        parseFloat("3.14");    // 3.14
+
+        typeof parseInt("3.14");     // "number"
+        typeof parseFloat("3.14");   // "number"
+        </code></pre>
+
+        <p><strong>Python / Java 對照：</strong></p>
+
+        <ul>
+            <li>Python：<code>int</code>、<code>float</code> 為不同型別。</li>
+            <li>Java：<code>int</code>、<code>float</code>、<code>double</code> 為不同型別。</li>
+            <li>JavaScript：只有 <code>Number</code> 一種數字型別。</li>
+        </ul>
+
+        <p><strong>💡 PS：</strong> JavaScript 中 <code>5</code> 和 <code>5.0</code> 屬於相同型別，因此 <code>5 === 5.0</code> 會得到 <code>true</code>。</p>
+    
+        <h4>邏輯運算子（Logical Operators）</h4>
+
+        <p>
+        邏輯運算子用來組合多個條件判斷。
+        </p>
+
+        <ul>
+            <li><strong>&&（AND）</strong>：兩個條件都要成立，結果才是 <code>true</code>。</li>
+            <li><strong>||（OR）</strong>：只要其中一個條件成立，結果就是 <code>true</code>。</li>
+        </ul>
+
+        <pre><code>
+        let age = 20;
+        let hasTicket = true;
+
+        age >= 18 && hasTicket;   // true
+
+        age >= 18 || hasTicket;   // true
+        </code></pre>
+
+        <p><strong>Python 對照：</strong></p>
+
+        <ul>
+            <li><code>&&</code> ≈ Python 的 <code>and</code></li>
+            <li><code>||</code> ≈ Python 的 <code>or</code></li>
+        </ul>
+        <h4>&& 和 || 的回傳值</h4>
+
+        <p>
+        JavaScript 的 <code>&&</code> 和 <code>||</code> 不一定回傳
+        <code>true</code> 或 <code>false</code>，而是回傳其中一個運算元。
+        </p>
+
+        <ul>
+            <li><strong>&&（AND）</strong>：回傳第一個 <strong>Falsy</strong> 值；若全部都是真，回傳最後一個值。</li>
+            <li><strong>||（OR）</strong>：回傳第一個 <strong>Truthy</strong> 值；若全部都是假，回傳最後一個值。</li>
+        </ul>
+
+        <pre><code>
+        3 && 5        // 5
+        0 && 5        // 0
+
+        3 || 5        // 3
+        0 || 5        // 5
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> 因此 <code>&&</code> 和 <code>||</code> 不只是布林運算，也常用來選擇值。</p>
+        
+        <p><strong>💡 PS：</strong> <code>&&</code> 常用於「條件成立才執行」；<code>||</code> 常用於「設定預設值」。</p>
+
+        <p>isLogin && showProfile();   // 登入才執行</p>
+        <h4>|| 指派預設值</h4>
+
+        <p>
+        <code>||</code> 常用來設定預設值。當左邊是 Falsy 時，就會使用右邊的值。
+        </p>
+
+        <pre><code>
+        let z;
+        z = z || 10;
+
+        console.log(z);   // 10
+        </code></pre>
+
+        <pre><code>
+        let n = 20;
+        n = n || 10;
+
+        console.log(n);   // 20
+        </code></pre>
+
+        <p><strong>💡 PS：</strong> ES2021 之後更常使用 <code>??</code>（Nullish Coalescing）來設定預設值，避免 <code>0</code>、<code>""</code>、<code>false</code> 等合法值被誤判為 Falsy。</p>
+        <p>||：只要左邊是 Falsy 就用右邊；??：只有左邊是 null 或 undefined 才用右邊。</p>
+        <p>Python 和 JavaScript 的 or / || 主要用於條件判斷；設定預設值時也可以使用，但如果 0、False、"" 等是合法值，就不要使用，Python 建議用 if x is None，JavaScript 建議用 ??（Nullish Coalescing）。</p>
     </body>
 </html>
