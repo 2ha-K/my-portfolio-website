@@ -70,6 +70,7 @@
         <li><a href="#section8">8/2</a></li>
         <li><a href="#chapter3">JavaScript上課筆記</a></li>
         <li><a href="#section9">8/5</a></li>
+        <li><a href="#section10">8/7</a></li>
     </ul>
     <h1 id="chapter1">HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -2553,5 +2554,398 @@ height: 200px;</code></pre>
         </ul>
 
         <p><strong>💡 PS：</strong> 一般來說，<strong>Expression 有回傳值；Statement 是執行動作</strong>。</p>
+        <h2 id="section10">8/7</h2>
+        <h4>函數宣告方式一：陳述式（Function Declaration）</h4>
+
+        <p>
+            使用 <code>function</code> 直接宣告函數。
+        </p>
+
+        <pre>
+        function sayHello() {
+            console.log("Hello");
+        }
+
+        sayHello();
+        </pre>
+
+        <p>
+            函數陳述式具有 <strong>Hoisting（提升）</strong>，
+            JavaScript 會先處理函數宣告，因此可以在函數宣告之前呼叫。
+        </p>
+
+        <pre>
+        sayHello();
+
+        function sayHello() {
+            console.log("Hello");
+        }
+        </pre>
+
+
+        <h4>函數宣告方式二：表達式（Function Expression）</h4>
+
+        <p>
+            將一個函數當成「值」，存進變數裡。
+        </p>
+
+        <pre>
+        const sayHello = function() {
+            console.log("Hello");
+        };
+
+        sayHello();
+        </pre>
+
+        <p>
+            函數表達式通常要在宣告之後才能使用，
+            因為變數還沒有取得這個函數之前，無法呼叫它。
+        </p>
+
+        <pre>
+        const sayHello = function() {
+            console.log("Hello");
+        };
+
+        sayHello();   // ✅ 執行函數
+        </pre>
+
+
+        <h4>有括號和沒有括號的差別</h4>
+
+        <pre>
+        sayHello();   // 執行函數
+        sayHello;     // 取得函數本身，不執行
+        </pre>
+
+        <p>
+            <code>()</code> 代表「呼叫函數」。
+            沒有 <code>()</code> 時，代表取得或傳遞這個函數本身。
+        </p>
+
+        <pre>
+        const a = sayHello;    // 把函數傳給 a
+        const b = sayHello();  // 執行函數，把回傳值給 b
+        </pre>
+
+
+        <h4>什麼時候使用？</h4>
+
+        <p>
+            <strong>Function Declaration：</strong>
+            一般函數最常使用，寫法簡單，而且可以在宣告前呼叫。
+        </p>
+
+        <p>
+            <strong>Function Expression：</strong>
+            當函數需要存進變數、傳給其他函數，或當作資料使用時很常見。
+        </p>
+        <p>Python 和 JavaScript 都可以把「函數當成值」：有 () 是執行函數，沒 () 是傳遞函數本身；import 只是把函數引入目前的程式，而「傳入函數」是讓另一個函數決定何時、在什麼情況下執行它。</p>
+        <p>我要自己使用函數 → import 後直接 func()；我要讓另一個函數「之後幫我執行／把它當規則」→ 傳 func。</p>
+
+        <h4>全域與區域變數</h4>
+
+        <p>
+            <strong>全域變數（Global Variable）</strong>：
+            宣告在函數外，可以在程式的多個地方使用。
+        </p>
+
+        <p>
+            <strong>區域變數（Local Variable）</strong>：
+            宣告在函數或區塊內，只能在特定作用域中使用。
+        </p>
+
+        <h4>window 物件</h4>
+
+        <p>
+            在瀏覽器中，<code>window</code> 是代表目前瀏覽器視窗的<strong>全域物件（Global Object）</strong>，
+            很多瀏覽器提供的功能都放在裡面。
+        </p>
+
+        <pre>
+        window.alert("Hello");
+        window.console.log("Hello");
+
+        // 平常可以省略 window
+        alert("Hello");
+        console.log("Hello");
+        </pre>
+
+        <p>
+            使用 <code>var</code> 在傳統瀏覽器 Script 的全域宣告變數時，
+            通常也會成為 <code>window</code> 的屬性。
+        </p>
+
+        <pre>
+        var x = 10;
+
+        console.log(x);         // 10
+        console.log(window.x);  // 10
+        </pre>
+
+        <p>
+            但 <code>let</code>、<code>const</code> 宣告的全域變數，
+            不會變成 <code>window</code> 的屬性。
+        </p>
+
+        <pre>
+        let y = 20;
+
+        console.log(y);         // 20
+        console.log(window.y);  // undefined
+        </pre>
+
+        <h4>直接寫 z = 1</h4>
+
+        <p>
+            在非嚴格模式下，如果沒有先使用 <code>var</code>、<code>let</code> 或
+            <code>const</code> 宣告，直接寫 <code>z = 1</code>，
+            可能會在全域物件 <code>window</code> 上建立一個屬性。
+        </p>
+
+        <pre>
+        z = 1;
+
+        console.log(z);         // 1
+        console.log(window.z);  // 1
+        </pre>
+
+        <p>
+            這不是正常的變數宣告方式，容易造成錯誤，應該使用
+            <code>let</code> 或 <code>const</code>。
+        </p>
+
+        <h4>回呼函數 Callback Function</h4>
+
+        <p>
+            <strong>Callback Function（回呼函數）</strong>：
+            把一個函數傳給另一個函數，讓對方在<strong>適當的時機再執行它</strong>。
+        </p>
+
+        <pre>
+        function heyFunc(myFunction) {
+            myFunction("Hi!!");
+        }
+
+        heyFunc(alert);
+        </pre>
+
+        <p>
+            這裡不是寫 <code>alert()</code>，因為不是現在執行，
+            而是把 <code>alert</code> 函數傳給 <code>heyFunc</code>，
+            再由 <code>heyFunc</code> 決定何時執行。
+        </p>
+
+        <h4>常見例子：addEventListener</h4>
+
+        <pre>
+        button.addEventListener("click", function() {
+            alert("按鈕被按下了！");
+        });
+        </pre>
+
+        <p>
+            <code>addEventListener()</code> 接收一個 Callback Function，
+            我們不是現在執行它，而是把函數交給瀏覽器，
+            等使用者真的 <strong>click</strong> 按鈕時，瀏覽器才呼叫這個函數。
+        </p>
+        <h4>匿名函式（Anonymous Function）</h4>
+
+        <p>
+            匿名函式就是<strong>沒有名字的函式</strong>，通常用在「只需要使用一次」或當作 Callback 傳給其他函式時。
+        </p>
+
+        <p>基本格式：</p>
+
+        <pre>
+        function(參數) {
+            // 要執行的程式
+        }
+        </pre>
+
+        <p>例如：</p>
+
+        <pre>
+        button.addEventListener("click", function() {
+            alert("按鈕被按下了！");
+        });
+        </pre>
+
+        <p>
+            這裡的 <code>function() {...}</code> 沒有函式名稱，所以是匿名函式。
+            它被當成 Callback 傳給 <code>addEventListener()</code>，
+            等到按鈕被點擊時才會執行。
+        </p>
+        <h4>立即函式 IIFE（Immediately Invoked Function Expression）</h4>
+
+        <p>
+            IIFE 是<strong>建立後立刻執行，而且通常只執行一次</strong>的函式。
+            不需要另外用變數接住，也不是等待事件發生的 Callback。
+        </p>
+        <p>真正的特色還是：「我需要一個暫時的 Function Scope，而且只執行一次，所以不用特別幫函式取名字。」</p>
+        <p>基本格式：</p>
+
+        <pre>
+        (function() {
+            console.log("立即執行");
+        })();
+        </pre>
+
+        <p>
+            第一組 <code>()</code>：把 <code>function(){...}</code>
+            變成一個 Function Expression。
+        </p>
+
+        <p>
+            第二組 <code>()</code>：呼叫這個函式，讓它立刻執行。
+        </p>
+
+        <pre>
+        (function() {
+            // 函式
+        })();
+        // ↑ 第一個 () 包住函式
+        //  ↑ 最後的 () 執行函式
+        </pre>
+
+
+        <h4>為什麼要使用 IIFE？</h4>
+
+        <p>
+            主要用途是<strong>建立自己的 Function Scope</strong>，
+            讓裡面的變數不會跑到全域（Global Scope），避免變數名稱互相衝突。
+        </p>
+
+        <pre>
+        (function() {
+            var name = "Kevin";
+            var count = 10;
+        })();
+
+        console.log(name); // ❌ 外面無法使用
+        </pre>
+
+        <p>
+            這種做法稱為避免<strong>污染全域作用域（Global Scope Pollution）</strong>。
+        </p>
+
+
+        <h4>IIFE 與 jQuery</h4>
+
+        <p>
+            以前很常使用 IIFE 包住 jQuery 程式，
+            並把全域的 <code>jQuery</code> 傳進去，讓函式內可以安全地使用 <code>$</code>。
+        </p>
+
+        <pre>
+        (function($) {
+
+            $("#button").click(function() {
+                alert("Hello");
+            });
+
+        })(jQuery);
+        </pre>
+
+        <p>
+            外面的 <code>jQuery</code> 傳進函式後，
+            在函式內用參數名稱 <code>$</code> 代表它。
+            因為這個 <code>$</code> 只存在於 IIFE 的作用域內，
+            不容易和其他也使用 <code>$</code> 的套件產生衝突。
+        </p>
+        <p>$ 只是變數名稱，沒有特殊語法意義；jQuery 習慣用 $ 作為 jQuery 的簡寫。</p>
+
+        <h4>變數提升 Hoisting</h4>
+
+        <p>
+            JavaScript 執行前會先處理變數宣告，這個現象稱為
+            <strong>Hoisting（提升）</strong>。
+        </p>
+
+        <h4>var 的提升</h4>
+
+        <pre>
+        console.log(a); // undefined
+        var a = 10;
+        </pre>
+
+        <p style="background-color: yellow;padding: 1px; display: inline-block;">
+            <code>var</code> 的「宣告」會被提升，而且一開始會被初始化成
+            <code>undefined</code>，但真正的賦值 <code>= 10</code> 不會提升。
+        </p>
+
+        <pre>
+        // 可以概念上理解成：
+
+        var a;          // a 已存在，值是 undefined
+
+        console.log(a); // undefined
+
+        a = 10;
+        </pre>
+
+
+        <h4>let / const 的提升</h4>
+
+        <pre>
+        console.log(a); // ❌ ReferenceError
+        let a = 10;
+        </pre>
+
+        <p>
+            <code>let</code>、<code>const</code> 其實也會被提升，
+            但在程式執行到宣告之前不能使用。
+            這段範圍稱為 <strong>TDZ（Temporal Dead Zone，暫時性死區）</strong>。
+        </p>
+
+
+        <h4>為什麼函數裡有時候讀不到外面的變數？</h4>
+
+        <p>
+            正常情況下，函數<strong>可以讀取外層／全域變數</strong>。
+        </p>
+
+        <pre>
+        var a = 10;
+
+        function test() {
+            console.log(a); // 10
+        }
+
+        test();
+        </pre>
+
+        <p>
+            但是如果函數內又宣告了<strong>同名變數</strong>，
+            內部變數會遮住外面的變數（Shadowing）。
+        </p>
+
+        <pre>
+        var a = 10;
+
+        function test() {
+            console.log(a); // undefined
+            var a = 20;
+        }
+
+        test();
+        </pre>
+
+        <p>
+            因為函數內的 <code>var a</code> 會被提升，
+            所以可以概念上理解成：
+        </p>
+
+        <pre>
+        var a = 10;
+
+        function test() {
+            var a;          // 內部 a 被提升，現在是 undefined
+
+            console.log(a); // 找到內部 a，所以不會再找外面的 a
+
+            a = 20;
+        }
+        </pre>
     </body>
 </html>
