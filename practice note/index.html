@@ -71,6 +71,7 @@
         <li><a href="#chapter3">JavaScript上課筆記</a></li>
         <li><a href="#section9">8/5</a></li>
         <li><a href="#section10">8/7</a></li>
+        <li><a href="#section11">8/9</a></li>
     </ul>
     <h1 id="chapter1">HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -2947,7 +2948,521 @@ height: 200px;</code></pre>
             a = 20;
         }
         </pre>
+        <h2 id="section11">8/9</h2>
+        <h3>Chapter 5 JS 中的物件與陣列</h3>
+        <h4>Object（物件）</h4>
 
-        <h3>Chapter 5 JS中的物件與陣列</h3>
+        JavaScript 的 Object 可以把多個相關資料放在一起。<br>
+        格式是 <b>key : value</b>，一個 key 對應一個 value。<br><br>
+
+        基本格式：
+        <pre>
+        let dog = {
+            name: "Mochi",
+            age: 3,
+            color: "white"
+        };
+        </pre>
+
+        可以先把 JavaScript Object 想成 Python 的 dict：
+        <pre>
+        # Python
+        dog = {
+            "name": "Mochi",
+            "age": 3
+        }
+        </pre>
+
+        <pre>
+        // JavaScript
+        let dog = {
+            name: "Mochi",
+            age: 3
+        };
+        </pre>
+
+        但是要注意：
+
+        <ul>
+            <li>Python 把這種資料結構叫做 <b>dict</b></li>
+            <li>JavaScript 沒有把它叫 dict，而是叫做 <b>Object</b></li>
+            <li>JS Object 不只可以存資料，也可以存 function</li>
+        </ul>
+
+
+        <h4>Object 和 Class 有什麼不同？</h4>
+
+        JavaScript <b>有 class</b>，但是 Object 不一定要透過 class 建立。<br><br>
+
+        例如直接建立一個 Object：
+        <pre>
+        let dog = {
+            name: "Mochi",
+            age: 3
+        };
+        </pre>
+
+        這個 dog 已經是一個 Object，不需要先寫 class。<br><br>
+
+        如果需要大量建立相同結構的物件，才比較適合使用 class：
+
+        <pre>
+        class Dog {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        let dog1 = new Dog("Mochi", 3);
+        let dog2 = new Dog("Lucky", 5);
+        </pre>
+
+        可以簡單理解成：
+
+        <pre>
+        Object → 一個實際的物件
+        Class  → 建立很多相似 Object 的模板
+        </pre>
+
+        PS：JavaScript 的 class 是 ES6（ES2015）加入的語法。
+
+
+        <h4>Object 可以存 Function</h4>
+
+        JavaScript 中 <b>function 本身也是一種值（value）</b>，所以可以存進 Object。
+
+        <pre>
+        let dog = {
+            name: "Mochi",
+            age: 3,
+
+            bark: function() {
+                console.log("Woof!");
+            }
+        };
+        </pre>
+
+        這裡：
+
+        <pre>
+        name → "Mochi"
+        age  → 3
+        bark → function
+        </pre>
+
+        Object 裡面的 function 通常稱為 <b>method（方法）</b>。
+
+
+        <h4>取得 Object 的屬性</h4>
+
+        有兩種主要方式：
+
+        <b>1. Dot notation（點語法）</b>
+
+        <pre>
+        dog.age
+        dog.name
+        </pre>
+
+        <b>2. Bracket notation（中括號語法）</b>
+
+        <pre>
+        dog["age"]
+        dog["name"]
+        </pre>
+
+        兩種都可以：
+
+        <pre>
+        console.log(dog.age);      // 3
+        console.log(dog["age"]);   // 3
+        </pre>
+
+
+        <h4>什麼時候一定要使用 []？</h4>
+
+        如果 key 是存在變數裡面，要使用 []：
+
+        <pre>
+        let key = "age";
+
+        console.log(dog[key]);   // 3
+        </pre>
+
+        如果寫：
+
+        <pre>
+        dog.key
+        </pre>
+
+        JS 會真的去找名字叫做 "key" 的屬性，而不是變數 key 裡面的 "age"。
+
+
+        <h4>呼叫 Object 裡面的 Function</h4>
+
+        假設：
+
+        <pre>
+        let dog = {
+            bark: function() {
+                console.log("Woof!");
+            }
+        };
+        </pre>
+
+        有括號：
+
+        <pre>
+        dog.bark();
+        </pre>
+
+        代表 <b>執行 function</b>。
+
+        沒有括號：
+
+        <pre>
+        dog.bark
+        </pre>
+
+        代表 <b>取得 function 本身</b>，不會執行。
+
+        因為 JavaScript 中 function 本身就是一個 value，所以可以被取得、儲存、傳遞。
+
+        例如：
+
+        <pre>
+        let myFunction = dog.bark;
+
+        myFunction();   // Woof!
+        </pre>
+
+
+        <h4>增加 / 修改 Object 的屬性</h4>
+
+        Object 建立之後還可以繼續增加屬性。
+
+        使用點：
+
+        <pre>
+        dog.color = "white";
+        dog.weight = 10;
+        </pre>
+
+        使用 []：
+
+        <pre>
+        dog["height"] = 30;
+        </pre>
+
+        也可以增加 method：
+
+        <pre>
+        dog.run = function() {
+            console.log("running");
+        };
+        </pre>
+
+        之後：
+
+        <pre>
+        dog.run();
+        </pre>
+
+        PS：不是「一般值用 []、function 用 .」。<br>
+        <b>點和 [] 都可以操作屬性，不管裡面放的是普通值還是 function。</b>
+
+        例如下面全部合法：
+
+        <pre>
+        dog.age = 3;
+        dog["age"] = 3;
+
+        dog.bark = function() {};
+        dog["bark"] = function() {};
+        </pre>
+
+        一般情況通常優先使用 <b>點語法</b>，比較簡單：
+
+        <pre>
+        dog.name
+        dog.age
+        dog.bark()
+        </pre>
+
+        需要動態 key 或特殊名稱時，再使用 []：
+
+        <pre>
+        dog[key]
+        dog["first-name"]
+        </pre>
+
+
+        <h4>JavaScript 的資料型別</h4>
+
+        JavaScript 可以先簡單分成：
+
+        <pre>
+        Primitive（基礎型別）
+            ↓
+        string
+        number
+        boolean
+        undefined
+        null
+        bigint
+        symbol
+
+        Object（物件）
+            ↓
+        普通 Object
+        Array
+        Function
+        Date
+        Map
+        Set
+        ...
+        </pre>
+
+        可以先記：
+
+        <b>除了 Primitive 之外，大部分比較複雜的資料結構都屬於 Object。</b>
+
+
+        <h4>Symbol 是什麼？</h4>
+
+        Symbol 是 ES6 加入的一種 Primitive type。<br>
+        它可以建立一個<b>唯一的值</b>。
+
+        <pre>
+        let a = Symbol("id");
+        let b = Symbol("id");
+
+        console.log(a === b);   // false
+        </pre>
+
+        即使兩個 Symbol 寫一樣的描述，它們仍然不是同一個值。
+
+        初學階段先記：
+
+        <b>Symbol = 用來建立唯一識別值的 Primitive type。</b>
+
+        目前不需要深入，實際開發中比 string、number、boolean 少見很多。
+
+
+        <h4>Object vs Python dict</h4>
+
+        可以先這樣對照：
+
+        <pre>
+        Python dict             JavaScript Object
+
+        dog["age"]              dog["age"]
+                                dog.age
+
+        key : value             key : value
+
+        可以存 function          可以存 function
+
+        稱為 dict                稱為 Object
+        </pre>
+
+        所以看到：
+
+        <pre>
+        let dog = {
+            name: "Mochi",
+            age: 3
+        };
+        </pre>
+
+        初學時可以想成：
+
+        <b>「很像 Python dict 的 JavaScript Object。」</b>
+
+        但正式名稱要記得叫 <b>Object</b>，不是 dict。
+        <p>不要誤以為 「Python function 不可以放 dict」。可以，只是 Python OOP 情境通常會用 class 表達得更漂亮。</p>
+        
+        <h4>陣列 Array</h4>
+
+        Array 是一種<b>按照索引（index）排列資料</b>的資料結構。<br>
+        索引從 0 開始。
+
+        <pre>
+        let fruits = ["apple", "banana", "orange"];
+
+        console.log(fruits[0]); // apple
+        console.log(fruits[1]); // banana
+        </pre>
+
+        和 Python 的 <b>list</b> 很像：
+
+        <pre>
+        # Python
+        fruits = ["apple", "banana", "orange"]
+
+        // JavaScript
+        let fruits = ["apple", "banana", "orange"];
+        </pre>
+
+        JavaScript 稱為 <b>Array</b>，Python 則把類似的資料結構稱為 <b>list</b>。<br>
+        雖然 JS 叫 Array，但它不像 Java 的傳統 Array 那麼固定，<b>長度可以動態改變</b>。
+
+        <pre>
+        let data = [1, 2];
+
+        data.push(3);
+
+        console.log(data); // [1, 2, 3]
+        </pre>
+
+        也可以混合不同型別：
+
+        <pre>
+        let data = [10, "Kevin", true];
+        </pre>
+
+        語法上可以，但一般情況下<b>不建議亂混不同型別</b>，會比較難管理。
+
+
+        <h5>length</h5>
+
+        JS 的 length 是 Array 本身的一個 <b>property（屬性）</b>：
+
+        <pre>
+        let fruits = ["apple", "banana", "orange"];
+
+        console.log(fruits.length); // 3
+        </pre>
+
+        Python 則使用：
+
+        <pre>
+        len(fruits)
+        </pre>
+
+        可以先簡單記：
+
+        <pre>
+        Python       JavaScript
+
+        len(arr)     arr.length
+        </pre>
+
+        JS 會隨著 Array 改變，自動維護 length。
+
+
+        <h5>陣列基本操作</h5>
+
+        <b>push()：從最後面加入元素</b>
+
+        <pre>
+        let fruits = ["apple", "banana"];
+
+        fruits.push("orange");
+
+        console.log(fruits);
+        // ["apple", "banana", "orange"]
+        </pre>
+
+
+        <b>pop()：刪除並回傳最後一個元素</b>
+
+        <pre>
+        let fruits = ["apple", "banana", "orange"];
+
+        let result = fruits.pop();
+
+        console.log(result); // orange
+        console.log(fruits); // ["apple", "banana"]
+        </pre>
+
+
+        <h5>負數索引</h5>
+
+        JavaScript 不像 Python，傳統的 [] 不支援負數索引：
+
+        <pre>
+        let fruits = ["apple", "banana", "orange"];
+
+        fruits[-1]; // undefined
+        </pre>
+
+        Python：
+
+        <pre>
+        fruits[-1] # orange
+        </pre>
+
+        現代 JavaScript 如果要取得最後一個，可以使用：
+
+        <pre>
+        fruits.at(-1); // orange
+        </pre>
+
+        所以：
+
+        <pre>
+        Python          JavaScript
+
+        arr[-1]         arr.at(-1)
+        </pre>
+
+
+        <h5>indexOf()</h5>
+
+        用來尋找元素第一次出現的 index：
+
+        <pre>
+        let fruits = ["apple", "banana", "orange"];
+
+        fruits.indexOf("banana"); // 1
+        fruits.indexOf("orange"); // 2
+        </pre>
+
+        如果找不到：
+
+        <pre>
+        fruits.indexOf("mango"); // -1
+        </pre>
+
+
+        <h5>slice() 切片</h5>
+
+        格式：
+
+        <pre>
+        array.slice(start, end)
+        </pre>
+
+        和 Python slicing 很像，<b>包含 start，不包含 end</b>：
+
+        <pre>
+        let nums = [0, 1, 2, 3, 4];
+
+        nums.slice(2, 4);
+        // [2, 3]
+        </pre>
+
+        Python：
+
+        <pre>
+        nums[2:4]
+        # [2, 3]
+        </pre>
+
+        所以可以記：
+
+        <pre>
+        Python        JavaScript
+
+        arr[2:4]      arr.slice(2, 4)
+        </pre>
+
+        slice() 不帶參數時，可以建立一個 Array 的<b>淺複製（shallow copy）</b>：
+
+        <pre>
+        let copy = nums.slice();
+        </pre>
     </body>
 </html>
