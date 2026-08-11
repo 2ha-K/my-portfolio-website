@@ -52,6 +52,56 @@
         body {
             background-color: rgb(220, 235, 245);
         }
+
+        /* 整份筆記標題 */
+        h1 {
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 24px;
+        }
+
+        /* 大章節 */
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Chapter */
+        h3 {
+            font-size: 24px;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        /* 主要知識點 */
+        h4 {
+            font-size: 20px;
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        /* 知識點中的小分類 */
+        h5 {
+            font-size: 17px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* 更小的補充標題 */
+        h6 {
+            font-size: 15px;
+            margin-top: 16px;
+            margin-bottom: 6px;
+        }
+
+        /* 一般筆記內容 */
+        p {
+            font-size: 16px;
+            margin: 8px 0;
+        }
     </style>
 </head>
 <body>
@@ -3947,5 +3997,1107 @@ height: 200px;</code></pre>
             避免和其他程式或未來的內建方法產生衝突。
         </p>
         <h3>Chapter 7 初探 ES6</h3>
+
+        <h4>新增變數的宣告：let 和 const</h4>
+
+        <p>
+            ES6 新增了 <code>let</code> 和 <code>const</code>，
+            主要改善以前 <code>var</code> 在作用域上的問題。
+        </p>
+
+        <pre><code>var   → Function Scope
+        let   → Block Scope { }
+        const → Block Scope { }</code></pre>
+
+        <p>
+            <code>var</code> 只受到 Function Scope 限制，
+            所以放在 <code>if</code>、<code>for</code> 等 Block 裡，
+            外面仍然可能存取到。
+        </p>
+
+        <pre><code>if (true) {
+            var a = 10;
+        }
+
+        console.log(a); // 10
+        </code></pre>
+
+        <p>
+            <code>let</code> 和 <code>const</code> 是 Block Scope，
+            只存在於宣告它的 <code>{ }</code> 中。
+        </p>
+
+        <pre><code>if (true) {
+            let a = 10;
+            const b = 20;
+        }
+
+        console.log(a); // ❌
+        console.log(b); // ❌
+        </code></pre>
+
+
+        <h5>const</h5>
+
+        <p>
+            <code>const</code> 代表變數<strong>不能被重新賦值（reassignment）</strong>。
+        </p>
+
+        <pre><code>const a = 10;
+
+        a = 20; // ❌ Error
+        </code></pre>
+
+        <p>
+            但如果 const 存的是 Object 或 Array，
+            Object / Array 裡面的內容仍然可以修改。
+        </p>
+
+        <pre><code>const numbers = [1, 2, 3];
+
+        numbers.push(4); // ✅
+        numbers[0] = 100; // ✅
+
+        numbers = [5, 6]; // ❌ 不能重新賦值
+        </code></pre>
+
+        <p>
+            所以簡單記：
+            <strong>const 固定的是變數的綁定（binding），不是讓整個 Object 變成不可修改。</strong>
+        </p>
+
+        <p>
+            ※ JavaScript 一般變數使用 camelCase；
+            真正想表示「固定設定值」的常數才常使用全大寫，例如
+            <code>MAX_SIZE</code>。
+        </p>
+
+
+        <h5>和 Python / Java 對比</h5>
+
+        <pre><code>JavaScript → const
+        Java       → final
+        Python     → 沒有真正的 const 關鍵字
+                    通常用 MAX_SIZE 這種大寫命名表示「請不要修改」</code></pre>
+
+
+        <h4>解構賦值 Destructuring Assignment</h4>
+
+        <p>
+            解構賦值是 ES6 提供的語法，
+            可以快速把 Array 或 Object 裡面的資料取出來並存進變數。
+        </p>
+
+
+        <h5>Array 解構</h5>
+
+        <pre><code>let [a, b, c] = [1, 2, 3];
+
+        console.log(a); // 1
+        console.log(b); // 2
+        console.log(c); // 3
+        </code></pre>
+
+        <p>
+            Array 解構是<strong>按照位置</strong>取值：
+        </p>
+
+        <pre><code>[a, b, c] = [1, 2, 3]
+ ↓  ↓  ↓
+ 1  2  3
+        </code></pre>
+
+        <p>
+            JavaScript 不能直接寫：
+        </p>
+
+        <pre><code>a, b, c = 1, 2, 3; // ❌ 不是 Python 那種多重賦值
+        </code></pre>
+
+        <p>
+            因為 JavaScript 的逗號本身有其他語法意義，
+            ES6 因此使用 Array 的 <code>[ ]</code> 語法表示：
+            「把右邊資料按照位置拆開」。
+        </p>
+
+        <p>Python 則原生支援 unpacking：</p>
+
+        <pre><code>a, b, c = 1, 2, 3
+        </code></pre>
+
+
+        <h5>Object 解構</h5>
+
+        <pre><code>let {a, b} = {
+            a: 111,
+            b: 222
+        };
+
+        console.log(a); // 111
+        console.log(b); // 222
+        </code></pre>
+
+        <p>
+            Object 解構不是按照位置，而是按照<strong>Property Name</strong>尋找。
+        </p>
+
+        <pre><code>
+        {
+            a: 111,
+            b: 222
+        }
+
+        a → 找到 property "a" → 111
+        b → 找到 property "b" → 222
+        </code></pre>
+
+        <p>
+            <code>{a, b}</code> 是簡寫。
+            可以概念上理解成：
+        </p>
+
+        <pre><code>let {
+            a: a,
+            b: b
+        } = {
+            a: 111,
+            b: 222
+        };
+        </code></pre>
+
+        <p>
+            左邊的意思：
+        </p>
+
+        <pre><code>
+        a: a
+        ↑  ↑
+        │  └── 建立的變數名稱
+        └───── 要找的 Property Name
+        </code></pre>
+
+        <p>
+            如果 Property Name 和變數名稱相同，
+            就可以簡寫成 <code>{a}</code>。
+        </p>
+
+        <p>也可以故意使用不同的變數名稱：</p>
+
+        <pre><code>const user = {
+            name: "Kevin",
+            age: 20
+        };
+
+        const {name: userName, age: userAge} = user;
+
+        console.log(userName); // Kevin
+        console.log(userAge);  // 20
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong><br>
+            Array 解構 → 按照位置拆<br>
+            Object 解構 → 按照 Property Name 拆
+        </p>
+
+        <h4>for...of 和 for...in</h4>
+
+        <h5>for...of</h5>
+
+        <p>
+            <code>for...of</code> 用來遍歷 <strong>Iterable（可迭代物件）的值</strong>。
+            常見的 Iterable 有 Array、String、Map、Set 等。
+        </p>
+
+        <pre><code>const numbers = [10, 20, 30];
+
+        for (const value of numbers) {
+            console.log(value);
+        }
+
+        // 10
+        // 20
+        // 30
+        </code></pre>
+
+        <p>
+            簡單記：<code>for...of</code> → 直接取得<strong>值 value</strong>。
+        </p>
+
+
+        <h5>for...in</h5>
+
+        <p>
+            <code>for...in</code> 用來遍歷 Object 的
+            <strong>可列舉 Property Key</strong>。
+        </p>
+
+        <pre><code>const user = {
+            name: "Kevin",
+            age: 20
+        };
+
+        for (const key in user) {
+            console.log(key);
+        }
+
+        // name
+        // age
+        </code></pre>
+
+        <p>
+            如果要取得 value，可以再使用：
+        </p>
+
+        <pre><code>for (const key in user) {
+            console.log(user[key]);
+        }
+
+        // Kevin
+        // 20
+        </code></pre>
+
+
+        <h5>Array 使用時的差別</h5>
+
+        <pre><code>const numbers = [10, 20, 30];
+
+        for (const x of numbers) {
+            console.log(x);
+        }
+        // 10, 20, 30 → value
+
+
+        for (const x in numbers) {
+            console.log(x);
+        }
+        // "0", "1", "2" → property key
+        </code></pre>
+
+        <p>
+            所以遍歷 Array 的內容通常使用 <code>for...of</code>，
+            不建議用 <code>for...in</code> 當一般 Array 迴圈。
+        </p>
+
+
+        <h5>和 Python 對比</h5>
+
+        <pre><code># Python list
+        for x in numbers:
+            print(x)
+
+        # 很像 JavaScript：
+        for (const x of numbers) {
+            console.log(x);
+        }
+        </code></pre>
+
+        <p>
+            Python 的 <code>for...in</code> 和 JavaScript 的
+            <code>for...in</code> 意思不同。
+        </p>
+
+        <pre><code># Python dict：直接遍歷會取得 key
+        for key in user:
+            print(key)
+
+        # JavaScript Object
+        for (const key in user) {
+            console.log(key);
+        }
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong><br>
+            JavaScript <code>for...of</code> → Iterable 的 value<br>
+            JavaScript <code>for...in</code> → Object 的 property key<br>
+            Python <code>for...in</code> → 從 iterable 一個一個取值
+        </p>
+        <h5>Iterator 與 next()</h5>
+
+        <p>
+            <code>for...of</code> 背後會使用 Iterator，
+            一次取得一個值。
+        </p>
+
+        <pre><code>const numbers = [1, 2, 3];
+
+        const iterator = numbers[Symbol.iterator]();
+
+        console.log(iterator.next());
+        // { value: 1, done: false }
+
+        console.log(iterator.next());
+        // { value: 2, done: false }
+
+        console.log(iterator.next());
+        // { value: 3, done: false }
+
+        console.log(iterator.next());
+        // { value: undefined, done: true }
+        </code></pre>
+
+        <p>
+            <code>next()</code> 每呼叫一次，就取得下一個元素。
+        </p>
+
+        <pre><code>value → 目前取得的值
+        done  → 是否已經迭代完成
+        </code></pre>
+
+        <p>
+            可以簡單理解 <code>for...of</code> 幫我們自動重複呼叫
+            <code>next()</code>，直到 <code>done === true</code>。
+        </p>
+
+        <h4>樣板字面值 Template Literals vs 字串字面值 String Literals</h4>
+
+        <p>
+            一般的 String Literal 使用單引號 <code>' '</code>
+            或雙引號 <code>" "</code>。
+        </p>
+
+        <pre><code>let name = "Kevin";
+        let text = "Hello " + name + "!";
+
+        console.log(text); // Hello Kevin!
+        </code></pre>
+
+        <p>
+            ES6 新增 <strong>Template Literal</strong>，
+            使用反引號 <code>` `</code> 建立字串。
+        </p>
+
+        <pre><code>let name = "Kevin";
+
+        let text = `Hello ${name}!`;
+
+        console.log(text); // Hello Kevin!
+        </code></pre>
+
+        <p>
+            <code>${ }</code> 可以直接把變數或 Expression 放進字串中。
+        </p>
+
+        <pre><code>let a = 10;
+        let b = 20;
+
+        console.log(`結果是 ${a + b}`);
+        // 結果是 30
+        </code></pre>
+
+        <h5>多行字串</h5>
+
+        <p>
+            Template Literal 也可以直接換行，
+            不需要自己加入 <code>\n</code>。
+        </p>
+
+        <pre><code>let text = `第一行
+        第二行
+        第三行`;
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong><br>
+            <code>" "</code> / <code>' '</code> → 一般 String Literal<br>
+            <code>` `</code> → Template Literal<br>
+            <code>${expression}</code> → 把變數或運算結果插入字串
+        </p>
+
+        <h5>Python 對比</h5>
+
+        <pre><code># Python f-string
+        name = "Kevin"
+        text = f"Hello {name}!"
+
+        // JavaScript Template Literal
+        let text = `Hello ${name}!`;
+        </code></pre>
+
+        <h4>擴展運算子 Spread Operator</h4>
+
+        <p>
+            Spread Operator 使用三個點 <code>...</code>，
+            可以把 Array 或 Object 的內容<strong>展開</strong>。
+        </p>
+
+        <h5>展開 Array</h5>
+
+        <pre><code>const numbers = [10, 20, 30];
+
+        console.log(...numbers);
+        // 相當於：
+        console.log(10, 20, 30);
+        </code></pre>
+
+
+        <h5>為什麼 Math.max() 要使用 ...？</h5>
+
+        <p>
+            <code>Math.max()</code> 要接收的是「多個獨立參數」，
+            不是一整個 Array。
+        </p>
+
+        <pre><code>const numbers = [10, 20, 30];
+
+        Math.max(numbers);     // ❌ NaN
+
+        Math.max(...numbers);  // ✅ 30
+
+        // 相當於：
+        Math.max(10, 20, 30);
+        </code></pre>
+
+        <p>
+            因為 <code>numbers</code> 本身是一個 Array 值：
+        </p>
+
+        <pre><code>numbers
+        ↓
+        [10, 20, 30]          // 一個 Array
+
+        ...numbers
+        ↓
+        10, 20, 30            // 展開成三個值
+        </code></pre>
+
+
+        <h5>和 Python 對比</h5>
+
+        <p>
+            Python 的 <code>max()</code> 本身就可以直接接收 Iterable，
+            所以可以直接傳入 List：
+        </p>
+
+        <pre><code>numbers = [10, 20, 30]
+
+        max(numbers)   # ✅ 30
+        </code></pre>
+
+        <p>
+            Python 其實也有類似 Spread 的功能，使用 <code>*</code>：
+        </p>
+
+        <pre><code>print(*numbers)
+
+        # 相當於
+        print(10, 20, 30)
+        </code></pre>
+
+        <p>
+            所以不是 JavaScript 做不到，
+            而是 <code>Math.max()</code> 的 API 設計和 Python <code>max()</code> 不同。
+        </p>
+
+
+        <h5>使用 Spread 合併 Array</h5>
+
+        <pre><code>const a = [1, 2];
+        const b = [3, 4];
+
+        const result = [...a, ...b];
+
+        console.log(result);
+        // [1, 2, 3, 4]
+        </code></pre>
+
+        <p>
+            傳統也可以使用 <code>concat()</code>：
+        </p>
+
+        <pre><code>const result = a.concat(b);
+        // [1, 2, 3, 4]
+        </code></pre>
+
+        <p>
+            <code>[...a, ...b]</code> 和 <code>a.concat(b)</code>
+            在一般 Array 合併時效果很像，
+            Spread 的寫法通常更加直覺、彈性也比較高。
+        </p>
+
+
+        <h5>使用 Spread 合併 Object</h5>
+
+        <pre><code>const a = {
+            name: "Kevin",
+            age: 20
+        };
+
+        const b = {
+            age: 21,
+            city: "Taipei"
+        };
+
+        const result = {...a, ...b};
+        </code></pre>
+
+        <p>結果：</p>
+
+        <pre><code>{
+            name: "Kevin",
+            age: 21,
+            city: "Taipei"
+        }
+        </code></pre>
+
+        <p>
+            Object 如果出現相同 Property Key，
+            <strong>後面展開的值會覆蓋前面的值。</strong>
+        </p>
+
+        <pre><code>{...a, ...b}
+            ↑
+            後面的 b.age 覆蓋 a.age
+        </code></pre>
+
+        <p>
+            Array 則是按照順序加入元素，
+            即使值相同也不會互相覆蓋。
+        </p>
+
+        <pre><code>const a = [1, 2];
+        const b = [2, 3];
+
+        const result = [...a, ...b];
+
+        // [1, 2, 2, 3]
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong><br>
+            <code>...array</code> → 展開元素<br>
+            <code>[...a, ...b]</code> → 合併 Array<br>
+            <code>{...a, ...b}</code> → 合併 Object，同 key 後面的覆蓋前面的
+        </p>
+
+        <h4>可變參數 Variadic Function 與 Rest Parameter</h4>
+
+        <p>
+            Function 的參數數量不一定要固定。
+            JavaScript 可以使用 <code>...args</code>（Rest Parameter）
+            把傳入的多個參數收集成一個 Array。
+        </p>
+
+        <pre><code>function test(...args) {
+            console.log(args);
+        }
+
+        test(10, 20, 30);
+
+        // args = [10, 20, 30]
+        </code></pre>
+
+        <p>
+            這也是為什麼像 <code>Math.max()</code>
+            可以接受不同數量的參數：
+        </p>
+
+        <pre><code>Math.max(10, 20);
+        Math.max(10, 20, 30);
+        Math.max(10, 20, 30, 40);
+        </code></pre>
+
+        <h5>Rest 和 Spread 的差別</h5>
+
+        <p>
+            兩個都使用 <code>...</code>，但方向剛好相反：
+        </p>
+
+        <pre><code>Rest Parameter：
+        1, 2, 3
+        ↓ 收起來
+        [1, 2, 3]
+
+
+        Spread：
+        [1, 2, 3]
+        ↓ 展開
+        1, 2, 3
+        </code></pre>
+
+        <pre><code>function test(...args) {  // Rest：收起來
+            console.log(args);
+        }
+
+        const numbers = [10, 20, 30];
+
+        test(...numbers);         // Spread：展開
+        </code></pre>
+
+        <h5>和 Python / Java 對比</h5>
+
+        <pre><code>// JavaScript
+        function test(...args) {}
+
+        // Python
+        def test(*args):
+            pass
+
+        // Java
+        void test(int... args) {}
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong><br>
+            <code>...args</code> 放在 Function 參數 → Rest，把多個參數收起來<br>
+            <code>...array</code> 放在呼叫 Function 時 → Spread，把 Array 展開
+        </p>
+
+        <h4>箭頭函式 Arrow Function</h4>
+
+        <p>
+            Arrow Function 是 ES6 新增的 Function 寫法，
+            使用 <code>=></code>，在現代 JavaScript 中非常常見，
+            尤其常用來寫 Callback Function。
+        </p>
+
+
+        <h5>基本格式</h5>
+
+        <p>一般 Function Expression：</p>
+
+        <pre><code>const add = function(a, b) {
+            return a + b;
+        };
+        </code></pre>
+
+        <p>改成 Arrow Function：</p>
+
+        <pre><code>const add = (a, b) => {
+            return a + b;
+        };
+        </code></pre>
+
+        <p>
+            主要就是把 <code>function</code> 改成 <code>=></code>。
+        </p>
+
+
+        <h5>Arrow Function 的簡寫</h5>
+
+        <p>
+            如果 Function 裡面只有<strong>一個 Expression</strong>，
+            可以省略 <code>{}</code> 和 <code>return</code>。
+        </p>
+
+        <pre><code>const add = (a, b) => {
+            return a + b;
+        };
+
+        // 可以簡寫成：
+
+        const add = (a, b) => a + b;
+        </code></pre>
+
+        <p>
+            當省略 <code>{}</code> 時，
+            Arrow Function 會<strong>自動 return 後面的 Expression</strong>。
+        </p>
+
+        <pre><code>const double = x => x * 2;
+
+        double(5); // 10
+        </code></pre>
+
+        <p>
+            如果使用 <code>{}</code>，就代表要寫 Function Body，
+            可以寫很多行，但<strong>不會自動 return</strong>，
+            想回傳值就要自己寫 <code>return</code>。
+        </p>
+
+        <pre><code>const calculate = (a, b) => {
+            const sum = a + b;
+            const result = sum * 2;
+
+            return result;
+        };
+
+        calculate(2, 3); // 10
+        </code></pre>
+
+        <p>
+            <strong>簡單記：</strong>
+        </p>
+
+        <pre><code>() => expression
+            ↑
+            自動 return
+
+
+        () => {
+            多行程式;
+            多行程式;
+
+            return value; // 想回傳就自己寫
+        }
+        </code></pre>
+
+
+        <h5>參數的 ()</h5>
+
+        <p>
+            如果只有<strong>一個參數</strong>，
+            參數外面的 <code>()</code> 可以省略。
+        </p>
+
+        <pre><code>const double = (x) => x * 2;
+
+        // 可以寫成：
+
+        const double = x => x * 2;
+        </code></pre>
+
+        <p>
+            如果沒有參數或有兩個以上參數，就需要 <code>()</code>。
+        </p>
+
+        <pre><code>() => console.log("Hello");
+
+        (a, b) => a + b;
+        </code></pre>
+
+
+        <h5>和 Python lambda 對比</h5>
+
+        <pre><code>// JavaScript
+        const add = (a, b) => a + b;
+
+        // Python
+        add = lambda a, b: a + b
+        </code></pre>
+
+        <p>
+            兩者概念很像，但是 JavaScript Arrow Function
+            可以使用 <code>{}</code> 寫多行程式。
+        </p>
+
+        <pre><code>// JavaScript 可以這樣
+        const calculate = (a, b) => {
+            const result = a + b;
+            console.log(result);
+            return result;
+        };
+        </code></pre>
+
+        <p>
+            Python lambda 則只能寫一個 Expression。
+        </p>
+
+
+        <h5>Arrow Function 常用在哪裡？</h5>
+
+        <p>
+            Arrow Function 非常常拿來寫 Callback，
+            因為寫法比一般 Function 簡短。
+        </p>
+
+        <pre><code>const numbers = [1, 2, 3];
+
+        // 一般 Function
+        numbers.map(function(x) {
+            return x * 2;
+        });
+
+        // Arrow Function
+        numbers.map(x => x * 2);
+        </code></pre>
+
+        <p>
+            所以之前學過的 <code>map()</code>、<code>filter()</code>、
+            <code>forEach()</code> 都很常搭配 Arrow Function。
+        </p>
+
+
+        <h5>一般 Function 和 Arrow Function 的 this 差別</h5>
+
+        <p>
+            除了語法比較短以外，
+            Arrow Function 還有一個非常重要的差別：
+            <strong>Arrow Function 沒有自己的 this。</strong>
+        </p>
+
+        <p>
+            先記住：
+        </p>
+
+        <pre><code>一般 Function
+        → 有自己的 this
+        → this 是誰，跟 Function「怎麼被呼叫」有關
+
+        Arrow Function
+        → 沒有自己的 this
+        → 直接使用外層的 this
+        </code></pre>
+
+
+        <h5>先理解一般 Function 的 this</h5>
+
+        <p>
+            <code>this</code> 可以理解成：
+            <strong>「這次執行 Function 時，目前綁定的 Object 是誰？」</strong>
+        </p>
+
+        <pre><code>const user = {
+            name: "Kevin",
+
+            sayHi: function() {
+                console.log(this.name);
+            }
+        };
+
+        user.sayHi(); // Kevin
+        </code></pre>
+
+        <p>
+            因為這次是透過 <code>user.sayHi()</code> 呼叫，
+            所以 <code>sayHi</code> 裡面的 <code>this</code> 是 <code>user</code>。
+        </p>
+
+        <pre><code>user.sayHi()
+        ↑
+        this = user
+        </code></pre>
+
+        <p>一般 Function 被呼叫時，會得到一個 this 值；這個 this 是誰，取決於呼叫方式。</p>
+        <h5>call()：手動指定 this</h5>
+
+        <p>
+            <code>call()</code> 是 Function 的方法，
+            可以<strong>呼叫 Function，並手動指定這次的 this</strong>。
+        </p>
+
+        <pre><code>function introduce() {
+            console.log(this.name);
+        }
+
+        const user = {
+            name: "Kevin"
+        };
+
+        introduce.call(user);
+
+        // Kevin
+        </code></pre>
+
+        <p>可以理解成：</p>
+
+        <pre><code>introduce.call(user)
+                    ↓
+        執行 introduce()
+        並指定 this = user
+        </code></pre>
+
+        <p>
+            所以 Function 可以搭配不同 Object：
+        </p>
+
+        <pre><code>const user1 = { name: "Kevin" };
+        const user2 = { name: "Tom" };
+
+        introduce.call(user1); // Kevin
+        introduce.call(user2); // Tom
+        </code></pre>
+
+
+        <h5>為什麼老師要講 setTimeout()？</h5>
+
+        <p>
+            <code>setTimeout()</code> 是瀏覽器提供的功能，
+            可以讓一個 Callback Function 延遲一段時間後執行。
+        </p>
+
+        <pre><code>setTimeout(function() {
+            console.log("Hello");
+        }, 1000);
+
+        // 約 1 秒後執行
+        </code></pre>
+
+        <p>
+            老師使用它，是為了展示：
+            <strong>一般 Function 和 Arrow Function 對 this 的處理不同。</strong>
+        </p>
+
+
+        <h5>一般 Function 當 Callback 的問題</h5>
+
+        <pre><code>const obj = {
+            a: 1
+        };
+
+        function test() {
+
+            console.log(this.a); // 1
+
+            setTimeout(function() {
+                console.log(this.a);
+            }, 1000);
+        }
+
+        test.call(obj);
+        </code></pre>
+
+        <p>
+            第一次：
+        </p>
+
+        <pre><code>test.call(obj)
+            ↓
+        test 裡面的 this = obj
+            ↓
+        this.a = 1
+        </code></pre>
+
+        <p>
+            但是 <code>setTimeout</code> 裡面又建立了一個<strong>一般 Function</strong>：
+        </p>
+
+        <pre><code>function() {
+            console.log(this.a);
+        }
+        </code></pre>
+
+        <p>
+            普通 Function 的 <code>this</code> 會根據「這次 Function 怎麼被呼叫」決定，
+            不會自動沿用外層的 <code>this</code>；Arrow Function 則會沿用外層的 <code>this</code>。
+        </p>
+        <br>
+        <p>
+            因此 <code>setTimeout()</code> 執行普通 Callback 時，
+            在瀏覽器中 <code>this</code> 通常是 <code>window</code>，
+            而不是外層 Function 的 <code>this</code>。
+        </p>
+        <br>    
+        <p>
+            ※ Java 的 <code>this</code> 通常代表目前的 instance；
+            JavaScript 普通 Function 的 <code>this</code> 則依呼叫方式決定。
+        </p>
+        <br>
+        <p>
+            JavaScript 普通 Function 的 <code>this</code> 不是看「誰在使用這個 Function」，
+            而是看 <strong>Function 執行時的呼叫方式</strong>。
+            例如 <code>user.sayHi()</code> → <code>this = user</code>；
+            <code>sayHi.call(user)</code> → 手動指定 <code>this = user</code>；
+            而 <code>sayHi()</code> 是直接呼叫，沒有前面的 Object。
+            所以判斷 <code>this</code> 時，要看「怎麼呼叫」，而不是看「Function 屬於誰或被誰使用」。
+        </p>
+        <h5>Arrow Function 解決 this 的問題</h5>
+
+        <p>
+            如果改成 Arrow Function：
+        </p>
+
+        <pre><code>const obj = {
+            a: 1
+        };
+
+        function test() {
+
+            console.log(this.a); // 1
+
+            setTimeout(() => {
+                console.log(this.a); // 1
+            }, 1000);
+        }
+
+        test.call(obj);
+        </code></pre>
+
+        <p>
+            執行流程：
+        </p>
+
+        <pre><code>test.call(obj)
+
+        ↓
+        test 的 this = obj
+
+        ↓
+        setTimeout 裡使用 Arrow Function
+
+        ↓
+        Arrow Function 沒有自己的 this
+
+        ↓
+        往外使用 test 的 this
+
+        ↓
+        this = obj
+
+        ↓
+        this.a = 1
+        </code></pre>
+
+        <p>
+            這就是為什麼 Callback 很常使用 Arrow Function。
+        </p>
+
+
+        <h5>this 和 Scope 不要搞混</h5>
+
+        <p>
+            <strong>Arrow Function 沒有自己的 this，
+            不代表它沒有自己的 Scope。</strong>
+        </p>
+
+        <p>
+            Function 本來就可以讀取外層 Scope 的變數：
+        </p>
+
+        <pre><code>let a = 10;
+
+        function test() {
+            console.log(a); // 10
+        }
+        </code></pre>
+
+        <p>
+            Arrow Function 也一樣：
+        </p>
+
+        <pre><code>let a = 10;
+
+        const test = () => {
+            console.log(a); // 10
+        };
+        </code></pre>
+
+        <p>
+            所以外面的變數本來就可以往裡面找。
+            Arrow Function 真正特殊的地方是 <code>this</code>。
+        </p>
+
+
+        <h5>最後整理</h5>
+
+        <pre><code>Arrow Function：
+
+        1. ES6 新增
+        2. 使用 =>
+        3. 很常拿來寫 Callback
+
+        () => expression
+        → 自動 return
+
+        () => {
+            ...
+            return value;
+        }
+        → 多行要自己 return
+
+        一般 Function
+        → 有自己的 this
+        → this 依呼叫方式決定
+
+        Arrow Function
+        → 沒有自己的 this
+        → 使用外層的 this
+
+        function.call(obj)
+        → 執行 function
+        → 並指定 this = obj
+        </code></pre>
+        <h3>Chapter 8 瀏覽器中的 JS</h3>
     </body>
 </html>
