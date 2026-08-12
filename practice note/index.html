@@ -123,6 +123,7 @@
         <li><a href="#section10">8/7</a></li>
         <li><a href="#section11">8/9</a></li>
         <li><a href="#section12">8/11</a></li>
+        <li><a href="#section13">8/12</a></li>
     </ul>
     <h1 id="chapter1">HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -5098,6 +5099,323 @@ height: 200px;</code></pre>
         → 執行 function
         → 並指定 this = obj
         </code></pre>
-        <h3>Chapter 8 瀏覽器中的 JS</h3>
+
+        <h2>8/12</h2>
+        <h3 id="section13">Chapter 8 瀏覽器中的 JS</h3>
+
+        <h4>甚麼是 DOM？</h4>
+
+        DOM = Document Object Model（文件物件模型）
+
+        Document 指的是「目前這個網頁文件」。
+
+        瀏覽器讀取 HTML 後，
+        會把 HTML 轉換成一個「樹狀結構」，
+        讓 JavaScript 可以操作網頁。
+
+        例如：
+
+        <pre>
+        html
+        ├── head
+        └── body
+            ├── nav
+            │   ├── img
+            │   └── ul
+            │       ├── li
+            │       ├── li
+            │       └── li
+            └── section
+        </pre>
+
+        這種結構稱為 DOM Tree。
+
+        每一個 HTML 元素都可以看成一個 Node（節點）。
+
+        例如：
+
+        <pre>
+        html → root node（根節點）
+        body → node
+        ul → parent node（父節點）
+        li → child node（子節點）
+        img → leaf node（沒有子節點）
+        </pre>
+
+        DOM 是 W3C 等 Web 標準所定義的一套模型，
+        瀏覽器會按照這些標準，把 HTML 建立成 DOM。
+
+        JavaScript 可以透過：
+
+        <pre>
+        document
+        </pre>
+
+        取得目前網頁的 DOM。
+
+        例如在瀏覽器 Console 輸入：
+
+        <pre>
+        document
+        </pre>
+
+        就可以看到目前網頁的 document 物件。
+
+
+        <h4>DOM 的 API</h4>
+
+        API = Application Programming Interface（應用程式介面）
+
+        簡單來說：
+
+        「程式提供給其他程式使用的一組功能與規則。」
+
+        例如瀏覽器提供 DOM API，
+        讓 JavaScript 可以操作網頁。
+
+        <pre>
+        document.getElementById("title")
+        </pre>
+
+        意思是：
+
+        JavaScript
+        → 使用 DOM API
+        → 找到網頁中的某個 HTML 元素。
+
+
+        <h5>為什麼有些 API 有 ()，有些沒有？</h5>
+
+        因為 API 不一定都是 Function。
+
+        API 可以提供：
+
+        1. Property（屬性）
+        2. Method（方法）
+
+        例如：
+
+        <pre>
+        document.title
+        </pre>
+
+        title 是 Property，
+        只是「取得一個值」，所以不用 ()。
+
+        而：
+
+        <pre>
+        document.getElementById("title")
+        </pre>
+
+        getElementById 是 Method，
+        需要「執行一個動作」，所以要加 ()。
+
+        簡單記：
+
+        Property → 看資料 → 通常沒有 ()
+        Method   → 做事情 → 通常有 ()
+
+
+        <h5>Web API</h5>
+
+        DOM API 只是 Web API 的其中一種。
+
+        瀏覽器還提供很多其他 API，例如：
+
+        <pre>
+        DOM API       → 操作網頁
+        Fetch API     → 發送 HTTP Request
+        Geolocation   → 取得位置
+        Web Storage   → 儲存資料
+        </pre>
+
+        所以 API 不等於 Function。
+
+        而是「一整套提供給程式使用的功能與規則」，
+        裡面可能包含 Property、Method、Object 等。
+
+
+        <h4>甚麼是 BOM？</h4>
+
+        BOM = Browser Object Model（瀏覽器物件模型）
+
+        DOM 主要負責「網頁內容」，
+
+        BOM 主要負責「瀏覽器本身」。
+
+        瀏覽器中最主要的全域物件是：
+
+        <pre>
+        window
+        </pre>
+
+        例如：
+
+        <pre>
+        window.document
+        window.location
+        window.history
+        window.navigator
+        window.screen
+        </pre>
+
+        其中：
+
+        <pre>
+        window.document
+        </pre>
+
+        就是我們前面使用的 DOM document。
+
+        因為 window 是瀏覽器中的 Global Object，
+        所以很多時候 window 可以省略：
+
+        <pre>
+        window.document
+        document
+
+        window.location
+        location
+
+        window.alert("Hello")
+        alert("Hello")
+        </pre>
+
+        效果基本相同。
+
+
+        <h5>常見的 BOM</h5>
+
+        1. location
+
+        取得或修改目前網址：
+
+        <pre>
+        window.location.href
+        </pre>
+
+        也可以簡寫：
+
+        <pre>
+        location.href
+        </pre>
+
+
+        2. history
+
+        操作瀏覽器的歷史紀錄：
+
+        <pre>
+        history.back()
+        </pre>
+
+        回到上一頁。
+
+        <pre>
+        history.go(-1)
+        </pre>
+
+        也可以回到上一頁。
+
+
+        3. navigator
+
+        取得瀏覽器、裝置等相關資訊：
+
+        <pre>
+        navigator
+        </pre>
+
+
+        4. screen
+
+        取得使用者螢幕相關資訊：
+
+        <pre>
+        screen.width
+        screen.height
+        </pre>
+
+
+        <h4>window 與全域變數</h4>
+
+        在瀏覽器傳統 script 中：
+
+        使用 var 宣告的全域變數，通常會成為 window 的 Property。
+
+        例如：
+
+        <pre>
+        var name = "Kevin";
+
+        console.log(window.name);
+        </pre>
+
+        但是 let 和 const 不會：
+
+        <pre>
+        let age = 20;
+
+        console.log(window.age); // undefined
+        </pre>
+
+        注意：
+
+        這跟 Function Scope 沒有關係。
+
+        var 如果寫在 Function 裡面，
+        才會因為 Function Scope 而不是全域變數。
+
+        <pre>
+        function test() {
+            var x = 10;
+        }
+
+        console.log(window.x); // undefined
+        </pre>
+
+
+        <h4>DOM 和 BOM 的差別</h4>
+
+        DOM → 管理「網頁」
+
+        例如：
+
+        <pre>
+        document
+        HTML
+        body
+        div
+        button
+        img
+        </pre>
+
+        可以用 JavaScript 修改網頁內容。
+
+
+        BOM → 管理「瀏覽器」
+
+        例如：
+
+        <pre>
+        window
+        location
+        history
+        navigator
+        screen
+        </pre>
+
+        可以取得網址、歷史紀錄、瀏覽器資訊等。
+
+
+        簡單記：
+
+        DOM = 網頁裡面的東西
+        BOM = 瀏覽器提供的環境
+
+        而在瀏覽器 JavaScript 中，
+        window 是最主要的 Global Object，
+        document 則是 window 裡面用來操作 DOM 的物件。
     </body>
 </html>
