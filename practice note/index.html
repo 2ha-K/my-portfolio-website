@@ -5417,5 +5417,31 @@ height: 200px;</code></pre>
         而在瀏覽器 JavaScript 中，
         window 是最主要的 Global Object，
         document 則是 window 裡面用來操作 DOM 的物件。
+
+        <h3>Chapter 9 JS 實作練習</h3>
+        <ol>
+            <li><a href="./js-tutorial/02 dom/red-yellow-green/begin/index.html">【實作練習】黃綠紅你要哪一個？ (DOM 操作練習)</a></li>
+            <li><a href="./js-tutorial/03 stopwatch/begin/index.html">【實作練習】碼錶 </a></li>
+            <li><a href="./js-tutorial/04 paperscissorstone/begin/index.html">【實作練習】剪刀石頭布</a></li>
+            <li><a href="./js-tutorial/05 api/dogRandom/begin/index.html">【實作練習】狗狗產生器</a></li>
+        </ol>
+        <h4>實作練習：黃綠紅你要哪一個？（DOM 操作練習）</h4>
+
+        <p>
+            <code>querySelectorAll()</code>：取得多個 DOM 元素。<br>
+            <code>forEach()</code>：跑過每個元素，替每個元素綁定 <code>onclick</code>。<br>
+            <code>onclick</code>：現在只是綁定 Function，點擊時才真正執行。<br>
+            <code>getAttribute('id')</code>：取得被點擊元素的 id。<br>
+            <code>innerHTML</code>：修改元素「裡面的 HTML 結構」。<br>
+            <code>innerText</code>：修改元素「裡面的純文字」。
+        </p>
+
+        <p>
+            改變 class / id 後，CSS 會自動套用對應的 Style，所以可以改變顏色。
+        </p>
+
+        <pre>
+        點擊方塊 → 取得 id → 修改 HTML → CSS 根據 id 套用顏色
+        </pre>
     </body>
 </html>
