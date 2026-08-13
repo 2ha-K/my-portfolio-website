@@ -5443,5 +5443,51 @@ height: 200px;</code></pre>
         <pre>
         點擊方塊 → 取得 id → 修改 HTML → CSS 根據 id 套用顏色
         </pre>
+
+        <h4>實作練習：碼錶</h4>
+
+        <p>
+            使用 setInterval() 讓函數每隔一段時間重複執行：
+        </p>
+
+        <pre><code>
+        interval = setInterval(timer, 10);
+        </code></pre>
+
+        <p>
+            代表每 10ms 執行一次 timer。
+        </p>
+
+        <p>
+            使用 clearInterval() 停止：
+        </p>
+
+        <pre><code>
+        clearInterval(interval);
+        </code></pre>
+
+        <p>
+            注意：每次 setInterval() 都會建立新的計時器，
+            所以要避免重複按 Start：
+        </p>
+
+        <pre><code>
+        if (interval === null) {
+            interval = setInterval(timer, 10);
+        }
+        </code></pre>
+
+        <p>
+            停止後記得自己設回 null：
+        </p>
+
+        <pre><code>
+        clearInterval(interval);
+        interval = null;
+        </code></pre>
+
+        <p>
+            重點：setInterval() = 重複執行；clearInterval() = 停止重複執行。
+        </p>
     </body>
 </html>
