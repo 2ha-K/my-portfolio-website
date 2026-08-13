@@ -2026,10 +2026,6 @@ height: 200px;</code></pre>
                 <td>==（值，可自動轉型）</td>
             </tr>
             <tr>
-                <td>is（是否同一個物件）</td>
-                <td>===（值+型別相同）</td>
-            </tr>
-            <tr>
                 <td>None</td>
                 <td>null</td>
             </tr>
@@ -3809,8 +3805,8 @@ height: 200px;</code></pre>
         </code></pre>
 
         <p>
-            <code>let</code> 和 <code>const</code> 則是 <strong>Block Scope</strong>，
-            所以任何 <code>{ }</code> 都可以形成它們的作用域。
+            <code>let</code> 和 <code>const</code> 是 <strong>Block Scope</strong>，
+            在 <code>{ }</code> 建立的 block 中宣告時，只能在該 block 內使用
         </p>
 
         <pre><code>if (true) {
@@ -5109,8 +5105,8 @@ height: 200px;</code></pre>
 
         Document 指的是「目前這個網頁文件」。
 
-        瀏覽器讀取 HTML 後，
-        會把 HTML 轉換成一個「樹狀結構」，
+        瀏覽器解析 HTML 後，建立 DOM；
+        DOM 是一個 Tree（樹狀）的資料結構，
         讓 JavaScript 可以操作網頁。
 
         例如：
@@ -5135,7 +5131,8 @@ height: 200px;</code></pre>
         例如：
 
         <pre>
-        html → root node（根節點）
+        document → root node（整個 DOM 的根節點）
+        html → document element（HTML 文件的最外層元素）
         body → node
         ul → parent node（父節點）
         li → child node（子節點）
@@ -5488,6 +5485,110 @@ height: 200px;</code></pre>
 
         <p>
             重點：setInterval() = 重複執行；clearInterval() = 停止重複執行。
+        </p>
+
+        <h4>實作練習：剪刀石頭布</h4>
+
+        <p>
+            使用陣列存放剪刀、石頭、布，搭配 Math.random() 隨機產生電腦的選擇。
+        </p>
+
+        <pre><code>
+        let choices = ['Stone', 'Paper', 'Scissors'];
+
+        let computerChoice =
+            choices[Math.floor(Math.random() * 3)];
+        </code></pre>
+
+        <p>
+            使用 if / else if 比較玩家與電腦的選擇，判斷輸贏。
+        </p>
+
+        <p>
+            使用 querySelectorAll() 取得所有按鈕，再使用 forEach() 為每個按鈕加入點擊事件。
+        </p>
+
+        <pre><code>
+        let buttons = document.querySelectorAll('.pssButton');
+
+        buttons.forEach(button => {
+            const value = button.value;
+            button.onclick = () => onClickPSS(value);
+        });
+        </code></pre>
+
+        <p>
+            重點：Math.random() 產生隨機結果；
+            querySelectorAll() 取得多個元素；
+            forEach() 逐一處理；
+            onclick 處理使用者點擊。
+        </p>
+
+        <h4>實作練習：狗狗產生器</h4>
+
+        <p>
+            使用 fetch() 從 API 取得隨機狗狗圖片，練習非同步與 Promise。
+        </p>
+
+        <pre><code>
+        const dogImageDiv = document.getElementById('dogImage')
+        const dogButton = document.getElementById('dogButton')
+
+        const getNewDog = () => {
+            fetch('https://dog.ceo/api/breeds/image/random')
+                .then(response => response.json())
+                .then(json => {
+                    dogImageDiv.innerHTML = `&lt;img src='${json.message}'&gt;`
+                })
+
+            console.log('得到狗狗!')
+        }
+
+        dogButton.onclick = () => getNewDog()
+        </code></pre>
+
+        <h5>fetch 與 Promise</h5>
+
+        <p>
+            fetch() 是非同步的，不會等待資料回來才繼續執行，而是先回傳 Promise。
+        </p>
+
+        <p>
+            Promise 有三種狀態：pending（等待）、fulfilled（成功）、rejected（失敗）。
+        </p>
+
+        <h5>.then()</h5>
+
+        <p>
+            Promise 完成後，結果會傳給第一個 .then() 當參數。
+        </p>
+
+        <pre><code>
+        fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+            })
+        </code></pre>
+
+        <p>
+            流程：fetch 結果 → 第一個 .then() 的參數 → return 的結果 → 下一個 .then() 的參數。
+        </p>
+
+        <p>
+            多個 .then() 就像流水線，上一個 .then() return 的結果可以交給下一個 .then()。
+        </p>
+
+        <h5>非同步的重要觀念</h5>
+
+        <pre><code>
+        fetch(url).then(...)
+
+        console.log('得到狗狗!')
+        </code></pre>
+
+        <p>
+            console.log 不一定會等 fetch 完成，所以「得到狗狗!」可能會比狗狗資料更早出現。
         </p>
     </body>
 </html>
