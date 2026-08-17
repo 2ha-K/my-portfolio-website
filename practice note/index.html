@@ -125,7 +125,7 @@
         <li><a href="#section12">8/11</a></li>
         <li><a href="#section13">8/12</a></li>
         <li><a href="#chapter4">React上課筆記</a></li>
-        <li><a href="#section14">8/12</a></li>
+        <li><a href="#section14">8/17</a></li>
     </ul>
     <h1 id="chapter1">HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -5966,6 +5966,313 @@ height: 200px;</code></pre>
         Vite Development Server
         ↓
         瀏覽器看到 React 網站
+        </pre>
+
+        <h3>Component 組件</h3>
+
+        <h4>Component 是什麼？</h4>
+
+        <p>
+            Component（組件）就是把 UI 拆成一個個可以重複使用的小部分。
+        </p>
+
+        <p>
+            React Component 主要有兩種寫法：
+        </p>
+
+        <ul>
+            <li>Function Component：現在最常使用</li>
+            <li>Class Component：較舊的寫法，現在比較少使用</li>
+        </ul>
+
+
+        <h4>建立 Function Component</h4>
+
+        <p>
+            一個 Function 可以定義一個 Component，並 return 要顯示的 JSX。
+        </p>
+
+        <pre><code>
+        function MyComponent() {
+            return &lt;h1&gt;Hello&lt;/h1&gt;
+        }
+        </code></pre>
+
+        <p>
+            Component 名稱必須使用大寫開頭，通常使用 PascalCase。
+        </p>
+
+        <pre><code>
+        MyComponent    // Component
+        myComponent    // 不應這樣命名 Component
+        </code></pre>
+
+        <p>
+            因為 JSX 透過大小寫區分：
+        </p>
+
+        <pre><code>
+        &lt;div&gt;              // HTML element
+        &lt;MyComponent /&gt;    // React Component
+        </code></pre>
+
+
+        <h4>使用 Component</h4>
+
+        <p>
+            建立 Component 後，可以在 JSX 中像標籤一樣使用：
+        </p>
+
+        <pre><code>
+        &lt;MyComponent /&gt;
+        </code></pre>
+
+        <p>
+            沒有 children 時，通常使用 self-closing 寫法。
+        </p>
+
+        <pre><code>
+        &lt;MyComponent /&gt;
+
+        等同於：
+
+        &lt;MyComponent&gt;&lt;/MyComponent&gt;
+        </code></pre>
+
+
+        <h4>JSX 是什麼？</h4>
+
+        <p>
+            JSX = JavaScript XML，是一種可以在 JavaScript 中寫類似 HTML 結構的語法。
+        </p>
+
+        <pre><code>
+        const title = &lt;h1&gt;Hello&lt;/h1&gt;
+        </code></pre>
+
+        <p>
+            JSX 看起來像 HTML，但它不是 HTML，也不是普通 JavaScript 語法。
+            開發工具會將 JSX 轉換成 JavaScript，最後由 React 建立對應的 DOM 畫面。
+        </p>
+
+        <pre>
+        JSX
+        ↓
+        Vite / React 編譯工具
+        ↓
+        JavaScript
+        ↓
+        React
+        ↓
+        DOM 畫面
+        </pre>
+
+
+        <h4>App 根組件</h4>
+
+        <p>
+            React 專案通常會把 App 當作 Root Component（根組件），
+            其他 Component 再放進 App，形成 Component Tree。
+        </p>
+
+        <pre>
+        App
+        ├── Header
+        ├── Main
+        │   ├── Product
+        │   └── Product
+        └── Footer
+        </pre>
+
+        <p>
+            包住其他 Component 的稱為 Parent Component，
+            被包在裡面的稱為 Child Component。
+        </p>
+
+
+        <h4>一個 Component 一個檔案</h4>
+
+        <p>
+            常見做法是把不同 Component 分成不同檔案，
+            檔案名稱通常和 Component 名稱相同。
+        </p>
+
+        <pre>
+        src/
+        ├── App.jsx
+        ├── Header.jsx
+        ├── Footer.jsx
+        └── Product.jsx
+        </pre>
+
+        <p>
+            需要使用其他檔案的 Component 時，再使用 import。
+        </p>
+
+        <pre><code>
+        import Header from "./Header.jsx"
+        </code></pre>
+
+        <p>
+            VS Code 有時可以自動幫忙加入 import。
+        </p>
+
+
+        <h4>export / import</h4>
+
+        <p>
+            export 和 import 是 JavaScript ES Module 語法，不是 JSX 語法。
+        </p>
+
+        <p>
+            export default 表示這個檔案的「預設匯出」。
+        </p>
+
+        <pre><code>
+        function App() {
+            return &lt;h1&gt;Hello&lt;/h1&gt;
+        }
+
+        export default App
+        </code></pre>
+
+        <p>
+            其他檔案就可以：
+        </p>
+
+        <pre><code>
+        import App from "./App.jsx"
+        </code></pre>
+
+
+        <h5>Default Export vs Named Export</h5>
+
+        <p>Default Export：一個 Module 只能有一個。</p>
+
+        <pre><code>
+        export default App
+
+        import App from "./App.jsx"
+        </code></pre>
+
+        <p>Named Export：可以有很多個，import 時使用 { }。</p>
+
+        <pre><code>
+        export function Header() {}
+        export function Footer() {}
+
+        import { Header, Footer } from "./Components.jsx"
+        </code></pre>
+
+
+        <h4>main.jsx 的作用</h4>
+
+        <p>
+            main.jsx 是 React 專案的主要 JavaScript 入口。
+        </p>
+
+        <pre><code>
+        ReactDOM.createRoot(
+            document.getElementById("root")
+        ).render(
+            &lt;App /&gt;
+        )
+        </code></pre>
+
+        <p>
+            document.getElementById("root") 找到 index.html 中的：
+        </p>
+
+        <pre><code>
+        &lt;div id="root"&gt;&lt;/div&gt;
+        </code></pre>
+
+        <p>
+            createRoot() 建立 React Root，
+            render() 再把 App Component 渲染到這個 root 裡。
+        </p>
+
+        <pre>
+        index.html 的 #root
+                ↓
+        React createRoot()
+                ↓
+        &lt;App /&gt;
+                ↓
+        整個 Component Tree
+                ↓
+        DOM 畫面
+        </pre>
+
+
+        <h4>React.StrictMode</h4>
+
+        <p>
+            StrictMode 是 React 開發時用來幫忙檢查潛在問題的工具，
+            不是負責把 React 轉成 HTML。
+        </p>
+
+        <pre><code>
+        &lt;React.StrictMode&gt;
+            &lt;App /&gt;
+        &lt;/React.StrictMode&gt;
+        </code></pre>
+
+        <p>
+            它通常包住 App，幫助開發時提早發現一些不好的 React 寫法。
+        </p>
+
+
+        <h4>type="module"</h4>
+
+        <pre><code>
+        &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+        </code></pre>
+
+        <p>
+            type="module" 告訴瀏覽器這支 JavaScript 使用 ES Module，
+            因此可以使用 import / export。
+        </p>
+
+
+        <h4>Component 注意事項</h4>
+
+        <ul>
+            <li>Component 名稱使用大寫開頭，例如 MyComponent。</li>
+            <li>通常使用 PascalCase 命名。</li>
+            <li>Component 不要定義在另一個 Component 裡面。</li>
+            <li>常見做法是一個 Component 一個檔案，方便管理。</li>
+            <li>JSX 中沒有內容的 Element / Component 要使用 self-closing，例如 &lt;App /&gt;。</li>
+        </ul>
+
+
+        <h4>Vite 即時更新</h4>
+
+        <p>
+            Vite 開發伺服器支援快速更新。
+            修改並儲存 React 程式後，瀏覽器通常會立即看到新的結果，
+            不需要重新啟動 Server。
+        </p>
+
+
+        <h4>整體流程</h4>
+
+        <pre>
+        index.html
+        ↓
+        main.jsx
+        ↓
+        找到 #root
+        ↓
+        createRoot()
+        ↓
+        &lt;App /&gt;
+        ↓
+        其他 Components
+        ↓
+        React 更新 DOM
+        ↓
+        瀏覽器顯示畫面
         </pre>
     </body>
 </html>
