@@ -126,6 +126,7 @@
         <li><a href="#section13">8/12</a></li>
         <li><a href="#chapter4">React上課筆記</a></li>
         <li><a href="#section14">8/17</a></li>
+        <li><a href="#section15">8/18</a></li>
     </ul>
     <h1 id="chapter1">HTML上課筆記</h1>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/fa214Ct6t9w?si=GokRqScpw6dmRpzd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -6685,6 +6686,232 @@ height: 200px;</code></pre>
             <li>style={{ }} = JSX 的 { } 裡放 JavaScript Object。</li>
             <li>React 事件通常直接使用 onClick={function}。</li>
             <li>function 不加 () 是傳 Function；加 () 是立即呼叫。</li>
+        </ul>
+
+        <h2 id="section15">8/18</h2>
+        <h3>JSX 中的陣列</h3>
+
+        <h4>JSX 可以存進變數</h4>
+
+        <p>
+            JSX 可以先寫在 return 外面，存進 JavaScript 變數。
+        </p>
+
+        <pre><code>
+        const title = &lt;h1&gt;Hello&lt;/h1&gt;
+
+        return (
+            &lt;div&gt;{title}&lt;/div&gt;
+        )
+        </code></pre>
+
+        <p>
+            JSX 最後會被轉換成 JavaScript，
+            所以可以像一般 JavaScript 的值一樣存進變數、放進陣列。
+        </p>
+
+
+        <h4>JSX 可以放進 Array</h4>
+
+        <pre><code>
+        const items = [
+            &lt;p key="1"&gt;Apple&lt;/p&gt;,
+            &lt;p key="2"&gt;Banana&lt;/p&gt;,
+            &lt;p key="3"&gt;Orange&lt;/p&gt;
+        ]
+
+        return &lt;div&gt;{items}&lt;/div&gt;
+        </code></pre>
+
+        <p>
+            React 可以直接 Render 一個 JSX Element 陣列。
+        </p>
+
+
+        <h4>使用 map() 產生 JSX</h4>
+
+        <p>
+            實際開發更常使用 map()，
+            把資料 Array 轉換成 JSX Array。
+        </p>
+
+        <pre><code>
+        const fruits = ["Apple", "Banana", "Orange"]
+
+        return (
+            &lt;div&gt;
+                {fruits.map((fruit) =&gt; (
+                    &lt;p key={fruit}&gt;{fruit}&lt;/p&gt;
+                ))}
+            &lt;/div&gt;
+        )
+        </code></pre>
+
+        <p>
+            map() 的 Callback 每次取得一個 item，
+            回傳一個 JSX Element，最後組成新的 Array。
+        </p>
+
+        <pre>
+        資料 Array
+        ["Apple", "Banana", "Orange"]
+                ↓ map()
+        JSX Array
+        [&lt;p&gt;Apple&lt;/p&gt;, &lt;p&gt;Banana&lt;/p&gt;, &lt;p&gt;Orange&lt;/p&gt;]
+                ↓
+        React Render
+        </pre>
+
+
+        <h4>key 屬性</h4>
+
+        <p>
+            使用 Array Render 多個 JSX Element 時，
+            每個同層級的 Element 應該有唯一且穩定的 key。
+        </p>
+
+        <pre><code>
+        &lt;p key={fruit.id}&gt;{fruit.name}&lt;/p&gt;
+        </code></pre>
+
+        <p>
+            key 是 React 專用的提示，
+            用來辨認「這次的 Element 和上次的哪一個是同一個」。
+        </p>
+
+        <pre>
+        原本：
+        1 → Apple
+        2 → Banana
+        3 → Orange
+
+        刪除 Banana：
+
+        1 → Apple
+        3 → Orange
+
+        React 看到 key
+        → 知道 1、3 還是原本的元素
+        → 知道 2 被刪除了
+        → 更正確地更新 UI
+        </pre>
+
+        <p>
+            所以 key 不只是為了速度，
+            更重要的是讓 React 正確追蹤每個 Element 的身分。
+        </p>
+
+        <p>
+            key 可以是 Number 或 String，
+            最好使用資料本身穩定且唯一的 id。
+        </p>
+
+
+        <h4>為什麼普通 JavaScript Array 不需要 key？</h4>
+
+        <p>
+            key 不是 JavaScript Array 的規則，而是 React Render List 時的規則。
+        </p>
+
+        <pre><code>
+        // 普通 JavaScript Array，不需要 key
+        const fruits = ["Apple", "Banana", "Orange"]
+        </code></pre>
+
+        <p>
+            只有當 React 把 Array 中的資料 Render 成多個 JSX Element 時，
+            才需要 key 幫助 React 辨認它們。
+        </p>
+
+
+        <h4>使用 filter() 過濾資料</h4>
+
+        <p>
+            filter() 會根據 Callback 回傳的 true / false，
+            建立一個新的 Array。
+        </p>
+
+        <pre><code>
+        const numbers = [1, 2, 3, 4, 5]
+
+        const result = numbers.filter((num) =&gt; num &gt; 3)
+
+        // [4, 5]
+        </code></pre>
+
+        <p>
+            true → 保留<br>
+            false → 不保留
+        </p>
+
+
+        <h4>filter() + map()</h4>
+
+        <p>
+            React 很常先用 filter() 過濾資料，
+            再用 map() 轉成 JSX。
+        </p>
+
+        <pre><code>
+        const products = [
+            { id: 1, name: "Apple", price: 20 },
+            { id: 2, name: "Banana", price: 10 },
+            { id: 3, name: "Orange", price: 30 }
+        ]
+
+        return (
+            &lt;div&gt;
+                {products
+                    .filter((product) =&gt; product.price &gt; 10)
+                    .map((product) =&gt; (
+                        &lt;p key={product.id}&gt;
+                            {product.name}
+                        &lt;/p&gt;
+                    ))}
+            &lt;/div&gt;
+        )
+        </code></pre>
+
+        <pre>
+        filter() → 決定哪些資料留下
+        map()    → 把留下的資料轉成 JSX
+        </pre>
+
+
+        <h4>與 Python 對照</h4>
+
+        <p>Python 常見兩種過濾方式：</p>
+
+        <p>① List Comprehension（最常見）</p>
+
+        <pre><code>
+        numbers = [1, 2, 3, 4, 5]
+
+        result = [num for num in numbers if num &gt; 3]
+        </code></pre>
+
+        <p>② filter()</p>
+
+        <pre><code>
+        result = list(filter(lambda num: num &gt; 3, numbers))
+        </code></pre>
+
+        <p>JavaScript：</p>
+
+        <pre><code>
+        const result = numbers.filter((num) =&gt; num &gt; 3)
+        </code></pre>
+
+
+        <h4>簡單整理</h4>
+
+        <ul>
+            <li>JSX 可以存進變數，也可以放進 Array。</li>
+            <li>map()：把資料 Array 轉成 JSX Array。</li>
+            <li>filter()：根據條件過濾 Array。</li>
+            <li>Render List 時，每個同層 Element 要有唯一、穩定的 key。</li>
+            <li>key 是 React 的規則，不是 JavaScript Array 的規則。</li>
+            <li>key 主要幫 React 正確辨認 Element 身分，並有效率地更新 UI。</li>
         </ul>
     </body>
 </html>
