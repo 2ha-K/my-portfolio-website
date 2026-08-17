@@ -5595,8 +5595,377 @@ height: 200px;</code></pre>
 
         <h1 id="chapter4">React上課筆記</h1>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/aBTiZfShe-4?si=k0QQjeJOWWN6CIxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <h2 id="section14">8/15</h2>
-        <h3>React介紹</h3>
-        
+        <h2 id="section14">8/17</h2>
+        <h3>React 介紹</h3>
+
+        <ul>
+            <li>React 是一種用「組件 Component」方式建立使用者介面的 JavaScript 函式庫。</li>
+            <li>簡單來說：把網站拆成不同的小部分，各自撰寫、重複使用。</li>
+            <li>由 Facebook（現在的 Meta）在 2013 年開源。</li>
+            <li>嚴格來說 React 是 Library（函式庫），不是完整的 Framework（框架）。</li>
+        </ul>
+
+        <h4>React 與 SPA（Single Page Application）</h4>
+
+        <p>
+            React 很常被用來建立 SPA（單頁應用程式），但 React 本身不等於 SPA。
+        </p>
+
+        <h5>傳統網站</h5>
+
+        <p>
+            使用者切換不同頁面時，瀏覽器通常會向 Server 請求新的 HTML 頁面。
+        </p>
+
+        <pre>
+        首頁 → 請求 index.html
+        關於 → 請求 about.html
+        商品 → 請求 product.html
+        </pre>
+
+        <h5>SPA</h5>
+
+        <p>
+            初次進入網站時，先載入主要 HTML 與 JavaScript。
+            之後切換畫面時，通常由 JavaScript 更新頁面內容，
+            不需要每次都重新取得一個完整的新 HTML 頁面。
+        </p>
+
+        <pre>
+        第一次：
+        Browser → Server → HTML + JavaScript
+
+        之後：
+        使用者操作
+            ↓
+        JavaScript / React
+            ↓
+        更新畫面
+        </pre>
+
+
+        <h4>Node.js、npm、npx</h4>
+
+        <ul>
+            <li>Node.js：讓 JavaScript 可以在瀏覽器之外執行的 Runtime。</li>
+            <li>npm：Node.js 常用的套件管理工具（Package Manager）。</li>
+            <li>npx：方便直接執行 npm 套件提供的指令。</li>
+        </ul>
+
+        <p>
+            從 Node.js 官方安裝 Node.js 時，通常會一起安裝 npm；
+            現代 npm 也提供 npx 指令。
+        </p>
+
+        <pre>
+        Node.js
+        ├── node → 執行 JavaScript
+        ├── npm  → 管理 / 安裝套件
+        └── npx  → 執行套件提供的指令
+        </pre>
+
+
+        <h4>NVM（Node Version Manager）</h4>
+
+        <p>
+            NVM 用來管理多個 Node.js 版本。
+        </p>
+
+        <pre>
+        nvm use 20
+        </pre>
+
+        <p>
+            Windows 最後仍然是透過 PATH 找到程式。
+            nvm-windows 讓 PATH 指向固定入口，
+            再切換這個入口實際連到哪一個 Node.js 版本。
+        </p>
+
+
+        <h4>Create React App 與 Vite</h4>
+
+        <p>
+            Create React App（CRA）和 Vite 都曾/可用來建立 React 專案，
+            但現在建立新的 React 專案通常更常使用 Vite。
+        </p>
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Create React App</th>
+                <th>Vite</th>
+            </tr>
+            <tr>
+                <td>定位</td>
+                <td>較舊的 React 建置工具方案</td>
+                <td>現代前端開發工具</td>
+            </tr>
+            <tr>
+                <td>啟動速度</td>
+                <td>較慢</td>
+                <td>快</td>
+            </tr>
+            <tr>
+                <td>新專案</td>
+                <td>現在通常不建議</td>
+                <td>常見選擇</td>
+            </tr>
+        </table>
+
+        <p>
+            Vite 的主要優勢之一是開發伺服器啟動快，
+            修改程式後的更新速度也很快。
+        </p>
+
+
+        <h4>使用 Vite 建立 React 專案</h4>
+
+        <pre>
+        npm create vite@latest
+        </pre>
+
+        <p>接著選擇：</p>
+
+        <pre>
+        Framework → React
+        Variant   → JavaScript
+        Linter    → ESLint
+        </pre>
+
+        <p>
+            建立完成後，如果沒有讓 Vite 自動安裝套件：
+        </p>
+
+        <pre>
+        cd 專案名稱
+        npm install
+        npm run dev
+        </pre>
+
+
+        <h4>啟動 React 專案</h4>
+
+        <pre>
+        npm run dev
+        </pre>
+
+        <p>
+            npm 會讀取目前資料夾的 package.json，
+            找到 scripts 裡面的 dev 指令並執行。
+        </p>
+
+        <pre>
+        npm run dev
+            ↓
+        package.json
+            ↓
+        "scripts": {
+            "dev": "vite"
+        }
+            ↓
+        啟動 Vite Development Server
+        </pre>
+
+
+        <h4>React 專案資料夾</h4>
+
+        <pre>
+        my-react-app/
+        │
+        ├── node_modules/
+        ├── public/
+        ├── src/
+        ├── index.html
+        ├── package.json
+        ├── package-lock.json
+        ├── vite.config.js
+        ├── eslint.config.js
+        └── .gitignore
+        </pre>
+
+
+        <h5>node_modules</h5>
+
+        <p>
+            存放這個專案安裝的依賴套件（dependencies）。
+        </p>
+
+        <p>
+            例如 React、Vite 等套件會放在這裡。
+            通常不需要自己修改，也不會上傳到 Git。
+        </p>
+
+
+        <h5>public</h5>
+
+        <p>
+            放不需要經過程式處理、可以直接提供給瀏覽器的靜態檔案。
+        </p>
+
+        <p>例如：</p>
+
+        <ul>
+            <li>favicon</li>
+            <li>固定圖片</li>
+            <li>robots.txt</li>
+            <li>其他需要保持原檔名 / 路徑的靜態資源</li>
+        </ul>
+
+        <p>
+            但不是所有圖片都一定放 public，
+            React 專案中的圖片也常放在 src/assets。
+        </p>
+
+
+        <h5>src</h5>
+
+        <p>
+            Source 的縮寫，是 React 開發最主要使用的資料夾。
+        </p>
+
+        <p>通常會放：</p>
+
+        <ul>
+            <li>React Components</li>
+            <li>JavaScript / JSX</li>
+            <li>CSS</li>
+            <li>assets</li>
+        </ul>
+
+        <p>
+            寫 React 時，大部分時間都會在 src 裡面工作。
+        </p>
+
+
+        <h5>index.html</h5>
+
+        <p>
+            Vite React 專案的主要 HTML 入口。
+        </p>
+
+        <p>
+            SPA 初次載入時會取得這個 HTML，
+            React 再透過 JavaScript 將應用程式內容放進頁面。
+        </p>
+
+        <p>
+            通常 index.html 裡會有：
+        </p>
+
+        <pre>
+        &lt;div id="root"&gt;&lt;/div&gt;
+        </pre>
+
+        <p>
+            React 會把 App 掛載到這個 root 裡面。
+        </p>
+
+
+        <h5>package.json</h5>
+
+        <p>
+            可以把 package.json 想成「這個 Node.js / React 專案的說明與設定檔」。
+        </p>
+
+        <p>主要記錄：</p>
+
+        <ul>
+            <li>專案名稱與版本</li>
+            <li>dependencies：專案需要哪些套件</li>
+            <li>devDependencies：開發時需要的套件</li>
+            <li>scripts：可以執行哪些 npm 指令</li>
+        </ul>
+
+        <p>例如：</p>
+
+        <pre>
+        "scripts": {
+            "dev": "vite",
+            "build": "vite build",
+            "lint": "eslint ."
+        }
+        </pre>
+
+        <p>所以：</p>
+
+        <pre>
+        npm run dev
+            ↓
+        執行 scripts 裡面的 "dev"
+            ↓
+        vite
+        </pre>
+
+
+        <h5>package-lock.json</h5>
+
+        <p>
+            記錄實際安裝的套件版本與相依關係，
+            讓不同電腦安裝時盡可能得到相同的 dependencies。
+        </p>
+
+        <p>
+            通常由 npm 自動管理，不需要自己修改。
+        </p>
+
+
+        <h5>vite.config.js</h5>
+
+        <p>
+            Vite 的設定檔，例如設定 Plugin、開發 Server、路徑等。
+            初學 React 時通常不需要修改。
+        </p>
+
+
+        <h5>eslint.config.js</h5>
+
+        <p>
+            ESLint 的設定檔。
+            ESLint 是 Linter，用來靜態檢查 JavaScript / React 程式碼是否有問題或不好的寫法。
+        </p>
+
+
+        <h5>.gitignore</h5>
+
+        <p>
+            告訴 Git 哪些檔案不要追蹤。
+        </p>
+
+        <p>例如：</p>
+
+        <pre>
+        node_modules/
+        dist/
+        </pre>
+
+        <p>
+            node_modules 可以透過 package.json 和 package-lock.json 重新安裝，
+            所以通常不需要上傳到 Git。
+        </p>
+
+
+        <h4>React 專案簡單流程</h4>
+
+        <pre>
+        Node.js
+        ↓
+        npm
+        ↓
+        npm create vite@latest
+        ↓
+        建立 React 專案
+        ↓
+        npm install
+        ↓
+        安裝 package.json 中的套件
+        ↓
+        node_modules
+        ↓
+        npm run dev
+        ↓
+        Vite Development Server
+        ↓
+        瀏覽器看到 React 網站
+        </pre>
     </body>
 </html>
