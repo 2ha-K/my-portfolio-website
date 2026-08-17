@@ -6913,5 +6913,167 @@ height: 200px;</code></pre>
             <li>key 是 React 的規則，不是 JavaScript Array 的規則。</li>
             <li>key 主要幫 React 正確辨認 Element 身分，並有效率地更新 UI。</li>
         </ul>
+
+        <h3>React 裡的條件判斷</h3>
+
+        <h4>if...else</h4>
+
+        <p>
+            React 中可以使用一般 JavaScript 的 if...else。
+        </p>
+
+        <pre><code>
+        function Message() {
+            const isLogin = true
+
+            if (isLogin) {
+                return &lt;h1&gt;歡迎回來&lt;/h1&gt;
+            } else {
+                return &lt;h1&gt;請先登入&lt;/h1&gt;
+            }
+        }
+        </code></pre>
+
+        <p>
+            但 if...else 不能直接寫在 JSX 的 { } 裡，
+            因為 { } 裡通常需要放 Expression（會產生值的表達式）。
+        </p>
+
+
+        <h4>三元運算子</h4>
+
+        <p>
+            JSX 中需要條件判斷時，很常使用三元運算子。
+        </p>
+
+        <pre><code>
+        條件 ? true時的值 : false時的值
+        </code></pre>
+
+        <p>例如：</p>
+
+        <pre><code>
+        const isLogin = true
+
+        return (
+            &lt;div&gt;
+                {isLogin ? &lt;h1&gt;歡迎回來&lt;/h1&gt; : &lt;h1&gt;請先登入&lt;/h1&gt;}
+            &lt;/div&gt;
+        )
+        </code></pre>
+
+
+        <h4>在 className 使用三元運算子</h4>
+
+        <p>
+            className 的值可以透過三元運算子動態決定。
+        </p>
+
+        <pre><code>
+        &lt;div className={isActive ? "active" : "inactive"}&gt;
+            Hello
+        &lt;/div&gt;
+        </code></pre>
+
+        <p>
+            如果有固定的 Class，又想根據條件增加其他 Class，
+            常使用 Template Literal（反引號字串）。
+        </p>
+
+        <pre><code>
+        &lt;div className={`box ${isActive ? "active" : "inactive"}`}&gt;
+            Hello
+        &lt;/div&gt;
+        </code></pre>
+
+        <p>
+            其中：
+        </p>
+
+        <pre>
+        { }  → JSX 進入 JavaScript
+
+        ` `  → JavaScript Template Literal
+
+        ${ } → 在 Template Literal 中插入 JavaScript 值
+        </pre>
+
+        <p>
+            所以外面的 { } 不能拿掉：
+        </p>
+
+        <pre><code>
+        className={`box ${isActive ? "active" : "inactive"}`}
+                ↑
+                這整個是 JavaScript Expression
+        </code></pre>
+
+
+        <h4>&& 條件渲染</h4>
+
+        <p>
+            如果只想在條件成立時顯示某個 JSX，可以使用 &&。
+        </p>
+
+        <pre><code>
+        const isLogin = true
+
+        return (
+            &lt;div&gt;
+                {isLogin &amp;&amp; &lt;h1&gt;歡迎回來&lt;/h1&gt;}
+            &lt;/div&gt;
+        )
+        </code></pre>
+
+        <p>
+            isLogin 為 Truthy → 顯示右邊的 JSX。<br>
+            isLogin 為 Falsy → 不執行 / 不取右邊，整個表達式回傳左邊的 Falsy 值。
+        </p>
+
+
+        <h5>&& 真正的 JavaScript 規則</h5>
+
+        <p>
+            && 不只是 React 的條件顯示語法，而是 JavaScript 本身的運算子。
+        </p>
+
+        <p>
+            && 會先檢查左邊：
+        </p>
+
+        <pre>
+        左邊是 Falsy
+        → 直接回傳左邊
+
+        左邊是 Truthy
+        → 繼續計算並回傳右邊
+        </pre>
+
+        <p>例如：</p>
+
+        <pre><code>
+        false &amp;&amp; "Hello"   // false
+
+        true &amp;&amp; "Hello"    // "Hello"
+
+        0 &amp;&amp; "Hello"       // 0
+
+        5 &amp;&amp; "Hello"       // "Hello"
+        </code></pre>
+
+        <p>
+            React 只是利用 && 的這個 JavaScript 特性來做條件渲染。
+        </p>
+
+
+        <h4>簡單整理</h4>
+
+        <ul>
+            <li>if...else：一般 JavaScript 條件判斷。</li>
+            <li>三元運算子：需要「二選一」時很常使用。</li>
+            <li>&&：只想在條件成立時顯示東西。</li>
+            <li>className 可以使用三元運算子動態決定 Class。</li>
+            <li>Template Literal 可以使用 ${ } 插入 JavaScript 值。</li>
+        </ul>
     </body>
 </html>
