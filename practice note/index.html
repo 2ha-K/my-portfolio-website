@@ -7075,5 +7075,309 @@ height: 200px;</code></pre>
             <li>className 可以使用三元運算子動態決定 Class。</li>
             <li>Template Literal 可以使用 ${ } 插入 JavaScript 值。</li>
         </ul>
+
+        <h3>Props 屬性</h3>
+
+        <h4>Props 是什麼？</h4>
+        <p>React Component 雖然像 Function，但在 JSX 中不是用 Component("Kevin") 的方式傳參數，而是透過 Props 傳入資料，讓同一個 Component 可以接收不同資料並重複使用。</p>
+        <p>
+            Props = Properties。
+        </p>
+
+        <p>
+            Props 是 React 中「父 Component 傳資料給子 Component」的方式。
+        </p>
+
+        <pre>
+        Parent Component
+            ↓ Props
+        Child Component
+        </pre>
+
+        <p>
+            可以把 Component 想成 Function：
+        </p>
+
+        <pre><code>
+        function Greeting(props) {
+            return &lt;h1&gt;Hello {props.name}&lt;/h1&gt;
+        }
+        </code></pre>
+
+        <p>父 Component 使用：</p>
+
+        <pre><code>
+        &lt;Greeting name="Kevin" /&gt;
+        </code></pre>
+
+        <p>
+            React 會把傳入的資料整理成 props Object：
+        </p>
+
+        <pre><code>
+        props = {
+            name: "Kevin"
+        }
+        </code></pre>
+
+
+        <h4>傳入多個 Props</h4>
+
+        <pre><code>
+        &lt;User name="Kevin" age={20} student={true} /&gt;
+        </code></pre>
+
+        <p>子 Component 可以取得：</p>
+
+        <pre><code>
+        function User(props) {
+            return (
+                &lt;p&gt;
+                    {props.name} - {props.age}
+                &lt;/p&gt;
+            )
+        }
+        </code></pre>
+
+        <p>
+            Props 可以傳入 String、Number、Boolean、Array、Object、
+            Function、JSX 等各種 JavaScript 值。
+        </p>
+
+
+        <h4>Props Destructuring（解構）</h4>
+
+        <p>
+            因為 props 本身是一個 Object，所以可以使用 Object Destructuring。
+        </p>
+
+        <p>原本：</p>
+
+        <pre><code>
+        function User(props) {
+            return &lt;p&gt;{props.name} - {props.age}&lt;/p&gt;
+        }
+        </code></pre>
+
+        <p>可以簡化成：</p>
+
+        <pre><code>
+        function User({ name, age }) {
+            return &lt;p&gt;{name} - {age}&lt;/p&gt;
+        }
+        </code></pre>
+
+        <p>
+            name、age 是根據 Property 名稱取得，
+            所以順序不重要，但名稱要對應。
+        </p>
+
+        <pre><code>
+        function User({ age, name }) {
+            // 一樣可以
+        }
+        </code></pre>
+
+
+        <h5>為什麼解構是 { }，不是 ...？</h5>
+
+        <p>
+            { } 是 Object Destructuring（物件解構）。
+        </p>
+
+        <pre><code>
+        const user = {
+            name: "Kevin",
+            age: 20
+        }
+
+        const { name, age } = user
+        </code></pre>
+
+        <p>相當於：</p>
+
+        <pre><code>
+        const name = user.name
+        const age = user.age
+        </code></pre>
+
+        <p>
+            ... 則是 Spread / Rest Syntax，是另一個功能。
+        </p>
+
+        <pre><code>
+        const user = { name: "Kevin", age: 20 }
+
+        const copy = { ...user }
+        </code></pre>
+
+
+        <h4>Props 預設值</h4>
+
+        <p>
+            使用解構時，也可以直接設定預設值。
+        </p>
+
+        <pre><code>
+        function User({ name = "Guest", age = 18 }) {
+            return &lt;p&gt;{name} - {age}&lt;/p&gt;
+        }
+        </code></pre>
+
+        <p>
+            如果父 Component 沒有傳入 name，就會使用 "Guest"。
+        </p>
+
+
+        <h4>Props 可以傳 Function</h4>
+
+        <p>
+            Function 也是 JavaScript 的值，所以也可以透過 Props 傳入。
+        </p>
+
+        <pre><code>
+        function Parent() {
+
+            function sayHello() {
+                alert("Hello")
+            }
+
+            return &lt;Button handleClick={sayHello} /&gt;
+        }
+
+        function Button({ handleClick }) {
+            return (
+                &lt;button onClick={handleClick}&gt;
+                    Click
+                &lt;/button&gt;
+            )
+        }
+        </code></pre>
+
+        <pre>
+        Parent
+        ↓ 傳 sayHello
+        Button
+        ↓
+        使用者 Click
+        ↓
+        執行 sayHello
+        </pre>
+
+
+        <h4>HTML Attribute vs React Props</h4>
+
+        <p>
+            如果寫的是 HTML Element：
+        </p>
+
+        <pre><code>
+        &lt;input type="text" placeholder="Name" /&gt;
+        </code></pre>
+
+        <p>
+            type、placeholder 是 HTML Element 的屬性。
+        </p>
+
+        <p>如果是自己建立的 Component：</p>
+
+        <pre><code>
+        &lt;User name="Kevin" age={20} /&gt;
+        </code></pre>
+
+        <p>
+            name、age 則是傳給 User Component 的 Props。
+        </p>
+
+
+        <h4>Props 通常是由上往下傳</h4>
+
+        <p>
+            Props 的基本資料流是 Parent → Child。
+        </p>
+
+        <pre>
+        App
+        ↓ props
+        User
+        ↓ props
+        Avatar
+        </pre>
+
+        <p>
+            Child 不應直接修改收到的 Props。
+            如果資料需要改變，通常由擁有該資料的 Component 管理。
+        </p>
+
+
+        <h4>傳入 JSX：children</h4>
+
+        <p>
+            Component 的開始與結束標籤中間，也可以放 JSX。
+        </p>
+
+        <pre><code>
+        &lt;Card&gt;
+            &lt;h1&gt;Hello Kevin&lt;/h1&gt;
+        &lt;/Card&gt;
+        </code></pre>
+
+        <p>
+            中間的內容會透過一個特殊的 Prop：children 傳給 Card。
+        </p>
+
+        <pre><code>
+        function Card({ children }) {
+            return (
+                &lt;div className="card"&gt;
+                    {children}
+                &lt;/div&gt;
+            )
+        }
+        </code></pre>
+
+        <pre>
+        &lt;Card&gt;
+            &lt;h1&gt;Hello&lt;/h1&gt;
+        &lt;/Card&gt;
+
+                ↓
+
+        children = &lt;h1&gt;Hello&lt;/h1&gt;
+        </pre>
+
+
+        <h4>Composition（組合）</h4>
+
+        <p>
+            使用 Component 包住其他 Component / JSX，
+            再透過 children 組合 UI，稱為 Composition。
+        </p>
+
+        <pre><code>
+        &lt;Card&gt;
+            &lt;Title /&gt;
+            &lt;Body /&gt;
+        &lt;/Card&gt;
+        </code></pre>
+
+        <p>
+            Composition 是 React 很常見的設計方式，
+            可以讓 Component 更容易重複使用。
+        </p>
+
+
+        <h4>Props 簡單整理</h4>
+
+        <ul>
+            <li>Props = Parent 傳資料給 Child。</li>
+            <li>Props 本身是一個 Object。</li>
+            <li>可以一次傳很多 Props。</li>
+            <li>可以傳 String、Number、Object、Array、Function、JSX 等。</li>
+            <li>{ name, age } 是 Object Destructuring，不是 Spread。</li>
+            <li>Props 通常由上往下傳：Parent → Child。</li>
+            <li>Component 中間的 JSX 會透過 children 傳入。</li>
+            <li>使用 children 組合 Component 是 React 常見的 Composition。</li>
+        </ul>
     </body>
 </html>
