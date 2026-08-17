@@ -6274,5 +6274,417 @@ height: 200px;</code></pre>
         ↓
         瀏覽器顯示畫面
         </pre>
+
+        <h3>JSX</h3>
+
+        <h4>JSX 只能有一個最外層元素</h4>
+
+        <p>
+            React Component 一次 return 的 JSX 必須有一個 Root（最外層）。
+        </p>
+
+        <p>錯誤：</p>
+
+        <pre><code>
+        return (
+            &lt;h1&gt;Hello&lt;/h1&gt;
+            &lt;p&gt;World&lt;/p&gt;
+        )
+        </code></pre>
+
+        <p>可以使用 div 包起來：</p>
+
+        <pre><code>
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Hello&lt;/h1&gt;
+                &lt;p&gt;World&lt;/p&gt;
+            &lt;/div&gt;
+        )
+        </code></pre>
+
+        <p>
+            這是 JSX / React 的結構規則，
+            不是因為 JavaScript 只能 return 一個物件。
+        </p>
+
+
+        <h4>Fragment</h4>
+
+        <p>
+            如果只是為了包住多個元素，不希望 DOM 多出一個 div，
+            可以使用 React Fragment：
+        </p>
+
+        <pre><code>
+        return (
+            &lt;&gt;
+                &lt;h1&gt;Hello&lt;/h1&gt;
+                &lt;p&gt;World&lt;/p&gt;
+            &lt;/&gt;
+        )
+        </code></pre>
+
+        <p>
+            &lt;&gt;&lt;/&gt; 是 Fragment 的簡寫，
+            可以包住多個 JSX 元素，但不會產生額外的 HTML Element。
+        </p>
+
+
+        <h4>return 與括號</h4>
+
+        <p>
+            JSX 有多行時，通常使用 ( ) 包起來。
+        </p>
+
+        <pre><code>
+        return (
+            &lt;h1&gt;Hello&lt;/h1&gt;
+        )
+        </code></pre>
+
+        <p>單行也可以直接寫：</p>
+
+        <pre><code>
+        return &lt;h1&gt;Hello&lt;/h1&gt;
+        </code></pre>
+
+        <p>
+            注意：不要在 return 後直接換行再寫 JSX，
+            JavaScript 可能會自動把 return 當成結束。
+        </p>
+
+
+        <h4>在 JSX 中使用 JavaScript</h4>
+
+        <p>
+            JSX 使用 { } 進入 JavaScript Expression。
+        </p>
+
+        <pre><code>
+        const name = "Kevin"
+
+        return &lt;h1&gt;Hello {name}&lt;/h1&gt;
+        </code></pre>
+
+        <p>也可以運算：</p>
+
+        <pre><code>
+        &lt;p&gt;{10 + 20}&lt;/p&gt;
+        </code></pre>
+
+        <p>
+            { } 裡面主要放 Expression（會產生值的 JavaScript 表達式）。
+        </p>
+
+
+        <h4>在屬性中使用 JavaScript</h4>
+
+        <p>
+            JSX 的屬性也可以使用 { }。
+        </p>
+
+        <pre><code>
+        const text = "請輸入名字"
+
+        &lt;input
+            type="text"
+            placeholder={text}
+        /&gt;
+        </code></pre>
+
+        <p>
+            HTML 的 input 是輸入框，
+            type 決定輸入類型，placeholder 是尚未輸入時顯示的提示文字。
+        </p>
+
+
+        <h4>JSX 屬性名稱</h4>
+
+        <p>
+            JSX 比較接近 JavaScript，因此部分 HTML 屬性名稱會改成 JavaScript 風格，
+            通常使用 camelCase。
+        </p>
+
+        <table>
+            <tr>
+                <th>HTML</th>
+                <th>JSX</th>
+            </tr>
+            <tr>
+                <td>class</td>
+                <td>className</td>
+            </tr>
+            <tr>
+                <td>for</td>
+                <td>htmlFor</td>
+            </tr>
+            <tr>
+                <td>onclick</td>
+                <td>onClick</td>
+            </tr>
+        </table>
+
+        <p>例如：</p>
+
+        <pre><code>
+        &lt;label htmlFor="name"&gt;名字&lt;/label&gt;
+        &lt;input id="name" className="inputBox" /&gt;
+        </code></pre>
+
+        <p>
+            label 的 for / htmlFor 用來指定這個 label 對應哪一個表單元素。
+        </p>
+
+
+        <h4>Inline Style</h4>
+
+        <p>
+            JSX 可以使用 style 屬性加入 Inline Style，
+            但傳入的是 JavaScript Object，不是一般 CSS 字串。
+        </p>
+
+        <pre><code>
+        &lt;h1 style={{ color: "red", fontSize: "30px" }}&gt;
+            Hello
+        &lt;/h1&gt;
+        </code></pre>
+
+        <p>兩層大括號可以拆開理解：</p>
+
+        <pre>
+        style={ { color: "red" } }
+            ↑
+            JavaScript Object
+
+            ↑               ↑
+        外面的 { } = JSX 進入 JavaScript
+        </pre>
+
+        <p>
+            所以 {{ }} 不是特殊語法，
+            只是「JSX 的 { } 裡面剛好放了一個 JavaScript Object」。
+        </p>
+
+        <p>
+            Style Object 的屬性通常使用 camelCase：
+        </p>
+
+        <pre><code>
+        font-size        → fontSize
+        background-color → backgroundColor
+        </code></pre>
+
+
+        <h4>使用 CSS 檔案</h4>
+
+        <p>
+            實際專案更常把樣式寫在 CSS 檔案。
+        </p>
+
+        <pre>
+        App.jsx
+        App.css
+        </pre>
+
+        <p>在 Component 中：</p>
+
+        <pre><code>
+        import "./App.css"
+        </code></pre>
+
+        <p>
+            原生瀏覽器 JavaScript 本身不是直接用這種方式載入 CSS。
+            Vite 會處理 CSS import，最後讓 CSS 套用到網頁。
+        </p>
+
+        <p>
+            CSS 檔案不一定要和 Component 同名，
+            同名只是常見的整理方式。
+        </p>
+
+
+        <h4>React 事件處理</h4>
+
+        <p>
+            一般 JavaScript 可能會先取得 DOM，再綁定事件：
+        </p>
+
+        <pre><code>
+        const button = document.getElementById("btn")
+
+        button.addEventListener("click", handleClick)
+        </code></pre>
+
+        <p>
+            React 通常不需要自己 getElementById 綁定事件，
+            而是直接在 JSX 宣告：
+        </p>
+
+        <pre><code>
+        function handleClick() {
+            console.log("Clicked")
+        }
+
+        return (
+            &lt;button onClick={handleClick}&gt;
+                Click
+            &lt;/button&gt;
+        )
+        </code></pre>
+
+        <p>
+            這是 React 常用的事件處理方式。
+        </p>
+
+
+        <h4>為什麼 onClick 不加 ()？</h4>
+
+        <p>正確：</p>
+
+        <pre><code>
+        onClick={handleClick}
+        </code></pre>
+
+        <p>
+            代表把 Function 本身交給 React，
+            等使用者 Click 時再執行。
+        </p>
+
+        <p>如果寫：</p>
+
+        <pre><code>
+        onClick={handleClick()}
+        </code></pre>
+
+        <p>
+            () 代表現在就呼叫 Function，
+            因此在 Render 時就會直接執行。
+        </p>
+
+        <pre>
+        handleClick    → Function 本身
+
+        handleClick()  → 立即呼叫 Function
+        </pre>
+
+
+        <h4>使用 Arrow Function</h4>
+
+        <p>
+            如果需要傳參數，可以包一層 Arrow Function：
+        </p>
+
+        <pre><code>
+        &lt;button onClick={() =&gt; handleClick("Kevin")}&gt;
+            Click
+        &lt;/button&gt;
+        </code></pre>
+
+        <p>
+            這樣 handleClick("Kevin") 不會立即執行，
+            而是 Click 後才執行。
+        </p>
+
+
+        <h4>Event Object</h4>
+
+        <p>
+            React 執行事件 Function 時，可以取得事件物件 e。
+        </p>
+
+        <pre><code>
+        function handleClick(e) {
+            console.log(e)
+        }
+        </code></pre>
+
+        <p>
+            e（event）包含這次事件的相關資訊，
+            例如是哪個元素觸發事件。
+        </p>
+
+        <pre><code>
+        function handleClick(e) {
+            console.log(e.target)
+        }
+        </code></pre>
+        <h5>React Event Handler 的參數</h5>
+
+        <p>
+            React Event Handler 觸發時，React 會自動傳入 Event Object，
+            通常使用 e (滑鼠座標, 點擊按鈕) 來接收。
+        </p>
+
+        <pre><code>
+        onClick={(e) =&gt; console.log(e)}
+        </code></pre>
+
+        <p>
+            如果不需要 Event，只想自己傳參數，可以使用空的 Arrow Function 包住：
+        </p>
+
+        <pre><code>
+        onClick={() =&gt; handleClick("Kevin")}
+        </code></pre>
+
+        <p>
+            如果 Event 和自己的參數都需要：
+        </p>
+
+        <pre><code>
+        onClick={(e) =&gt; handleClick(e, "Kevin")}
+        </code></pre>
+
+        <p>
+            簡單記：不需要 Event → () =&gt;；
+            需要 Event → (e) =&gt;。
+        </p>
+
+        <h4>JavaScript Function 參數型別</h4>
+
+        <p>
+            JavaScript 的參數不需要宣告型別。
+        </p>
+
+        <pre><code>
+        function add(num) {
+            return num + 1
+        }
+        </code></pre>
+
+        <p>JavaScript 沒有 Python 的 num: int 寫法。</p>
+
+        <pre>
+        Java:
+        int num
+
+        Python:
+        num: int
+
+        JavaScript:
+        num
+
+        TypeScript:
+        num: number
+        </pre>
+
+        <p>
+            如果希望 JavaScript 有更完整的型別系統，
+            通常會使用 TypeScript。
+        </p>
+
+
+        <h4>JSX 簡單整理</h4>
+
+        <ul>
+            <li>Component 的 JSX 必須有一個最外層 Root。</li>
+            <li>不想增加 div，可以使用 Fragment &lt;&gt;&lt;/&gt;。</li>
+            <li>JSX 中使用 { } 放 JavaScript Expression。</li>
+            <li>class → className，for → htmlFor。</li>
+            <li>style={{ }} = JSX 的 { } 裡放 JavaScript Object。</li>
+            <li>React 事件通常直接使用 onClick={function}。</li>
+            <li>function 不加 () 是傳 Function；加 () 是立即呼叫。</li>
+        </ul>
     </body>
 </html>

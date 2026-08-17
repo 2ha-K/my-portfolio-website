@@ -7,8 +7,13 @@ function Title() {
 }
 
 function Body() {
+  let temp = 25
   return (
-    <p>今天天氣很好喔!</p>
+    <>
+      <p>今天天氣很好喔!溫度是{temp}度</p>
+      <button onClick={()=>(alert("超級狗狗"))}>產生狗狗</button>
+    </>
+    
   )
 }
 
