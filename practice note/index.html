@@ -7379,5 +7379,407 @@ height: 200px;</code></pre>
             <li>Component 中間的 JSX 會透過 children 傳入。</li>
             <li>使用 children 組合 Component 是 React 常見的 Composition。</li>
         </ul>
+        <h3>State</h3>
+
+        <h4>為什麼需要 State？</h4>
+
+        <p>
+            一般 JavaScript 變數改變時，React 不會因此重新 Render，
+            所以畫面不會自動跟著改變。
+        </p>
+
+        <pre><code>
+        let clicks = 0
+
+        clicks = clicks + 1
+        </code></pre>
+
+        <p>
+            clicks 的值雖然改變了，但 React 不知道需要更新 UI。
+        </p>
+
+        <p>
+            因此 React 提供 State，讓 Component 可以記住資料，
+            並在 State 更新後重新 Render UI。
+        </p>
+
+
+        <h4>State 是什麼？</h4>
+
+        <p>
+            State 是 React 幫 Component 記住並管理的「狀態值」。
+        </p>
+
+        <p>
+            State value 本身仍然只是普通的 JavaScript 值，
+            可以是 Number、String、Boolean、Array、Object 等。
+        </p>
+
+        <pre><code>
+        useState(0)
+        useState("Kevin")
+        useState(false)
+        useState([])
+        useState({})
+        </code></pre>
+
+        <p>
+            特別的是 React 會管理 State，
+            State 更新後 React 會重新 Render Component。
+        </p>
+
+
+        <h4>useState()</h4>
+
+        <p>
+            useState 是 React 提供的 Hook Function，
+            使用前需要從 React import。
+        </p>
+
+        <pre><code>
+        import { useState } from "react"
+        </code></pre>
+
+        <p>
+            VS Code 有時會自動幫忙加入 import。
+        </p>
+
+        <p>
+            useState() 的參數是 State 的初始值。
+        </p>
+
+        <pre><code>
+        useState(0)
+        </code></pre>
+
+        <p>
+            useState() 會回傳一個 Array，裡面有兩個東西：
+        </p>
+
+        <pre>
+        [
+            目前的 State value,
+            更新 State 的 Function
+        ]
+        </pre>
+
+        <p>所以通常使用 Array Destructuring：</p>
+
+        <pre><code>
+        const [clicks, setClicks] = useState(0)
+        </code></pre>
+
+        <pre>
+        clicks
+        → 目前的 State value
+
+        setClicks
+        → 更新 State 的 Function
+
+        0
+        → State 的初始值
+        </pre>
+
+
+        <h4>Array Destructuring</h4>
+
+        <p>
+            [clicks, setClicks] 是 JavaScript 的 Array Destructuring，
+            不是 React 特殊語法。
+        </p>
+
+        <pre><code>
+        const [clicks, setClicks] = useState(0)
+        </code></pre>
+
+        <p>
+            Array Destructuring 是「順序重要，名稱不重要」。
+        </p>
+
+        <pre>
+        第一個 → State value
+        第二個 → Setter Function
+        </pre>
+
+        <p>
+            只是 React 慣例會把 Setter 命名為 set + State名稱。
+        </p>
+
+        <pre><code>
+        const [count, setCount] = useState(0)
+        const [name, setName] = useState("")
+        const [login, setLogin] = useState(false)
+        </code></pre>
+
+        <p>
+            Object Destructuring 則是名稱重要、順序不重要。
+        </p>
+
+
+        <h4>Setter Function</h4>
+
+        <p>
+            useState 回傳的第二個值是一個 Function，
+            通常稱為 Setter Function。
+        </p>
+
+        <pre><code>
+        const [clicks, setClicks] = useState(0)
+        </code></pre>
+
+        <p>例如：</p>
+
+        <pre><code>
+        setClicks(5)
+        </code></pre>
+
+        <p>
+            表示要求 React 把這個 State 更新成 5。
+        </p>
+
+        <pre>
+        setClicks(5)
+            ↓
+        React 收到 State 更新
+            ↓
+        State 更新
+            ↓
+        重新 Render Component
+            ↓
+        UI 使用新的 State
+        </pre>
+
+        <p>
+            Setter 不是單純執行 clicks = 5，
+            而是 React 提供的 Function，
+            背後會連接 React 的 State 管理與重新 Render 機制。
+        </p>
+
+
+        <h4>State 範例</h4>
+
+        <pre><code>
+        function Counter() {
+
+            const [clicks, setClicks] = useState(0)
+
+            function handleClick() {
+                setClicks(clicks + 1)
+            }
+
+            return (
+                &lt;button onClick={handleClick}&gt;
+                    點擊次數：{clicks}
+                &lt;/button&gt;
+            )
+        }
+        </code></pre>
+
+        <p>流程：</p>
+
+        <pre>
+        初始：
+        clicks = 0
+        ↓
+        畫面：點擊次數 0
+
+        Click
+        ↓
+        setClicks(clicks + 1)
+        ↓
+        React 更新 State
+        ↓
+        重新 Render
+        ↓
+        clicks = 1
+        ↓
+        畫面：點擊次數 1
+        </pre>
+
+
+        <h4>一個 Component 可以有多個 State</h4>
+
+        <p>
+            一個 Component 可以建立很多個 State，
+            每個 State 負責不同的狀態。
+        </p>
+
+        <pre><code>
+        function User() {
+
+            const [name, setName] = useState("")
+            const [age, setAge] = useState(18)
+            const [isLogin, setIsLogin] = useState(false)
+
+            // ...
+        }
+        </code></pre>
+
+        <p>
+            可以把一個 State 暫時理解成一個
+            「由 React 管理、改變時會讓 UI 重新 Render 的特殊變數」。
+        </p>
+
+
+        <h4>不同 Component 的 State 互相獨立</h4>
+
+        <p>
+            每個 Component Instance 都可以擁有自己的 State。
+        </p>
+
+        <pre><code>
+        &lt;Counter /&gt;
+        &lt;Counter /&gt;
+        &lt;Counter /&gt;
+        </code></pre>
+
+        <p>
+            三個 Counter 通常各自記住自己的 clicks，
+            點第一個不會自動改變另外兩個。
+        </p>
+
+
+        <h4>State 可以透過 Props 傳給 Child</h4>
+
+        <p>
+            Parent 可以把自己的 State 當成 Props 傳給 Child。
+        </p>
+
+        <pre><code>
+        function Parent() {
+
+            const [count, setCount] = useState(0)
+
+            return (
+                &lt;Child count={count} /&gt;
+            )
+        }
+
+        function Child({ count }) {
+            return &lt;p&gt;{count}&lt;/p&gt;
+        }
+        </code></pre>
+
+        <pre>
+        Parent State
+            ↓
+        Props
+            ↓
+        Child
+        </pre>
+
+
+        <h4>Render（渲染）是什麼？</h4>
+
+        <p>
+            Render 可以簡單理解成：
+            React 執行 Component，根據目前的 Props 和 State 計算出要顯示的 JSX，
+            再更新畫面需要改變的部分。
+        </p>
+
+        <pre>
+        Component
+        ↓
+        目前的 Props + State
+        ↓
+        產生 JSX
+        ↓
+        React 比較並更新 DOM
+        ↓
+        瀏覽器畫面
+        </pre>
+
+        <p>
+            注意：Render 不是簡單的「JSX 直接變成 HTML 字串」，
+            而是 React 根據 JSX 決定 DOM 應該長什麼樣子。
+        </p>
+
+
+        <h5>Initial Render 初次渲染</h5>
+
+        <p>
+            Component 第一次出現在畫面時，React 會進行 Initial Render。
+        </p>
+
+        <pre>
+        Component 第一次執行
+        ↓
+        useState 使用初始值
+        ↓
+        產生 JSX
+        ↓
+        建立 / 更新 DOM
+        ↓
+        顯示畫面
+        </pre>
+
+
+        <h5>Re-render 重新渲染</h5>
+
+        <p>
+            State 更新後，React 會重新執行 Component，
+            使用新的 State 再計算一次 JSX。
+        </p>
+
+        <pre>
+        setState(...)
+        ↓
+        State 更新
+        ↓
+        Component 重新 Render
+        ↓
+        產生新的 JSX
+        ↓
+        React 比較前後結果
+        ↓
+        只更新需要改變的 DOM
+        </pre>
+
+
+        <h4>useState 背後原理</h4>
+
+        <p>
+            useState 是 React 提供的 Hook Function，
+            背後有 React 自己的 State 管理機制。
+        </p>
+
+        <p>
+            React 會記住某個 Component 對應的 State，
+            所以 Component Re-render 時，
+            State 不會每次都重新變回初始值。
+        </p>
+
+        <pre>
+        useState(0)
+            ↓
+        React 記住這個 State
+            ↓
+        setState(1)
+            ↓
+        React 保存新的 State
+            ↓
+        Re-render
+            ↓
+        再次 useState(0)
+            ↓
+        取得 React 保存的 1
+        而不是重新變成 0
+        </pre>
+
+
+        <h4>簡單整理</h4>
+
+        <ul>
+            <li>普通變數改變，不會讓 React 自動重新 Render。</li>
+            <li>State = React 幫 Component 記住並管理的狀態值。</li>
+            <li>useState(初始值) 用來建立 State。</li>
+            <li>useState 回傳 [State value, Setter Function]。</li>
+            <li>Setter Function 更新 State，並讓 React 安排重新 Render。</li>
+            <li>一個 Component 可以有很多個 State。</li>
+            <li>不同 Component Instance 的 State 通常互相獨立。</li>
+            <li>State 可以透過 Props 傳給 Child Component。</li>
+            <li>Initial Render = 第一次渲染。</li>
+            <li>Re-render = State 等資料改變後重新計算 UI。</li>
+        </ul>
     </body>
 </html>
