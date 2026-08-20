@@ -7791,5 +7791,12 @@ height: 200px;</code></pre>
         先建立component然後用簡單文字來確定可以倒堧後再去改(先定位)
         全部css用一個appcss?就算是組件?
         *代表全域調整(component要用class的css調色) app用body
+        對於component的子元素:選擇器可以 >.createClass > input = 只找下一層的 input；.createClass input = 只要在 createClass 裡面的 input，不管隔幾層都找。也可以加上class
+        一句話：display: flex 會排列「直接子元素」，而預設 flex-direction: row，所以 input 和 button 會排在同一行。
+        onchange是甚麼(可以利用傳入e去得到target的value)
+        to-way binding: 當ui發生改變state會改變，state改變ui也會改變
+        state要存對地方 要記得寫在上層元素 (技術上來說可以寫在app中，但是app和目標組件中間有很多state這樣很麻煩還要一層一層傳輸 會成prompt drining，其實也可以串建context(全域的prompt))
+        array列表要變成一系列的陣列首先要{}裡面有個list中有html元素所以我們可以把list map成每個裡面都是元素，並將組建的內容以傳遞參數的方法到子組件中做修改
+        陣列中的每個元素要有key 可以一開市list變成 {content: "", id: Math.ramdom()}
     </body>
 </html>
