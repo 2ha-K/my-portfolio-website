@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-function CreateForm({addTodo}) {
-
-    const [content, setContent]=useState('');
+function EditForm({todo, editTodo}) {
+    const [content, setContent]=useState(todo.content);
     const handelSubmit = (e) => {
         e.preventDefault()
-        addTodo(content)
-        setContent('')
+        editTodo(todo.id, content)
     }
 
     return (
@@ -14,9 +12,9 @@ function CreateForm({addTodo}) {
         <input type="text" placeholder="輸入代辦事項"
         value={content} 
         onChange={(e)=>{setContent(e.target.value)}}/>
-        <button type="submit">加入</button>
+        <button type="submit">完成</button>
     </form>
     );
 }
 
-export default CreateForm
+export default EditForm

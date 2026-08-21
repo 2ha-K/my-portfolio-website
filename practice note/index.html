@@ -7785,18 +7785,618 @@ height: 200px;</code></pre>
         </ul>
 
         <h2 id="section16">8/20</h2>
-        <h3>實作todo專案</h3>
-        順序: 先APP中底色和數設計 再來製作COMPONETNS資料夾製作元素 (一般會建議怎麼做)
-        可以製作wrapper
-        先建立component然後用簡單文字來確定可以倒堧後再去改(先定位)
-        全部css用一個appcss?就算是組件?
-        *代表全域調整(component要用class的css調色) app用body
-        對於component的子元素:選擇器可以 >.createClass > input = 只找下一層的 input；.createClass input = 只要在 createClass 裡面的 input，不管隔幾層都找。也可以加上class
-        一句話：display: flex 會排列「直接子元素」，而預設 flex-direction: row，所以 input 和 button 會排在同一行。
-        onchange是甚麼(可以利用傳入e去得到target的value)
-        to-way binding: 當ui發生改變state會改變，state改變ui也會改變
-        state要存對地方 要記得寫在上層元素 (技術上來說可以寫在app中，但是app和目標組件中間有很多state這樣很麻煩還要一層一層傳輸 會成prompt drining，其實也可以串建context(全域的prompt))
-        array列表要變成一系列的陣列首先要{}裡面有個list中有html元素所以我們可以把list map成每個裡面都是元素，並將組建的內容以傳遞參數的方法到子組件中做修改
-        陣列中的每個元素要有key 可以一開市list變成 {content: "", id: Math.ramdom()}
+
+        <h3>實作練習：React Todo List 專案</h3>
+
+        <h4>1. 專案製作順序</h4>
+
+        <p>製作 React 專案時，可以按照以下順序進行：</p>
+
+        <ol>
+            <li>先在 App 設定整體背景、字體等全域樣式。</li>
+            <li>建立 <code>components</code> 資料夾。</li>
+            <li>將不同功能拆成 Component，例如 TodoWrapper、CreateForm、Todo、EditForm。</li>
+            <li>建立 Component 後，可以先顯示簡單文字，確認 Component 有成功 Render。</li>
+            <li>確認結構沒問題後，再加入 CSS 與功能。</li>
+        </ol>
+
+        <p>
+            開發時可以先「定位」Component：
+            先確認它能成功顯示，再慢慢加入 State、Props、事件與 CSS，
+            這樣發生錯誤時比較容易知道是哪一步出問題。
+        </p>
+
+        <br>
+
+        <h4>2. Wrapper Component</h4>
+
+        <p>
+            可以建立一個 Wrapper Component，負責包住 Todo List 的主要內容。
+        </p>
+
+        <pre><code>
+        function TodoWrapper() {
+            return (
+                &lt;div className="wrapper"&gt;
+                    &lt;h1&gt;代辦事項&lt;/h1&gt;
+                &lt;/div&gt;
+            );
+        }
+        </code></pre>
+
+        <p>
+            Wrapper 可以負責管理 Todo List 共用的 State，
+            再將資料或 Function 透過 Props 傳給下面的 Component。
+        </p>
+
+        <br>
+
+        <h4>3. CSS 可以全部放在 App.css 嗎？</h4>
+
+        <p>
+            可以。小型專案即使有很多 Component，
+            仍然可以先把 CSS 全部放在 <code>App.css</code>。
+        </p>
+
+        <p>
+            專案變大後，才可能將不同 Component 的 CSS 拆成不同檔案。
+        </p>
+
+        <pre><code>
+        Todo.jsx
+        Todo.css
+
+        CreateForm.jsx
+        CreateForm.css
+        </code></pre>
+
+        <br>
+
+        <h4>4. 全域 CSS 與 Component CSS</h4>
+
+        <p>
+            <code>*</code> 可以選擇所有元素，通常用來做全域設定。
+        </p>
+
+        <pre><code>
+        * {
+            box-sizing: border-box;
+        }
+        </code></pre>
+
+        <p>
+            <code>body</code> 可以設定整個網頁的背景、字體等。
+        </p>
+
+        <pre><code>
+        body {
+            background-color: #333;
+        }
+        </code></pre>
+
+        <p>
+            Component 通常使用 <code>className</code> 搭配 CSS Class 設計自己的樣式。
+        </p>
+
+        <pre><code>
+        &lt;div className="todo"&gt;&lt;/div&gt;
+        </code></pre>
+
+        <br>
+
+        <h4>5. CSS 子元素選擇器</h4>
+
+        <p>如果只想選擇直接子元素，可以使用 <code>&gt;</code>：</p>
+
+        <pre><code>
+        .createForm &gt; input
+        </code></pre>
+
+        <p>
+            意思是：只選擇 <code>.createForm</code> 下一層的 <code>input</code>。
+        </p>
+
+        <p>如果使用空格：</p>
+
+        <pre><code>
+        .createForm input
+        </code></pre>
+
+        <p>
+            代表只要是 <code>.createForm</code> 裡面的 input，
+            不管中間隔幾層都會被選到。
+        </p>
+
+        <p>
+            如果需要更精確控制，也可以直接替元素加入 Class。
+        </p>
+
+        <br>
+
+        <h4>6. Flexbox</h4>
+
+        <pre><code>
+        .createForm {
+            display: flex;
+        }
+        </code></pre>
+
+        <p>
+            <code>display: flex</code> 會排列「直接子元素」。
+        </p>
+
+        <p>
+            Flexbox 預設：
+        </p>
+
+        <pre><code>
+        flex-direction: row;
+        </code></pre>
+
+        <p>
+            因此 input 和 button 等直接子元素預設會排列在同一行。
+        </p>
+
+        <br>
+
+        <h4>7. onChange</h4>
+
+        <p>
+            <code>onChange</code> 是 React 的事件，
+            當 input 的內容發生改變時就會觸發。
+        </p>
+
+        <pre><code>
+        &lt;input
+            onChange={(e) =&gt; {
+                setContent(e.target.value);
+            }}
+        /&gt;
+        </code></pre>
+
+        <p>
+            <code>e</code> 是 Event Object，
+            <code>e.target</code> 是觸發事件的 input，
+            <code>e.target.value</code> 就是目前 input 裡面的內容。
+        </p>
+
+        <pre><code>
+        使用者輸入
+            ↓
+        onChange
+            ↓
+        e.target.value
+            ↓
+        setContent(...)
+            ↓
+        更新 State
+        </code></pre>
+
+        <br>
+
+        <h4>8. Controlled Input 與雙向資料流</h4>
+
+        <pre><code>
+        &lt;input
+            value={content}
+            onChange={(e) =&gt; setContent(e.target.value)}
+        /&gt;
+        </code></pre>
+
+        <p>
+            <code>onChange</code>：Input 改變 → 更新 State。
+        </p>
+
+        <p>
+            <code>value={content}</code>：State 改變 → Input 顯示跟著改變。
+        </p>
+
+        <pre><code>
+        Input ──onChange──&gt; State
+        Input &lt;──value──── State
+        </code></pre>
+
+        <p>
+            因此 React 的 State 成為 Input value 的主要資料來源，
+            這種 Input 稱為 <strong>Controlled Input</strong>。
+        </p>
+
+        <br>
+
+        <h4>9. State 應該放在哪裡？</h4>
+
+        <p>
+            State 應該放在「需要共同使用這份資料的 Component 的最近共同上層」。
+        </p>
+
+        <p>
+            技術上可以全部放在 App，
+            但是如果 App 和真正需要 State 的 Component 中間隔了很多層，
+            就可能必須一直傳 Props：
+        </p>
+
+        <pre><code>
+        App
+        ↓ props
+        A
+        ↓ props
+        B
+        ↓ props
+        C
+        </code></pre>
+
+        <p>
+            這種一層一層傳遞 Props 的情況稱為
+            <strong>Prop Drilling</strong>。
+        </p>
+
+        <p>
+            專案較複雜時，可以考慮使用 React Context 等 State 管理方式，
+            讓多個 Component 共享資料。
+        </p>
+
+        <br>
+
+        <h4>10. 使用 map() 將 Todo Array Render 成 Component</h4>
+
+        <p>假設 Todo State 是一個 Array：</p>
+
+        <pre><code>
+        const [todos, setTodos] = useState([
+            { content: "打掃廁所", id: 1 },
+            { content: "寫作業", id: 2 }
+        ]);
+        </code></pre>
+
+        <p>
+            JSX 中如果要根據 Array 產生多個 Component，
+            可以使用 <code>map()</code>。
+        </p>
+
+        <pre><code>
+        {todos.map((todo) =&gt; {
+            return (
+                &lt;Todo
+                    todo={todo}
+                    key={todo.id}
+                /&gt;
+            );
+        })}
+        </code></pre>
+
+        <p>
+            <code>map()</code> 會把每個 Todo Object
+            轉換成一個 <code>&lt;Todo /&gt;</code> Component。
+        </p>
+
+        <pre><code>
+        Todo Object
+            ↓
+        map()
+            ↓
+        &lt;Todo /&gt;
+        </code></pre>
+
+        <br>
+
+        <h4>11. 使用 Props 將 Todo 傳給子 Component</h4>
+
+        <pre><code>
+        &lt;Todo todo={todo} /&gt;
+        </code></pre>
+
+        <p>
+            代表把目前的 todo Object 透過 Props 傳給 Todo Component。
+        </p>
+
+        <p>子 Component 可以直接解構 Props：</p>
+
+        <pre><code>
+        function Todo({ todo }) {
+            return (
+                &lt;p&gt;{todo.content}&lt;/p&gt;
+            );
+        }
+        </code></pre>
+
+        <br>
+
+        <h4>12. Array 中每個 Component 都需要 key</h4>
+
+        <p>
+            React 使用 <code>map()</code> Render 一系列 Component 時，
+            每個 Component 都應該有唯一的 <code>key</code>。
+        </p>
+
+        <pre><code>
+        &lt;Todo
+            todo={todo}
+            key={todo.id}
+        /&gt;
+        </code></pre>
+
+        <p>練習專案可以暫時使用：</p>
+
+        <pre><code>
+        {
+            content: "寫作業",
+            id: Math.random()
+        }
+        </code></pre>
+
+        <p>
+            但實際開發通常會使用資料庫產生的唯一 ID，
+            而不是使用 <code>Math.random()</code>。
+        </p>
+
+        <br>
+
+        <h4>13. 新增 Todo</h4>
+
+        <pre><code>
+        setTodos([
+            ...todos,
+            {
+                content: content,
+                id: Math.random(),
+                isCompleted: false,
+                isEditing: false
+            }
+        ]);
+        </code></pre>
+
+        <p>
+            <code>...todos</code> 先將原本 Array 的 Todo 全部複製，
+            再把新的 Todo Object 加到最後面。
+        </p>
+
+        <pre><code>
+        原本：
+        [A, B]
+
+        加入 C：
+
+        [...todos, C]
+
+        結果：
+        [A, B, C]
+        </code></pre>
+
+        <br>
+
+        <h4>14. Function 也可以透過 Props 傳遞</h4>
+
+        <p>父 Component：</p>
+
+        <pre><code>
+        &lt;CreateForm addTodo={addTodo} /&gt;
+        </code></pre>
+
+        <p>子 Component：</p>
+
+        <pre><code>
+        function CreateForm({ addTodo }) {
+        }
+        </code></pre>
+
+        <p>
+            <code>function CreateForm({ addTodo })</code>
+            代表 Function 收到一個 Props Object，
+            並直接在參數的位置把 <code>addTodo</code> 解構出來。
+        </p>
+
+        <br>
+
+        <h4>15. Form 的預設行為與 preventDefault()</h4>
+
+        <p>
+            Form Submit 時，瀏覽器預設可能會重新整理頁面。
+        </p>
+
+        <p>React 中通常會阻止這個預設行為：</p>
+
+        <pre><code>
+        const handleSubmit = (e) =&gt; {
+            e.preventDefault();
+
+            addTodo(content);
+        };
+        </code></pre>
+
+        <p>
+            <code>e.preventDefault()</code> =
+            阻止這次 Event 原本的瀏覽器預設行為。
+        </p>
+
+        <br>
+
+        <h4>16. 使用 React Icons</h4>
+
+        <p>安裝：</p>
+
+        <pre><code>
+        npm install react-icons
+        </code></pre>
+
+        <p>例如使用 Material Design Icons：</p>
+
+        <pre><code>
+        import { MdDelete, MdEdit } from "react-icons/md";
+        </code></pre>
+
+        <p>然後可以像 Component 一樣使用：</p>
+
+        <pre><code>
+        &lt;MdEdit /&gt;
+        &lt;MdDelete /&gt;
+        </code></pre>
+
+        <p>
+            React Icons 是將多套常見 Icon Library 整合成 React Components，
+            而 Font Awesome 則是其中一套獨立的 Icon Library。
+        </p>
+
+        <br>
+
+        <h4>17. Flexbox 中將部分元素包成一組</h4>
+
+        <p>
+            如果使用 <code>justify-content: space-between</code>，
+            但希望幾個元素一起移動，可以先使用 div 將它們包成一組。
+        </p>
+
+        <pre><code>
+        &lt;div className="todo"&gt;
+
+            &lt;p&gt;寫作業&lt;/p&gt;
+
+            &lt;div&gt;
+                &lt;MdEdit /&gt;
+                &lt;MdDelete /&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+        </code></pre>
+
+        <p>這樣 Flexbox 看到的直接子元素就是：</p>
+
+        <pre><code>
+        todo
+        ├── p
+        └── div
+            ├── Edit
+            └── Delete
+        </code></pre>
+
+        <br>
+
+        <h4>18. 使用 State 切換 CSS</h4>
+
+        <p>可以在 Todo Object 裡加入：</p>
+
+        <pre><code>
+        {
+            content: "寫作業",
+            id: 1,
+            isCompleted: false
+        }
+        </code></pre>
+
+        <p>再根據 State 決定是否加入 CSS Class：</p>
+
+        <pre><code>
+        &lt;div className={`todo ${todo.isCompleted ? "completed" : ""}`}&gt;
+        </code></pre>
+
+        <p>當：</p>
+
+        <pre><code>
+        isCompleted === true
+        </code></pre>
+
+        <p>最後的 class 會變成：</p>
+
+        <pre><code>
+        className="todo completed"
+        </code></pre>
+
+        <p>
+            因此可以利用 State 動態切換 CSS 樣式。
+        </p>
+
+        <br>
+
+        <h4>19. 使用 Spread Syntax 更新 Todo Object</h4>
+
+        <p>例如切換完成狀態：</p>
+
+        <pre><code>
+        {
+            ...todo,
+            isCompleted: !todo.isCompleted
+        }
+        </code></pre>
+
+        <p>
+            <code>...todo</code> =
+            先保留 Todo 原本所有 Property，
+            再覆蓋我們想修改的 Property。
+        </p>
+
+        <p>例如：</p>
+
+        <pre><code>
+        {
+            id: 1,
+            content: "寫作業",
+            isCompleted: false,
+            isEditing: false
+        }
+        </code></pre>
+
+        <p>執行：</p>
+
+        <pre><code>
+        {
+            ...todo,
+            isCompleted: true
+        }
+        </code></pre>
+
+        <p>得到：</p>
+
+        <pre><code>
+        {
+            id: 1,
+            content: "寫作業",
+            isCompleted: true,
+            isEditing: false
+        }
+        </code></pre>
+
+        <br>
+
+        <h4>20. Todo 專案核心資料流</h4>
+
+        <pre><code>
+        TodoWrapper
+        │
+        ├── todos State
+        │
+        ├── addTodo()
+        ├── deleteTodo()
+        ├── toggleCompleted()
+        ├── toggleIsEditing()
+        └── editTodo()
+                │
+                │ Props
+                ↓
+        ┌───────────────┐
+        │               │
+        CreateForm        Todo
+                        │
+                        ↓
+                        EditForm
+        </code></pre>
+
+        <p>
+            <strong>核心概念：</strong>
+            上層 Component 管理 State，
+            再透過 Props 將「資料」與「修改資料的 Function」
+            傳給需要使用它們的子 Component。
+        </p>
+
+        <h4>實作練習總結</h4>
+
+        <p>
+            Todo List 專案最重要的是理解：
+            <strong>Component 拆分、State、Props、Event、Array map、Controlled Input、
+            State 更新與 CSS 狀態切換</strong>。
+            不需要把每個 CSS Property 或 React 寫法全部背起來，
+            但要理解資料如何從 State 傳到 Component，以及使用者操作後如何再更新 State。
+        </p>
+
+        <a href="./REACT快速入門/my-react-todo/dist/index.html"></a>
+        <p>npm run build = 產生「可以部署到靜態 Web Server」的網站，不等於產生「可以雙擊 HTML 執行」的網站。</p>
     </body>
 </html>
